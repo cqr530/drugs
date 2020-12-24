@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.DrugInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.DrugInfo">
+    <id column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
+    <result column="generic_name" jdbcType="VARCHAR" property="genericName" />
+    <result column="reagent_type" jdbcType="VARCHAR" property="reagentType" />
+    <result column="drug_size" jdbcType="VARCHAR" property="drugSize" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="transver_num" jdbcType="INTEGER" property="transverNum" />
+    <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="tender_price" jdbcType="DECIMAL" property="tenderPrice" />
+    <result column="approval_num" jdbcType="VARCHAR" property="approvalNum" />
+    <result column="approval_num_date" jdbcType="TIMESTAMP" property="approvalNumDate" />
+    <result column="import_produc_status" jdbcType="INTEGER" property="importProducStatus" />
+    <result column="package_material" jdbcType="VARCHAR" property="packageMaterial" />
+    <result column="drug_pack_comp" jdbcType="VARCHAR" property="drugPackComp" />
+    <result column="lr_price" jdbcType="DECIMAL" property="lrPrice" />
+    <result column="retail_price_from" jdbcType="INTEGER" property="retailPriceFrom" />
+    <result column="quality_level" jdbcType="VARCHAR" property="qualityLevel" />
+    <result column="quality_level_spec" jdbcType="VARCHAR" property="qualityLevelSpec" />
+    <result column="test_report_status" jdbcType="INTEGER" property="testReportStatus" />
+    <result column="drug_report_id" jdbcType="INTEGER" property="drugReportId" />
+    <result column="drug_report_id_date" jdbcType="TIMESTAMP" property="drugReportIdDate" />
+    <result column="drug_specification" jdbcType="VARCHAR" property="drugSpecification" />
+    <result column="drug_tranl_status" jdbcType="INTEGER" property="drugTranlStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num, 
+    factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status, 
+    package_material, drug_pack_comp, lr_price, retail_price_from, quality_level, quality_level_spec, 
+    test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from drug_info
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drug_info
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lianxi.drugs.DrugInfo">
+    insert into drug_info (drug_id, serial_num, generic_name, 
+      reagent_type, drug_size, company, 
+      transver_num, factory_name, product_name, 
+      tender_price, approval_num, approval_num_date, 
+      import_produc_status, package_material, drug_pack_comp, 
+      lr_price, retail_price_from, quality_level, 
+      quality_level_spec, test_report_status, drug_report_id, 
+      drug_report_id_date, drug_specification, 
+      drug_tranl_status)
+    values (#{drugId,jdbcType=INTEGER}, #{serialNum,jdbcType=INTEGER}, #{genericName,jdbcType=VARCHAR}, 
+      #{reagentType,jdbcType=VARCHAR}, #{drugSize,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{transverNum,jdbcType=INTEGER}, #{factoryName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{tenderPrice,jdbcType=DECIMAL}, #{approvalNum,jdbcType=VARCHAR}, #{approvalNumDate,jdbcType=TIMESTAMP}, 
+      #{importProducStatus,jdbcType=INTEGER}, #{packageMaterial,jdbcType=VARCHAR}, #{drugPackComp,jdbcType=VARCHAR}, 
+      #{lrPrice,jdbcType=DECIMAL}, #{retailPriceFrom,jdbcType=INTEGER}, #{qualityLevel,jdbcType=VARCHAR}, 
+      #{qualityLevelSpec,jdbcType=VARCHAR}, #{testReportStatus,jdbcType=INTEGER}, #{drugReportId,jdbcType=INTEGER}, 
+      #{drugReportIdDate,jdbcType=TIMESTAMP}, #{drugSpecification,jdbcType=VARCHAR}, 
+      #{drugTranlStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.DrugInfo">
+    insert into drug_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="drugId != null">
+        drug_id,
+      </if>
+      <if test="serialNum != null">
+        serial_num,
+      </if>
+      <if test="genericName != null">
+        generic_name,
+      </if>
+      <if test="reagentType != null">
+        reagent_type,
+      </if>
+      <if test="drugSize != null">
+        drug_size,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="transverNum != null">
+        transver_num,
+      </if>
+      <if test="factoryName != null">
+        factory_name,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="tenderPrice != null">
+        tender_price,
+      </if>
+      <if test="approvalNum != null">
+        approval_num,
+      </if>
+      <if test="approvalNumDate != null">
+        approval_num_date,
+      </if>
+      <if test="importProducStatus != null">
+        import_produc_status,
+      </if>
+      <if test="packageMaterial != null">
+        package_material,
+      </if>
+      <if test="drugPackComp != null">
+        drug_pack_comp,
+      </if>
+      <if test="lrPrice != null">
+        lr_price,
+      </if>
+      <if test="retailPriceFrom != null">
+        retail_price_from,
+      </if>
+      <if test="qualityLevel != null">
+        quality_level,
+      </if>
+      <if test="qualityLevelSpec != null">
+        quality_level_spec,
+      </if>
+      <if test="testReportStatus != null">
+        test_report_status,
+      </if>
+      <if test="drugReportId != null">
+        drug_report_id,
+      </if>
+      <if test="drugReportIdDate != null">
+        drug_report_id_date,
+      </if>
+      <if test="drugSpecification != null">
+        drug_specification,
+      </if>
+      <if test="drugTranlStatus != null">
+        drug_tranl_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="drugId != null">
+        #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="serialNum != null">
+        #{serialNum,jdbcType=INTEGER},
+      </if>
+      <if test="genericName != null">
+        #{genericName,jdbcType=VARCHAR},
+      </if>
+      <if test="reagentType != null">
+        #{reagentType,jdbcType=VARCHAR},
+      </if>
+      <if test="drugSize != null">
+        #{drugSize,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="transverNum != null">
+        #{transverNum,jdbcType=INTEGER},
+      </if>
+      <if test="factoryName != null">
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderPrice != null">
+        #{tenderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalNum != null">
+        #{approvalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalNumDate != null">
+        #{approvalNumDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="importProducStatus != null">
+        #{importProducStatus,jdbcType=INTEGER},
+      </if>
+      <if test="packageMaterial != null">
+        #{packageMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="drugPackComp != null">
+        #{drugPackComp,jdbcType=VARCHAR},
+      </if>
+      <if test="lrPrice != null">
+        #{lrPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="retailPriceFrom != null">
+        #{retailPriceFrom,jdbcType=INTEGER},
+      </if>
+      <if test="qualityLevel != null">
+        #{qualityLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="qualityLevelSpec != null">
+        #{qualityLevelSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="testReportStatus != null">
+        #{testReportStatus,jdbcType=INTEGER},
+      </if>
+      <if test="drugReportId != null">
+        #{drugReportId,jdbcType=INTEGER},
+      </if>
+      <if test="drugReportIdDate != null">
+        #{drugReportIdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugSpecification != null">
+        #{drugSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="drugTranlStatus != null">
+        #{drugTranlStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.DrugInfo">
+    update drug_info
+    <set>
+      <if test="serialNum != null">
+        serial_num = #{serialNum,jdbcType=INTEGER},
+      </if>
+      <if test="genericName != null">
+        generic_name = #{genericName,jdbcType=VARCHAR},
+      </if>
+      <if test="reagentType != null">
+        reagent_type = #{reagentType,jdbcType=VARCHAR},
+      </if>
+      <if test="drugSize != null">
+        drug_size = #{drugSize,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="transverNum != null">
+        transver_num = #{transverNum,jdbcType=INTEGER},
+      </if>
+      <if test="factoryName != null">
+        factory_name = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderPrice != null">
+        tender_price = #{tenderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalNum != null">
+        approval_num = #{approvalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalNumDate != null">
+        approval_num_date = #{approvalNumDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="importProducStatus != null">
+        import_produc_status = #{importProducStatus,jdbcType=INTEGER},
+      </if>
+      <if test="packageMaterial != null">
+        package_material = #{packageMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="drugPackComp != null">
+        drug_pack_comp = #{drugPackComp,jdbcType=VARCHAR},
+      </if>
+      <if test="lrPrice != null">
+        lr_price = #{lrPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="retailPriceFrom != null">
+        retail_price_from = #{retailPriceFrom,jdbcType=INTEGER},
+      </if>
+      <if test="qualityLevel != null">
+        quality_level = #{qualityLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="qualityLevelSpec != null">
+        quality_level_spec = #{qualityLevelSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="testReportStatus != null">
+        test_report_status = #{testReportStatus,jdbcType=INTEGER},
+      </if>
+      <if test="drugReportId != null">
+        drug_report_id = #{drugReportId,jdbcType=INTEGER},
+      </if>
+      <if test="drugReportIdDate != null">
+        drug_report_id_date = #{drugReportIdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugSpecification != null">
+        drug_specification = #{drugSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="drugTranlStatus != null">
+        drug_tranl_status = #{drugTranlStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.DrugInfo">
+    update drug_info
+    set serial_num = #{serialNum,jdbcType=INTEGER},
+      generic_name = #{genericName,jdbcType=VARCHAR},
+      reagent_type = #{reagentType,jdbcType=VARCHAR},
+      drug_size = #{drugSize,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      transver_num = #{transverNum,jdbcType=INTEGER},
+      factory_name = #{factoryName,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      tender_price = #{tenderPrice,jdbcType=DECIMAL},
+      approval_num = #{approvalNum,jdbcType=VARCHAR},
+      approval_num_date = #{approvalNumDate,jdbcType=TIMESTAMP},
+      import_produc_status = #{importProducStatus,jdbcType=INTEGER},
+      package_material = #{packageMaterial,jdbcType=VARCHAR},
+      drug_pack_comp = #{drugPackComp,jdbcType=VARCHAR},
+      lr_price = #{lrPrice,jdbcType=DECIMAL},
+      retail_price_from = #{retailPriceFrom,jdbcType=INTEGER},
+      quality_level = #{qualityLevel,jdbcType=VARCHAR},
+      quality_level_spec = #{qualityLevelSpec,jdbcType=VARCHAR},
+      test_report_status = #{testReportStatus,jdbcType=INTEGER},
+      drug_report_id = #{drugReportId,jdbcType=INTEGER},
+      drug_report_id_date = #{drugReportIdDate,jdbcType=TIMESTAMP},
+      drug_specification = #{drugSpecification,jdbcType=VARCHAR},
+      drug_tranl_status = #{drugTranlStatus,jdbcType=INTEGER}
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </update>
+</mapper>

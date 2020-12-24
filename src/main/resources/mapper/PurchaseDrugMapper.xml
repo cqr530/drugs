@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.PurchaseDrugMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.PurchaseDrug">
+    <id column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="order_biddingPrice" jdbcType="DECIMAL" property="orderBiddingprice" />
+    <result column="order_TradingPrice" jdbcType="DECIMAL" property="orderTradingprice" />
+    <result column="order_buyCount" jdbcType="INTEGER" property="orderBuycount" />
+    <result column="order_buyPrice" jdbcType="DECIMAL" property="orderBuyprice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_num, drug_id, supplier_id, order_biddingPrice, order_TradingPrice, order_buyCount, 
+    order_buyPrice
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from purchase_drug
+    where order_num = #{orderNum,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from purchase_drug
+    where order_num = #{orderNum,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lianxi.drugs.PurchaseDrug">
+    insert into purchase_drug (order_num, drug_id, supplier_id, 
+      order_biddingPrice, order_TradingPrice, order_buyCount, 
+      order_buyPrice)
+    values (#{orderNum,jdbcType=INTEGER}, #{drugId,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, 
+      #{orderBiddingprice,jdbcType=DECIMAL}, #{orderTradingprice,jdbcType=DECIMAL}, #{orderBuycount,jdbcType=INTEGER}, 
+      #{orderBuyprice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.PurchaseDrug">
+    insert into purchase_drug
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="drugId != null">
+        drug_id,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="orderBiddingprice != null">
+        order_biddingPrice,
+      </if>
+      <if test="orderTradingprice != null">
+        order_TradingPrice,
+      </if>
+      <if test="orderBuycount != null">
+        order_buyCount,
+      </if>
+      <if test="orderBuyprice != null">
+        order_buyPrice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="drugId != null">
+        #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="orderBiddingprice != null">
+        #{orderBiddingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTradingprice != null">
+        #{orderTradingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderBuycount != null">
+        #{orderBuycount,jdbcType=INTEGER},
+      </if>
+      <if test="orderBuyprice != null">
+        #{orderBuyprice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.PurchaseDrug">
+    update purchase_drug
+    <set>
+      <if test="drugId != null">
+        drug_id = #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="orderBiddingprice != null">
+        order_biddingPrice = #{orderBiddingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTradingprice != null">
+        order_TradingPrice = #{orderTradingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderBuycount != null">
+        order_buyCount = #{orderBuycount,jdbcType=INTEGER},
+      </if>
+      <if test="orderBuyprice != null">
+        order_buyPrice = #{orderBuyprice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where order_num = #{orderNum,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.PurchaseDrug">
+    update purchase_drug
+    set drug_id = #{drugId,jdbcType=INTEGER},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      order_biddingPrice = #{orderBiddingprice,jdbcType=DECIMAL},
+      order_TradingPrice = #{orderTradingprice,jdbcType=DECIMAL},
+      order_buyCount = #{orderBuycount,jdbcType=INTEGER},
+      order_buyPrice = #{orderBuyprice,jdbcType=DECIMAL}
+    where order_num = #{orderNum,jdbcType=INTEGER}
+  </update>
+</mapper>
