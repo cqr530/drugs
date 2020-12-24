@@ -23,4 +23,6 @@ public class DrugController {
     public int finduser(@RequestParam("id")Integer id,@RequestParam("pwd") String pwd){
         return drugSystemService.queryuser(id, pwd);
     }
+
+
 }
