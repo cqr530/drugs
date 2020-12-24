@@ -17,7 +17,7 @@ public class User {
 
     private String userEmail;
 
-    private String ?userLinkman;
+    private String userLinkman;
 
     public Integer getUserId() {
         return userId;
@@ -83,11 +83,11 @@ public class User {
         this.userEmail = userEmail == null ? null : userEmail.trim();
     }
 
-    public String get?userLinkman() {
-        return ?userLinkman;
+    public String getuserLinkman() {
+        return userLinkman;
     }
 
-    public void set?userLinkman(String ?userLinkman) {
-        this.?userLinkman = ?userLinkman == null ? null : ?userLinkman.trim();
+    public void setuserLinkman(String userLinkman) {
+        this.userLinkman = userLinkman == null ? null : userLinkman.trim();
     }
 }

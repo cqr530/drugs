@@ -1,6 +1,7 @@
 package com.lianxi.drugs.dao;
 
 import com.lianxi.drugs.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -14,4 +15,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    int selectuser(@Param("id")Integer id, @Param("pwd") String pwd);
 }

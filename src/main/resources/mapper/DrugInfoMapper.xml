@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lianxi.drugs.dao.DrugInfoMapper">
-  <resultMap id="BaseResultMap" type="com.lianxi.drugs.DrugInfo">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.DrugInfo">
     <id column="drug_id" jdbcType="INTEGER" property="drugId" />
     <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
     <result column="generic_name" jdbcType="VARCHAR" property="genericName" />
@@ -43,7 +43,7 @@
     delete from drug_info
     where drug_id = #{drugId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lianxi.drugs.DrugInfo">
+  <insert id="insert" parameterType="com.lianxi.drugs.pojo.DrugInfo">
     insert into drug_info (drug_id, serial_num, generic_name, 
       reagent_type, drug_size, company, 
       transver_num, factory_name, product_name, 
@@ -63,7 +63,7 @@
       #{drugReportIdDate,jdbcType=TIMESTAMP}, #{drugSpecification,jdbcType=VARCHAR}, 
       #{drugTranlStatus,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.lianxi.drugs.DrugInfo">
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.DrugInfo">
     insert into drug_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="drugId != null">
@@ -214,7 +214,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.DrugInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.pojo.DrugInfo">
     update drug_info
     <set>
       <if test="serialNum != null">
@@ -289,7 +289,7 @@
     </set>
     where drug_id = #{drugId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.DrugInfo">
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.pojo.DrugInfo">
     update drug_info
     set serial_num = #{serialNum,jdbcType=INTEGER},
       generic_name = #{genericName,jdbcType=VARCHAR},

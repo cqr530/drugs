@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lianxi.drugs.dao.PurchaseDrugMapper">
-  <resultMap id="BaseResultMap" type="com.lianxi.drugs.PurchaseDrug">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.PurchaseDrug">
     <id column="order_num" jdbcType="INTEGER" property="orderNum" />
     <result column="drug_id" jdbcType="INTEGER" property="drugId" />
     <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
@@ -24,7 +24,7 @@
     delete from purchase_drug
     where order_num = #{orderNum,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lianxi.drugs.PurchaseDrug">
+  <insert id="insert" parameterType="com.lianxi.drugs.pojo.PurchaseDrug">
     insert into purchase_drug (order_num, drug_id, supplier_id, 
       order_biddingPrice, order_TradingPrice, order_buyCount, 
       order_buyPrice)
@@ -32,7 +32,7 @@
       #{orderBiddingprice,jdbcType=DECIMAL}, #{orderTradingprice,jdbcType=DECIMAL}, #{orderBuycount,jdbcType=INTEGER}, 
       #{orderBuyprice,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.lianxi.drugs.PurchaseDrug">
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.PurchaseDrug">
     insert into purchase_drug
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderNum != null">
@@ -81,7 +81,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.PurchaseDrug">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.pojo.PurchaseDrug">
     update purchase_drug
     <set>
       <if test="drugId != null">
@@ -105,7 +105,7 @@
     </set>
     where order_num = #{orderNum,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.PurchaseDrug">
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.pojo.PurchaseDrug">
     update purchase_drug
     set drug_id = #{drugId,jdbcType=INTEGER},
       supplier_id = #{supplierId,jdbcType=INTEGER},

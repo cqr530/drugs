@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lianxi.drugs.dao.PurchaseMapper">
-  <resultMap id="BaseResultMap" type="com.lianxi.drugs.Purchase">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.Purchase">
     <id column="payoff_tab_id" jdbcType="INTEGER" property="payoffTabId" />
     <result column="payoff_tab_num" jdbcType="INTEGER" property="payoffTabNum" />
     <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
@@ -30,7 +30,7 @@
     delete from purchase
     where payoff_tab_id = #{payoffTabId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lianxi.drugs.Purchase">
+  <insert id="insert" parameterType="com.lianxi.drugs.pojo.Purchase">
     insert into purchase (payoff_tab_id, payoff_tab_num, payoff_tab_name, 
       hospital_id, examine, examine_end, 
       start_time, end_time, create_time, 
@@ -42,7 +42,7 @@
       #{inputTime,jdbcType=TIMESTAMP}, #{examineTime,jdbcType=TIMESTAMP}, #{payoffTabStatus,jdbcType=INTEGER}, 
       #{hospitalName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lianxi.drugs.Purchase">
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.Purchase">
     insert into purchase
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="payoffTabId != null">
@@ -127,7 +127,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.Purchase">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.pojo.Purchase">
     update purchase
     <set>
       <if test="payoffTabNum != null">
@@ -169,7 +169,7 @@
     </set>
     where payoff_tab_id = #{payoffTabId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.Purchase">
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.pojo.Purchase">
     update purchase
     set payoff_tab_num = #{payoffTabNum,jdbcType=INTEGER},
       payoff_tab_name = #{payoffTabName,jdbcType=VARCHAR},

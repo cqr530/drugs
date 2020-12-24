@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lianxi.drugs.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.lianxi.drugs.User">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.User">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
@@ -16,6 +16,106 @@
     user_id, user_name, user_pwd, user_type, user_company, user_state, user_phone, user_email, 
     ﻿user_linkman
   </sql>
+  <select id="selectuser" resultType="integer">
+    select *
+    from user
+    where user_id=#{id} and user_pwd=#{pwd}
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
@@ -26,7 +126,7 @@
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lianxi.drugs.User">
+  <insert id="insert" parameterType="com.lianxi.drugs.pojo.User">
     insert into user (user_id, user_name, user_pwd, 
       user_type, user_company, user_state, 
       user_phone, user_email, ﻿user_linkman
@@ -36,7 +136,7 @@
       #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{﻿userLinkman,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lianxi.drugs.User">
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -97,7 +197,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.pojo.User">
     update user
     <set>
       <if test="userName != null">
@@ -127,7 +227,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.User">
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.pojo.User">
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       user_pwd = #{userPwd,jdbcType=VARCHAR},

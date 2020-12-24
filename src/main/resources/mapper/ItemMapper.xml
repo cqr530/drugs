@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lianxi.drugs.dao.ItemMapper">
-  <resultMap id="BaseResultMap" type="com.lianxi.drugs.Item">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.Item">
     <id column="drug_category_id" jdbcType="VARCHAR" property="drugCategoryId" />
     <result column="drug_category_name" jdbcType="VARCHAR" property="drugCategoryName" />
     <result column="drug_category_type" jdbcType="VARCHAR" property="drugCategoryType" />
@@ -25,7 +25,7 @@
     delete from item
     where drug_category_id = #{drugCategoryId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.lianxi.drugs.Item">
+  <insert id="insert" parameterType="com.lianxi.drugs.pojo.Item">
     insert into item (drug_category_id, drug_category_name, 
       drug_category_type, drug_category_standard, 
       drug_category_unit, drug_category_tran, drug_clazz_id, 
@@ -35,7 +35,7 @@
       #{drugCategoryUnit,jdbcType=VARCHAR}, #{drugCategoryTran,jdbcType=INTEGER}, #{drugClazzId,jdbcType=INTEGER}, 
       #{drugCategoryStatus,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.lianxi.drugs.Item">
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.Item">
     insert into item
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="drugCategoryId != null">
@@ -90,7 +90,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.Item">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.pojo.Item">
     update item
     <set>
       <if test="drugCategoryName != null">
@@ -117,7 +117,7 @@
     </set>
     where drug_category_id = #{drugCategoryId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.Item">
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.pojo.Item">
     update item
     set drug_category_name = #{drugCategoryName,jdbcType=VARCHAR},
       drug_category_type = #{drugCategoryType,jdbcType=VARCHAR},
