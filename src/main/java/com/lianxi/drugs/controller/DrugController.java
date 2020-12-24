@@ -15,13 +15,13 @@ public class DrugController {
 
     /**
      *2020.12.24 陈泉润
-     * @param id
+     * @param name
      * @param pwd
      * @return 登录接口
      */
     @RequestMapping("/denglu")
-    public int finduser(@RequestParam("id")Integer id,@RequestParam("pwd") String pwd){
-        return drugSystemService.queryuser(id, pwd);
+    public int finduser(@RequestParam("name")String name,@RequestParam("pwd") String pwd){
+        return drugSystemService.queryuser(name, pwd);
     }
 
 

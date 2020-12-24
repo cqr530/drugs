@@ -11,7 +11,7 @@ public class DrugSystemServiceImpl implements DrugSystemService {
 
 
     @Override
-    public int queryuser(Integer id, String pwd) {
-        return usermapper.selectuser(id, pwd);
+    public int queryuser(String name, String pwd) {
+        return usermapper.selectuser(name, pwd);
     }
 }

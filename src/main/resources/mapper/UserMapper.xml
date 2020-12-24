@@ -19,7 +19,7 @@
   <select id="selectuser" resultType="integer">
     select *
     from user
-    where user_id=#{id} and user_pwd=#{pwd}
+    where user_name=#{name} and user_pwd=#{pwd}
   </select>
 
 

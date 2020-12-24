@@ -16,5 +16,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    int selectuser(@Param("id")Integer id, @Param("pwd") String pwd);
+    int selectuser(@Param("name")String name, @Param("pwd") String pwd);
 }
