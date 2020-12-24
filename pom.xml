@@ -8,7 +8,7 @@
         <version>2.4.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.lianxi</groupId>
+    <groupId>com.lianxi.drugs</groupId>
     <artifactId>drugs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>drugs</name>
@@ -66,7 +66,10 @@
 
     </dependencies>
 
+
+
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -82,5 +85,7 @@
             </plugin>
         </plugins>
     </build>
+
+
 
 </project>
