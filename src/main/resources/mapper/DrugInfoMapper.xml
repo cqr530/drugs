@@ -26,12 +26,14 @@
     <result column="drug_report_id_date" jdbcType="TIMESTAMP" property="drugReportIdDate" />
     <result column="drug_specification" jdbcType="VARCHAR" property="drugSpecification" />
     <result column="drug_tranl_status" jdbcType="INTEGER" property="drugTranlStatus" />
+    <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
   </resultMap>
   <sql id="Base_Column_List">
     drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num, 
     factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status, 
     package_material, drug_pack_comp, lr_price, retail_price_from, quality_level, quality_level_spec, 
-    test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status
+    test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status, 
+    drug_type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
@@ -52,7 +54,7 @@
       lr_price, retail_price_from, quality_level, 
       quality_level_spec, test_report_status, drug_report_id, 
       drug_report_id_date, drug_specification, 
-      drug_tranl_status)
+      drug_tranl_status, drug_type)
     values (#{drugId,jdbcType=INTEGER}, #{serialNum,jdbcType=INTEGER}, #{genericName,jdbcType=VARCHAR}, 
       #{reagentType,jdbcType=VARCHAR}, #{drugSize,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
       #{transverNum,jdbcType=INTEGER}, #{factoryName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
@@ -61,7 +63,7 @@
       #{lrPrice,jdbcType=DECIMAL}, #{retailPriceFrom,jdbcType=INTEGER}, #{qualityLevel,jdbcType=VARCHAR}, 
       #{qualityLevelSpec,jdbcType=VARCHAR}, #{testReportStatus,jdbcType=INTEGER}, #{drugReportId,jdbcType=INTEGER}, 
       #{drugReportIdDate,jdbcType=TIMESTAMP}, #{drugSpecification,jdbcType=VARCHAR}, 
-      #{drugTranlStatus,jdbcType=INTEGER})
+      #{drugTranlStatus,jdbcType=INTEGER}, #{drugType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.DrugInfo">
     insert into drug_info
@@ -138,6 +140,9 @@
       <if test="drugTranlStatus != null">
         drug_tranl_status,
       </if>
+      <if test="drugType != null">
+        drug_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="drugId != null">
@@ -211,6 +216,9 @@
       </if>
       <if test="drugTranlStatus != null">
         #{drugTranlStatus,jdbcType=INTEGER},
+      </if>
+      <if test="drugType != null">
+        #{drugType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -286,6 +294,9 @@
       <if test="drugTranlStatus != null">
         drug_tranl_status = #{drugTranlStatus,jdbcType=INTEGER},
       </if>
+      <if test="drugType != null">
+        drug_type = #{drugType,jdbcType=VARCHAR},
+      </if>
     </set>
     where drug_id = #{drugId,jdbcType=INTEGER}
   </update>
@@ -313,7 +324,8 @@
       drug_report_id = #{drugReportId,jdbcType=INTEGER},
       drug_report_id_date = #{drugReportIdDate,jdbcType=TIMESTAMP},
       drug_specification = #{drugSpecification,jdbcType=VARCHAR},
-      drug_tranl_status = #{drugTranlStatus,jdbcType=INTEGER}
+      drug_tranl_status = #{drugTranlStatus,jdbcType=INTEGER},
+      drug_type = #{drugType,jdbcType=VARCHAR}
     where drug_id = #{drugId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -52,6 +52,8 @@ public class DrugInfo {
 
     private Integer drugTranlStatus;
 
+    private String drugType;
+
     public Integer getDrugId() {
         return drugId;
     }
@@ -242,5 +244,13 @@ public class DrugInfo {
 
     public void setDrugTranlStatus(Integer drugTranlStatus) {
         this.drugTranlStatus = drugTranlStatus;
+    }
+
+    public String getDrugType() {
+        return drugType;
+    }
+
+    public void setDrugType(String drugType) {
+        this.drugType = drugType == null ? null : drugType.trim();
     }
 }
