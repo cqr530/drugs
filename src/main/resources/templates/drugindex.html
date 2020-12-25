@@ -15,7 +15,10 @@
     <script type="text/javascript">
         var app = angular.module('myApp', ["pagination"]);
         app.controller('myCtrl', function($scope,$http){
-
+            $http.get("http://localhost:8000/drugs/alldrug").success(function (data){
+                $scope.list = data.list;
+                console.log(11111)
+            });
         })
     </script>
     <style>
@@ -127,19 +130,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                <tr ng-repeat="drug in list">
+                    <td>{{drug.serialNum}}</td>
+                    <td>{{drug.genericName}}</td>
+                    <td>{{drug.reagentType}}</td>
+                    <td>{{drug.drugSize}}</td>
+                    <td>{{drug.company}}</td>
+                    <td>{{drug.transverNum}}</td>
+                    <td>{{drug.factoryName}}</td>
+                    <td>{{drug.productName}}</td>
+                    <td>{{drug.tenderPrice}}</td>
+                    <td>{{drug.qualityLevel}}</td>
+                    <td>{{drug.drugType}}</td>
+                    <td>{{drug.drugTranlStatus}}</td>
                     <td><a href="www.baidu.com">查看</a></td>
                     <td><a href="www.baidu.com">修改</a></td>
                     <td><a href="www.baidu.com">删除</a></td>
