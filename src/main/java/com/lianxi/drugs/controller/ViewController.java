@@ -19,4 +19,14 @@ public class ViewController {
     public String toDrug(){
         return "/drug";
     }
+
+
+    /**
+     * 药品目录查询页面
+     * @return
+     */
+    @RequestMapping("/drugindex")
+    public String DrugIndex(){
+        return "/drugindex";
+    }
 }

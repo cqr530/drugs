@@ -35,6 +35,89 @@
     test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status, 
     drug_type
   </sql>
+  <select id="selectAllDrugInfo" resultMap="BaseResultMap">
+    select drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num,
+    factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status,
+    package_material, drug_pack_comp, lr_price, retail_price_from, quality_level, quality_level_spec,
+    test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status,
+    drug_type
+    from drug_info
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
