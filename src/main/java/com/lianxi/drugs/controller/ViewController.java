@@ -29,4 +29,13 @@ public class ViewController {
     public String DrugIndex(){
         return "/drugindex";
     }
+
+    /**
+     * 药品品目查询页面
+     * @return
+     */
+    @RequestMapping("/drugselect")
+    public String DrugSelect(){
+        return "/drugSelect";
+    }
 }
