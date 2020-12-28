@@ -1894,7 +1894,7 @@
 
 
 <!--交易查询统计-采购单查询 select-->
-<div class="panel panel-default" id="selectCaiGou" style="display: none">
+<div class="panel panel-default" name="selectCaiGou" style="display: none">
     <div class="panel-heading">
         采购单查询
     </div>
@@ -2038,7 +2038,7 @@
     </div>
 </div>
 <!--交易查询统计-采购单查询 table-->
-<div class="panel-body" id="tableCaiGou" style="display: none">
+<div class="panel-body" name="tableCaiGou" style="display: none">
         <table class="table">
             <thead class="thead-light">
             <tr>
@@ -2131,7 +2131,7 @@
     </div>
 
 <!--交易查询统计-供货商查询 select-->
-<div class="panel panel-default" id="selectGongHuoShang" style="display: none">
+<div class="panel panel-default" name="selectGongHuoShang" style="display: none">
     <div class="panel-heading">
         供货商查询
     </div>
@@ -2190,7 +2190,7 @@
     </div>
 </div>
 <!--交易查询统计-供货商查询 table-->
-<div class="panel-body" id="tableGongHuoShang" style="display: none">
+<div class="panel-body" name="tableGongHuoShang" style="display: none">
     <table class="table">
         <thead class="thead-light">
         <tr>
@@ -2241,7 +2241,7 @@
 </div>
 
 <!--交易查询统计-采购医院查询 select-->
-<div class="panel panel-default" id="selectCaiGouYiYuan" style="display: none">
+<div class="panel panel-default" name="selectCaiGouYiYuan" style="display: none">
     <div class="panel-heading">
         采购医院查询
     </div>
@@ -2296,7 +2296,7 @@
     </div>
 </div>
 <!--交易查询统计-采购医院查询 table-->
-<div class="panel-body" id="tableCaiGouYiYuan" style="display: none">
+<div class="panel-body" name="tableCaiGouYiYuan" style="display: none">
     <table class="table">
         <thead class="thead-light">
         <tr>
@@ -2343,7 +2343,7 @@
 </div>
 
 <!--交易查询统计-交易药品查询 select-->
-<div class="panel panel-default" id="selectJiaoYiYaoPin" style="display: none">
+<div class="panel panel-default" name="selectJiaoYiYaoPin" style="display: none">
     <div class="panel-heading">
         交易药品查询
     </div>
@@ -2490,7 +2490,7 @@
     </div>
 </div>
 <!--交易查询统计-交易药品查询 table-->
-<div class="panel-body" id="tableJiaoYiYaoPin" style="display: none">
+<div class="panel-body" name="tableJiaoYiYaoPin" style="display: none">
     <table class="table">
         <thead class="thead-light">
         <tr>
@@ -2541,7 +2541,7 @@
 </div>
 
 <!--交易查询统计-交易药品交易明细查询 select-->
-<div class="panel panel-default" name= id="selectYaoPinJiaoYiMingXi" style="display: none">
+<div class="panel panel-default" name="selectYaoPinJiaoYiMingXi" style="display: none">
     <div class="panel-heading">
         查询药品交易明细
     </div>
@@ -2688,7 +2688,7 @@
     </div>
 </div>
 <!--交易查询统计-交易药品交易明细查询 table-->
-<div class="panel-body" id="tableYaoPinJiaoYiMingXi" style="display: none">
+<div class="panel-body" name="tableYaoPinJiaoYiMingXi" style="display: none">
     <table class="table">
         <thead class="thead-light">
         <tr>
@@ -2847,53 +2847,42 @@
 <script>
     /*交易查询统计-采购单查询 */
     function selectCaiGouDan() {
-        var html1 = $("#selectCaiGou").html();
-        var html2 = $("#tableCaiGou").html();
+        var html1 = $("[name=selectCaiGou]").html();
+        var html2 = $("[name=tableCaiGou]").html();
         $("#selectDiv").html(html1);
         $("#tableDiv").html(html2);
-        document.getElementById("selectCaiGou").style.display="block"
-        document.getElementById("tableCaiGou").style.display="block"
-        alert($("#selectCaiGou").length)
     }
 
     /*交易查询统计-供货商查询 */
     function selectGongHuoShang() {
-        var html1 = $("#selectGongHuoShang").html();
-        var html2 = $("#tableGongHuoShang").html();
+        var html1 = $("[name=selectGongHuoShang]").html();
+        var html2 = $("[name=tableGongHuoShang]").html();
         $("#selectDiv").html(html1);
         $("#tableDiv").html(html2);
-        document.getElementById("selectGongHuoShang").style.display="block"
-        document.getElementById("tableGongHuoShang").style.display="block"
     }
 
     /*交易查询统计-采购医院查询 */
     function selectCaiGouYiYuan() {
-        var html1 = $("#selectCaiGouYiYuan").html();
-        var html2 = $("#tableCaiGouYiYuan").html();
+        var html1 = $("[name=selectCaiGouYiYuan]").html();
+        var html2 = $("[name=tableCaiGouYiYuan]").html();
         $("#selectDiv").html(html1);
         $("#tableDiv").html(html2);
-        document.getElementById("selectCaiGouYiYuan").style.display="block"
-        document.getElementById("tableCaiGouYiYuan").style.display="block"
     }
 
     /*交易查询统计-交易药品查询 */
     function selectJiaoYiYaoPin() {
-        var html1 = $("#selectJiaoYiYaoPin").html();
-        var html2 = $("#tableJiaoYiYaoPin").html();
+        var html1 = $("[name=selectJiaoYiYaoPin]").html();
+        var html2 = $("[name=tableJiaoYiYaoPin]").html();
         $("#selectDiv").html(html1);
         $("#tableDiv").html(html2);
-        document.getElementById("selectJiaoYiYaoPin").style.display="block"
-        document.getElementById("tableJiaoYiYaoPin").style.display="block"
     }
 
     /*交易查询统计-交易药品交易明细查询 */
     function selectYaoPinJiaoYiMingXi() {
-        var html1 = $("#selectYaoPinJiaoYiMingXi").html();
-        var html2 = $("#tableYaoPinJiaoYiMingXi").html();
+        var html1 = $("[name=selectYaoPinJiaoYiMingXi]").html();
+        var html2 = $("[name=tableYaoPinJiaoYiMingXi]").html();
         $("#selectDiv").html(html1);
         $("#tableDiv").html(html2);
-        document.getElementById("selectYaoPinJiaoYiMingXi").style.display="block"
-        document.getElementById("tableYaoPinJiaoYiMingXi").style.display="block"
     }
 </script>
 </html>
