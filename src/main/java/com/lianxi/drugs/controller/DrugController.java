@@ -1,5 +1,6 @@
 package com.lianxi.drugs.controller;
 
+import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.vo.DruginfoVO;
@@ -30,6 +31,14 @@ public class DrugController {
         return drugSystemService.queryUser(name, pwd);
     }
 
+    /**
+     * 2020.12.28 陈泉润
+     * @return 查询所有药品类别
+     */
+    @RequestMapping("/drugclass")
+    public List<DrugClazz> findDrugClazz(){
+        return  drugSystemService.queryDrugClazz();
+    }
     /**
      * 2020.12.28 陈泉润
      * @return 查询所有药品品目

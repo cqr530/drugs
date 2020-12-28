@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.pojo.DrugClazzMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.DrugClazz">
+    <id column="drug_clazz_id" jdbcType="INTEGER" property="drugClazzId" />
+    <result column="drug_clazz_name" jdbcType="VARCHAR" property="drugClazzName" />
+    <result column="drug_clazz_status" jdbcType="INTEGER" property="drugClazzStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    drug_clazz_id, drug_clazz_name, drug_clazz_status
+  </sql>
+  <select id="selectDrugClazz" resultMap="BaseResultMap">
+    select drug_clazz_id, drug_clazz_name
+    from drug_clazz
+    where drug_clazz_status = 1
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from drug_clazz
+    where drug_clazz_id = #{drugClazzId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drug_clazz
+    where drug_clazz_id = #{drugClazzId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lianxi.drugs.pojo.DrugClazz">
+    insert into drug_clazz (drug_clazz_id, drug_clazz_name, drug_clazz_status
+      )
+    values (#{drugClazzId,jdbcType=INTEGER}, #{drugClazzName,jdbcType=VARCHAR}, #{drugClazzStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.DrugClazz">
+    insert into drug_clazz
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="drugClazzId != null">
+        drug_clazz_id,
+      </if>
+      <if test="drugClazzName != null">
+        drug_clazz_name,
+      </if>
+      <if test="drugClazzStatus != null">
+        drug_clazz_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="drugClazzId != null">
+        #{drugClazzId,jdbcType=INTEGER},
+      </if>
+      <if test="drugClazzName != null">
+        #{drugClazzName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugClazzStatus != null">
+        #{drugClazzStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.pojo.DrugClazz">
+    update drug_clazz
+    <set>
+      <if test="drugClazzName != null">
+        drug_clazz_name = #{drugClazzName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugClazzStatus != null">
+        drug_clazz_status = #{drugClazzStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where drug_clazz_id = #{drugClazzId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.pojo.DrugClazz">
+    update drug_clazz
+    set drug_clazz_name = #{drugClazzName,jdbcType=VARCHAR},
+      drug_clazz_status = #{drugClazzStatus,jdbcType=INTEGER}
+    where drug_clazz_id = #{drugClazzId,jdbcType=INTEGER}
+  </update>
+</mapper>

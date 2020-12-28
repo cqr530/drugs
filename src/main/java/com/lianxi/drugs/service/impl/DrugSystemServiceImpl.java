@@ -1,5 +1,6 @@
 package com.lianxi.drugs.service.impl;
 
+import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.service.DrugSystemService;
@@ -21,6 +22,9 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     @Autowired
     private com.lianxi.drugs.dao.ItemMapper itemMapper;
 
+    @Autowired
+    private com.lianxi.drugs.dao.DrugClazzMapper drugClazzMapper;
+
     @Override
     public int queryUser(String name, String pwd) {
         return usermapper.selectuser(name, pwd);
@@ -29,6 +33,11 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     @Override
     public List<DrugInfo> queryDrug() {
         return drugInfoMapper.selectAllDrugInfo();
+    }
+
+    @Override
+    public List<DrugClazz> queryDrugClazz() {
+        return drugClazzMapper.selectDrugClazz();
     }
 
     @Override

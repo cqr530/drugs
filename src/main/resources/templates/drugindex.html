@@ -12,18 +12,15 @@
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
-    <script type="text/javascript">
-        var app = angular.module('myApp', ["pagination"]);
+    <script>
+        var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope,$http){
-
             $scope.load=function(){
-                $http.get("http://localhost:8000/drugs/alldrug").then(function (data){
-                    $scope.list = data.list;
-                    console.log(11111)
+                $http.get("http://localhost:8000/drugs/alldrug").then(function (response){
+                    $scope.list = response.data;
+                    console.log(response.data)
                 });
             }
-
-
         })
     </script>
     <style>
@@ -45,10 +42,10 @@
 <body ng-app="myApp" ng-controller="myCtrl" ng-init="load()">
 <div class="container-fluid">
     <div class="container1" style="background-color: #EEF7FC">
-    <form>
+    <form id="form1" action="/likeFindItem" method="get">
         <table class="table">
             <thead>
-            <tr style="background-color: #EEF7FC">
+            <tr style="background-color: #eef7fc">
                 <th>药品信息查询</th>
                 <th>  </th>
             </tr>
@@ -74,11 +71,9 @@
                 <td>价格范围:<input style="margin-left: 31px" type="text">至<input type="text"></td>
                 <td>质量层次:<select style="margin-left: 45px" id="wuranluv">
                     <option value="">请选择</option>
-                    <option value="0-20">0~20%</option>
-                    <option value="20-40">20%~40%</option>
-                    <option value="40-60">40%~60%</option>
-                    <option value="60-80">60%~80%</option>
-                    <option value="80-100">80%~100%</option>
+                    <option value="1">国家一类药物</option>
+                    <option value="2">国家二类药物</option>
+                    <option value="3">国家三类药物</option>
                 </select></td>
             </tr>
             <tr style="background-color: #F3F3F3">

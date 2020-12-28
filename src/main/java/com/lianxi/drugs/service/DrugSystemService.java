@@ -1,5 +1,6 @@
 package com.lianxi.drugs.service;
 
+import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.vo.DruginfoVO;
@@ -8,6 +9,7 @@ import com.lianxi.drugs.vo.ItemVO;
 import java.util.List;
 
 public interface DrugSystemService {
+
     /**
      * 登录
      * @param name
@@ -21,6 +23,12 @@ public interface DrugSystemService {
      * @return
      */
     List<DrugInfo> queryDrug();
+
+    /**
+     * 查找全部药品别信息
+     * @return
+     */
+    List<DrugClazz> queryDrugClazz();
 
     /**
      * 模糊查询

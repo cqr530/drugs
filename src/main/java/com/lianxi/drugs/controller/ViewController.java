@@ -26,9 +26,9 @@ public class ViewController {
      * @return
      */
     @RequestMapping("/selectAndAddCaiGouDan")
-    public String toCaiGouDan(){
+    public String toCaiGouDan() {
         return "/caigoudan-add";
-
+    }
 
     /**
      * 药品目录查询页面
