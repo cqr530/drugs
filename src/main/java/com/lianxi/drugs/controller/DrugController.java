@@ -1,6 +1,7 @@
 package com.lianxi.drugs.controller;
 
 import com.lianxi.drugs.pojo.DrugInfo;
+import com.lianxi.drugs.vo.DruginfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,5 +36,15 @@ public class DrugController {
     @RequestMapping("/alldrug")
     public List<DrugInfo> findDrug(){
         return drugSystemService.queryDrug();
+    }
+
+    /**
+     * 2020.12.28 陈泉润
+     * @param druginfoVO
+     * @return 药品信息模糊查询
+     */
+    @RequestMapping("/likedrug")
+    public List<DrugInfo> likeFindDrug(DruginfoVO druginfoVO){
+        return drugSystemService.queryDrugLike(druginfoVO);
     }
 }

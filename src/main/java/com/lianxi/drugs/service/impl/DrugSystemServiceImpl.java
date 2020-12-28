@@ -2,6 +2,7 @@ package com.lianxi.drugs.service.impl;
 
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.service.DrugSystemService;
+import com.lianxi.drugs.vo.DruginfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,10 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     @Override
     public List<DrugInfo> queryDrug() {
         return drugInfoMapper.selectAllDrugInfo();
+    }
+
+    @Override
+    public List<DrugInfo> queryDrugLike(DruginfoVO druginfoVO) {
+        return drugInfoMapper.selectAllDrugInfoLike(druginfoVO);
     }
 }
