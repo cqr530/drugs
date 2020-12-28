@@ -1,8 +1,10 @@
 package com.lianxi.drugs.service.impl;
 
 import com.lianxi.drugs.pojo.DrugInfo;
+import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.service.DrugSystemService;
 import com.lianxi.drugs.vo.DruginfoVO;
+import com.lianxi.drugs.vo.ItemVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class DrugSystemServiceImpl implements DrugSystemService {
 
     @Autowired
     private com.lianxi.drugs.dao.DrugInfoMapper drugInfoMapper;
+
+    @Autowired
+    private com.lianxi.drugs.dao.ItemMapper itemMapper;
 
     @Override
     public int queryUser(String name, String pwd) {
@@ -29,5 +34,15 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     @Override
     public List<DrugInfo> queryDrugLike(DruginfoVO druginfoVO) {
         return drugInfoMapper.selectAllDrugInfoLike(druginfoVO);
+    }
+
+    @Override
+    public List<Item> queryItem() {
+        return itemMapper.selectAllItem();
+    }
+
+    @Override
+    public List<Item> queryItemLike(ItemVO itemVO) {
+        return itemMapper.selectAllItemLike(itemVO);
     }
 }

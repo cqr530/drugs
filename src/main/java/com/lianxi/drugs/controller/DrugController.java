@@ -1,7 +1,9 @@
 package com.lianxi.drugs.controller;
 
 import com.lianxi.drugs.pojo.DrugInfo;
+import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.vo.DruginfoVO;
+import com.lianxi.drugs.vo.ItemVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,6 @@ public class DrugController {
     @Autowired
     private com.lianxi.drugs.service.DrugSystemService drugSystemService;
 
-
     /**
      *2020.12.24 陈泉润
      * @param name
@@ -29,6 +30,24 @@ public class DrugController {
         return drugSystemService.queryUser(name, pwd);
     }
 
+    /**
+     * 2020.12.28 陈泉润
+     * @return 查询所有药品品目
+     */
+    @RequestMapping("/allitem")
+    public List<Item> findItem(){
+        return drugSystemService.queryItem();
+    }
+
+    /**
+     * 2020.12.28 陈泉润
+     * @param itemVO
+     * @return 药品品目模糊查询
+     */
+    @RequestMapping("/likeitem")
+    public List<Item> likeFindItem(ItemVO itemVO){
+        return drugSystemService.queryItemLike(itemVO);
+    }
     /**
      * 2020.12.25 陈泉润
      * @return 查询所有药品信息
