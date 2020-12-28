@@ -8,7 +8,7 @@ import org.springframework.context.event.EventListener;
 
 import java.io.IOException;
 
-@SpringBootApplication
+@SpringBootApplication()
 @MapperScan("com.lianxi.drugs.dao")
 public class DrugsApplication {
 

@@ -22,6 +22,15 @@ public class ViewController {
 
 
     /**
+     * 跳转到添加采购单的页面
+     * @return
+     */
+    @RequestMapping("/selectAndAddCaiGouDan")
+    public String toCaiGouDan(){
+        return "/caigoudan-add";
+
+
+    /**
      * 药品目录查询页面
      * @return
      */

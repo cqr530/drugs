@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<table class="table table-striped" style="display: table">
+    <caption>修改供货商</caption>
+    <thead>
+    <tr>
+        <th scope="col">选择供货商</th>
+        <th scope="col">企业名称</th>
+        <th scope="col">详细</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">
+            <input type="radio">
+        </th>
+        <td>@fat</td>
+        <td>
+            <button type="button" class="btn btn-primary">查看</button>
+        </td>
+    </tr>
+    </tbody>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-default">选择</button>
+        <button type="button" onclick="colse()" class="btn btn-default">关闭</button>
+    </div>
+</table>
+</body>
+
+<script>
+    function close() {
+        document.getElementsByClassName("table table-striped").style.display="none";
+    }
+</script>
+
+</html>
