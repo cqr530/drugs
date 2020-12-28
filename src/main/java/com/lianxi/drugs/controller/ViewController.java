@@ -19,4 +19,13 @@ public class ViewController {
     public String toDrug(){
         return "/drug";
     }
+
+    /**
+     * 跳转到添加采购单的页面
+     * @return
+     */
+    @RequestMapping("/selectAndAddCaiGouDan")
+    public String toCaiGouDan(){
+        return "/caigoudan-add";
+    }
 }
