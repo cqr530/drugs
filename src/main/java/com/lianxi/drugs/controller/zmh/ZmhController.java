@@ -20,7 +20,7 @@ public class ZmhController {
     /**
      *
      * @param queryDrugItemDto 模糊查询需要的类
-     * @return  Map code 状态码  data 数据
+     * @return  Map code 状态码  data 数据 啊
      */
     @RequestMapping("queryAllItemPage")
     @ResponseBody
