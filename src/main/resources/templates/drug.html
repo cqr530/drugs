@@ -92,6 +92,10 @@
     </div>
 </nav>
 
+<div id="idDiv">
+
+</div>
+
 
 <!--采购管理-药品品目查询-->
 <div style="display: none" id="selectYaoPinIndex">
@@ -2770,77 +2774,59 @@
 <script>
     /*采购管理-药品目录查询*/
     function selectYaoPinIndex() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectYaoPinIndex").style.display="block"
-        }
+       var html = $("#selectYaoPinIndex").html()
+        $("#idDiv").html(html)
     }
 
     /*采购管理-药品信息查询*/
     function selectYaoPinInfo() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectYaoPinInfo").style.display="block"
-        }
+        var html1 = $("#selectYaoPinInfo").html()
+        $("#idDiv").html(html1)
     }
 
     /*采购管理-采购目录管理 商场*/
     function selectCaiGouIndexManage() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectCaiGouIndexManage").style.display="block"
-        }
+        var html1 = $("#selectCaiGouIndexManage").html()
+        $("#idDiv").html(html1)
 
     }
 
     /*采购管理-采购目录维护 医院仓库*/
     function selectCaiGouIndexWeiHu() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectCaiGouIndexWeiHu").style.display="block"
-        }
+        var html1 = $("#selectCaiGouIndexWeiHu").html()
+        $("#idDiv").html(html1)
 
     }
 
     /*采购管理-采购单管理*/
     function selectCaiGouDanManage(){
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectCaiGouDanManage").style.display="block"
-        }
+        var html1 = $("#selectCaiGouDanManage").html()
+        $("#idDiv").html(html1)
     }
 
     /*采购管理-采购入库*/
     function selectCaiGouWarehouseIn() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectCaiGouWarehouseIn").style.display="block"
-        }
+        var html1 = $("#selectCaiGouWarehouseIn").html()
+        $("#idDiv").html(html1)
 
     }
 
     /*采购管理-退货单创建*/
     function createReturnGoodsManage() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("createReturnGoodsManage").style.display="block"
-        }
+        var html1 = $("#createReturnGoodsManage").html()
+        $("#idDiv").html(html1)
     }
 
     <!--采购管理-结算单创建-->
     function createSettlementDan(){
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("createSettlementDan").style.display="block"
-        }
+        var html1 = $("#createSettlementDan").html()
+        $("#idDiv").html(html1)
     }
 
     <!--采购管理-交易查询统计-->
     function selectTransaction() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectTransaction").style.display="block"
-        }
+        var html1 = $("#selectTransaction").html()
+        $("#idDiv").html(html1)
     }
 </script>
 
