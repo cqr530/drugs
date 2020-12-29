@@ -1,6 +1,7 @@
 package com.lianxi.drugs.service.impl;
 
 import com.lianxi.drugs.pojo.DrugClazz;
+import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.service.DrugSystemService;
 import com.lianxi.drugs.vo.DruginfoVO;

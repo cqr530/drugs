@@ -67,4 +67,30 @@ public class ViewController {
         return "/drugSelect";
     }
 
+    /**
+     * 供应商商品选择
+     * @return
+     */
+    @RequestMapping("/supplierdrug")
+    public String supplierdrug(){
+        return "/supplierdrug";
+    }
+
+    /**
+     * 取消供应商品选择
+     * @return
+     */
+    @RequestMapping("/cancelsupplierdrug")
+    public String cancelsupplierdrug(){
+        return "/cancelsupplierdrug";
+    }
+
+    /**
+     * 供应商商品维护
+     * @return
+     */
+    @RequestMapping("/maintainsupplierdrug")
+    public String maintainsupplierdrug(){
+        return "/maintainsupplierdrug";
+    }
 }
