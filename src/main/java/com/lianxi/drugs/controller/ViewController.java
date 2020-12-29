@@ -20,16 +20,18 @@ public class ViewController {
         return "/drug";
     }
 
+
     /**
      * 跳转到添加采购单的页面
      * @return
      */
     @RequestMapping("/selectAndAddCaiGouDan")
-    public String toCaiGouDan(){
+    public String toCaiGouDan() {
         return "/caigoudan-add";
     }
 
     /**
+
      * 跳转到创建退货单的页面
      * @return
      */
@@ -45,6 +47,24 @@ public class ViewController {
     @RequestMapping("/redirectionToSettlementDan")
     public String redirectionToSettlementDan(){
         return "/SettlementDan";
+    }
+
+    /**
+     * 药品目录查询页面
+     * @return
+     */
+    @RequestMapping("/drugindex")
+    public String DrugIndex(){
+        return "/drugindex";
+    }
+
+    /**
+     * 药品品目查询页面
+     * @return
+     */
+    @RequestMapping("/drugselect")
+    public String DrugSelect(){
+        return "/drugSelect";
     }
 
 }

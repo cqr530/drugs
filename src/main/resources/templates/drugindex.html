@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>药品信息维护</title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope,$http){
+            $scope.load=function(){
+                $http.get("http://localhost:8000/drugs/alldrug").then(function (response){
+                    $scope.list = response.data;
+                    console.log(response.data)
+                });
+            }
+        })
+    </script>
+    <style>
+        body,ul,ol,p,h1,h2,h3,h4,h5,h6,div{
+            margin: 0px;
+            padding: 0px;
+        }
+        .container-fluid{
+            height: 450px;
+        }
+        .container-fluid:after{
+            content:"";
+            display:block;
+            clear:both;
+            height:0;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="load()">
+<div class="container-fluid">
+    <div class="container1" style="background-color: #EEF7FC">
+    <form id="form1" action="/likeFindItem" method="get">
+        <table class="table">
+            <thead>
+            <tr style="background-color: #eef7fc">
+                <th>药品信息查询</th>
+                <th>  </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="background-color: #F3F3F3">
+                <td>药品流水号:<input style="margin-left: 15px" type="text"></td>
+                <td>通用名:<input style="margin-left: 62px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>剂型:<input style="margin-left: 63px" type="text"></td>
+                <td>规格:<input style="margin-left: 78px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>单位:<input style="margin-left: 63px" type="text"></td>
+                <td>转换系数:<input style="margin-left: 45px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>生产企业:<input style="margin-left: 31px" type="text"></td>
+                <td>商品名:<input style="margin-left: 62px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>价格范围:<input style="margin-left: 31px" type="text">至<input type="text"></td>
+                <td>质量层次:<select style="margin-left: 45px" id="wuranluv">
+                    <option value="">请选择</option>
+                    <option value="1">国家一类药物</option>
+                    <option value="2">国家二类药物</option>
+                    <option value="3">国家三类药物</option>
+                </select></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>药品类别:<select style="margin-left: 30px" id="type">
+                    <option value="">请选择</option>
+                    <option value="0-20">0~20%</option>
+                    <option value="20-40">20%~40%</option>
+                    <option value="40-60">40%~60%</option>
+                    <option value="60-80">60%~80%</option>
+                    <option value="80-100">80%~100%</option>
+                </select></td>
+                <td>药品交易状态:<select style="margin-left: 13px" id="stuta">
+                    <option value="">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="0">暂停交易</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td><button style="margin-left: 350px" type="button" class="btn btn-primary">查询</button></td>
+                <td><button type="button" class="btn btn-primary">导出</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</div>
+<div class="container-fluid">
+        <div class="container2">
+            <table class="table table-bordered" style="font-size: 10px;width: 1349px">
+                <thead>
+                <tr>
+                    <th><button type="button" class="btn btn-primary">添加</button></th>
+                    <th><button type="button" class="btn btn-primary">导出</button></th>
+                </tr>
+                <tr>
+                    <th>药品流水号</th>
+                    <th>通用名</th>
+                    <th>剂型</th>
+                    <th>规格</th>
+                    <th>单位</th>
+                    <th>转换系数</th>
+                    <th>生产企业</th>
+                    <th>药品名称</th>
+                    <th>中标价</th>
+                    <th>质量层次</th>
+                    <th>药品类别</th>
+                    <th>交易状态</th>
+                    <th>详情</th>
+                    <th>修改</th>
+                    <th>删除</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="drug in list">
+                    <td>{{drug.serialNum}}</td>
+                    <td>{{drug.genericName}}</td>
+                    <td>{{drug.reagentType}}</td>
+                    <td>{{drug.drugSize}}</td>
+                    <td>{{drug.company}}</td>
+                    <td>{{drug.transverNum}}</td>
+                    <td>{{drug.factoryName}}</td>
+                    <td>{{drug.productName}}</td>
+                    <td>{{drug.tenderPrice}}</td>
+                    <td>{{drug.qualityLevel}}</td>
+                    <td>{{drug.drugType}}</td>
+                    <td>{{drug.drugTranlStatus}}</td>
+                    <td><a href="www.baidu.com">查看</a></td>
+                    <td><a href="www.baidu.com">修改</a></td>
+                    <td><a href="www.baidu.com">删除</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

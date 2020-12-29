@@ -15,6 +15,178 @@
     drug_category_id, drug_category_name, drug_category_type, drug_category_standard, 
     drug_category_unit, drug_category_tran, drug_clazz_id, drug_category_status
   </sql>
+  <select id="selectAllItem" resultMap="BaseResultMap">
+    select drug_category_id, drug_category_name, drug_category_type, drug_category_standard,
+    drug_category_unit, drug_category_tran, drug_clazz_id, drug_category_status
+    from item
+  </select>
+  <select id="selectAllItemLike" resultMap="BaseResultMap">
+    select drug_category_id, drug_category_name, drug_category_type, drug_category_standard,
+    drug_category_unit, drug_category_tran, drug_clazz_id, drug_category_status
+    from item
+    <where>
+      <if test="itemVO.drugCategoryId != null and itemVO.drugCategoryId != ''">
+        and drug_category_id = #{itemVO.drugCategoryId}
+      </if>
+      <if test="itemVO.drugCategoryName != null and itemVO.drugCategoryName != ''">
+        and drug_category_name = #{itemVO.drugCategoryName}
+      </if>
+      <if test="itemVO.drugCategoryType != null and itemVO.drugCategoryType != ''">
+        and drug_category_type = #{itemVO.drugCategoryType}
+      </if>
+      <if test="itemVO.drugCategoryStandard != null and itemVO.drugCategoryStandard != ''">
+        and drug_category_standard = #{itemVO.drugCategoryStandard}
+      </if>
+      <if test="itemVO.drugCategoryUnit != null and itemVO.drugCategoryUnit != ''">
+        and drug_category_unit = #{itemVO.drugCategoryUnit}
+      </if>
+      <if test="itemVO.drugCategoryTran != null and itemVO.drugCategoryTran != ''">
+        and drug_category_tran = #{itemVO.drugCategoryTran}
+      </if>
+      <if test="itemVO.drugClazzId != null and itemVO.drugClazzId != ''">
+        and drug_clazz_id = #{itemVO.drugClazzId}
+      </if>
+      <if test="itemVO.drugCategoryStatus != null and itemVO.drugCategoryStatus != ''">
+        and drug_category_status = #{itemVO.drugCategoryStatus}
+      </if>
+    </where>
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />

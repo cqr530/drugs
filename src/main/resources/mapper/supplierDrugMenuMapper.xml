@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.supplierDrugMenuMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.supplierDrugMenu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="drug_id" jdbcType="VARCHAR" property="drugId" />
+    <result column="origanzition_control_status" jdbcType="VARCHAR" property="origanzitionControlStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, company_id, drug_id, origanzition_control_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from supplier_drug_menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from supplier_drug_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lianxi.drugs.pojo.supplierDrugMenu">
+    insert into supplier_drug_menu (id, company_id, drug_id, 
+      origanzition_control_status)
+    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=VARCHAR}, #{drugId,jdbcType=VARCHAR}, 
+      #{origanzitionControlStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.supplierDrugMenu">
+    insert into supplier_drug_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="drugId != null">
+        drug_id,
+      </if>
+      <if test="origanzitionControlStatus != null">
+        origanzition_control_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="drugId != null">
+        #{drugId,jdbcType=VARCHAR},
+      </if>
+      <if test="origanzitionControlStatus != null">
+        #{origanzitionControlStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.pojo.supplierDrugMenu">
+    update supplier_drug_menu
+    <set>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="drugId != null">
+        drug_id = #{drugId,jdbcType=VARCHAR},
+      </if>
+      <if test="origanzitionControlStatus != null">
+        origanzition_control_status = #{origanzitionControlStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.pojo.supplierDrugMenu">
+    update supplier_drug_menu
+    set company_id = #{companyId,jdbcType=VARCHAR},
+      drug_id = #{drugId,jdbcType=VARCHAR},
+      origanzition_control_status = #{origanzitionControlStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
