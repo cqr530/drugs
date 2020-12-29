@@ -4,12 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!-- bootstrap的核心js文件 -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https:////cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+
+
+    <script src="../static/js/jquery-3.3.1.js"></script>
+    <!-- bootstrap的核心js文件 -->
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="../static/js/jquery-3.3.1.js"></script>
+    <!--bootstrap的table顺序 1-->
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js"></script>
+    <!--bootstrap的table顺序 2-->
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap.js"></script>
+
+
+
 
 </head>
 
@@ -101,7 +111,9 @@
     </div>
 </nav>
 
+<div id="idDiv">
 
+</div>
 <!--采购管理-药品品目查询-->
 <div style="display: none" id="selectYaoPinIndex">
     <!--条件查询-->
@@ -195,7 +207,7 @@
     <!--表格-->
     <div class="panel panel-default">
         <div class="panel-body">
-            <table class="table">
+            <table class="table" id="example">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">药品品目好号</th>
@@ -209,75 +221,8 @@
                     <th scope="col">操作</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">查看</button>
-                            <button type="button" class="btn btn-warning">修改</button>
-                            <button type="button" class="btn btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">查看</button>
-                            <button type="button" class="btn btn-warning">修改</button>
-                            <button type="button" class="btn btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">查看</button>
-                            <button type="button" class="btn btn-warning">修改</button>
-                            <button type="button" class="btn btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
             </table>
-            <ul class="pagination">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li class="disabled"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
         </div>
-
-        <ul class="pager">
-            <li><a href="#">Previous</a></li>
-            <li><a href="#">Next</a></li>
-        </ul>
     </div>
 </div>
 
@@ -2759,8 +2704,15 @@
 
 </body>
 
-
 <script>
+    /*刷新页面*/
+    function queryList(){
+        $("#idDiv").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+    }
+
+
+
+    /*页面跳转*/
     function selectAndAddCaiGouDan(id) {
         location.href="/selectAndAddCaiGouDan"
     }
@@ -2774,86 +2726,144 @@
     function redirectionToSettlementDan(){
         location.href="/redirectionToSettlementDan"
     }
-</script>
-
-<script>
+    /*----------------------------------------------*/
+    /*导航栏单击事件*/
     /*采购管理-药品目录查询*/
     function selectYaoPinIndex() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectYaoPinIndex").style.display="block"
-        }
-    }
+        var html = $("#selectYaoPinIndex").html()
+        $("#idDiv").html(html)
+        //分页查询
+            var buttons="";
+            table=$('#example').DataTable({
+                "processing": true,
+                "serverSide": true,//开启服务的模式
+                "searching":false,
+                "ordering":true,
+                "aLengthMenu": [5, 6, 7], //更改显示记录数选项
+                ajax:{
+                    url:"drug/queryAllItemPage",
 
+                    type:"post",
+                    dataSrc:function(f){
+
+                        if(f.code == 200){
+                            alert(f.data.recordsFiltered)
+                            f.draw = f.data.draw;
+                            f.recordsTotal = f.data.recordsTotal;
+                            f.recordsFiltered = f.data.recordsFiltered;
+                            return f.data.data;
+                        }else{
+                            return "";
+                        }
+                    },
+                    data:function(d){
+                        //DataTables在发送ajax请求的时候会发送一些自己的参数，比如说每页显示条数，起始条数等等。。。
+                        //通过param这个参数咱们可以设置自己需要传递的参数，比如说条件查询的值
+                        //添加额外的参数传给服务器
+                        return JSON.stringify(d);
+                    }
+                },
+                "columns": [
+                    {"data": "drugCategoryId"},
+                    {"data": "drugCategoryName"},
+                    /*{"data": "sex",
+                        render:function (data) {
+                            return data==1?"雄":"雌"
+                        }
+                    },*/
+                    {"data": "drugCategoryType"},
+                    {"data": "drugCategoryStandard"},
+                    /*{"data": "filepath",render: function(data){
+                            buttons = '<img src="'+data+'" width="80px" />'
+                            return buttons;
+                        }},*/
+                    {"data": "drugCategoryUnit"},
+                    {"data": "drugCategoryTran"},
+                    {"data": "drugClazzId"},
+                    {"data": "drugCategoryStatus"},
+                    {"data": "drugCategoryId",render: function(data) {
+                            return '<div class="btn-group btn-group-xs">'+
+                                '<button type="button" onclick="toUpdate(' + data + ')" class="btn btn-primary">'+
+                                '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
+                                '</button>'+
+                                '</div>';
+                        }
+                    }
+                ],
+                "language": {                              // 这是修改语言的显示
+                    buttons: {
+                        pageLength: {
+                            _: "显示%d条",
+                            '-1': "全部显示"
+                        }
+                    },
+                    paginate: {
+                        first: "首条",
+                        previous: "前一页",
+                        next: "下一页",
+                        last: "末页"
+                    },
+                    "info": "第_PAGE_页,共_PAGES_页",
+                    "infoEmpty": "未找到相关数据",
+                    "search": "关键字",
+                    "zeroRecords": "未找到相关数据",
+                    "decimal": ".",
+                    "thousands": ","
+                }
+            })
+    }
     /*采购管理-药品信息查询*/
     function selectYaoPinInfo() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectYaoPinInfo").style.display="block"
-        }
+        var html1 = $("#selectYaoPinInfo").html()
+        $("#idDiv").html(html1)
     }
 
     /*采购管理-采购目录管理 商场*/
     function selectCaiGouIndexManage() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectCaiGouIndexManage").style.display="block"
-        }
+        var html1 = $("#selectCaiGouIndexManage").html()
+        $("#idDiv").html(html1)
 
     }
 
     /*采购管理-采购目录维护 医院仓库*/
     function selectCaiGouIndexWeiHu() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectCaiGouIndexWeiHu").style.display="block"
-        }
+        var html1 = $("#selectCaiGouIndexWeiHu").html()
+        $("#idDiv").html(html1)
 
     }
 
     /*采购管理-采购单管理*/
     function selectCaiGouDanManage(){
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectCaiGouDanManage").style.display="block"
-        }
+        var html1 = $("#selectCaiGouDanManage").html()
+        $("#idDiv").html(html1)
     }
 
     /*采购管理-采购入库*/
     function selectCaiGouWarehouseIn() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectCaiGouWarehouseIn").style.display="block"
-        }
+        var html1 = $("#selectCaiGouWarehouseIn").html()
+        $("#idDiv").html(html1)
 
     }
 
     /*采购管理-退货单创建*/
     function createReturnGoodsManage() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("createReturnGoodsManage").style.display="block"
-        }
+        var html1 = $("#createReturnGoodsManage").html()
+        $("#idDiv").html(html1)
     }
 
     <!--采购管理-结算单创建-->
     function createSettlementDan(){
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("createSettlementDan").style.display="block"
-        }
+        var html1 = $("#createSettlementDan").html()
+        $("#idDiv").html(html1)
     }
 
     <!--采购管理-交易查询统计-->
     function selectTransaction() {
-        var status = false;//当前Div是否可见
-        if(!status){
-            document.getElementById("selectTransaction").style.display="block"
-        }
+        var html1 = $("#selectTransaction").html()
+        $("#idDiv").html(html1)
     }
-</script>
 
-<script>
+    /*------------------------------------------*/
     /*交易查询统计-采购单查询 */
     function selectCaiGouDan() {
         var html1 = $("[name=selectCaiGou]").html();
@@ -2894,4 +2904,5 @@
         $("#tableDiv").html(html2);
     }
 </script>
+
 </html>
