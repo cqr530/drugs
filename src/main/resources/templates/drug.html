@@ -4,12 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!-- bootstrap的核心js文件 -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https:////cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+
+
+    <script src="../static/js/jquery-3.3.1.js"></script>
+    <!-- bootstrap的核心js文件 -->
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="../static/js/jquery-3.3.1.js"></script>
+    <!--bootstrap的table顺序 1-->
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js"></script>
+    <!--bootstrap的table顺序 2-->
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap.js"></script>
+
+
+
 
 </head>
 
@@ -210,11 +220,6 @@
                 </thead>
             </table>
         </div>
-
-        <ul class="pager">
-            <li><a href="#">Previous</a></li>
-            <li><a href="#">Next</a></li>
-        </ul>
     </div>
 </div>
 
@@ -2731,14 +2736,15 @@
                 "serverSide": true,//开启服务的模式
                 "searching":false,
                 "ordering":true,
-                "order":[[0,'asc'],[1,'desc']],
                 "aLengthMenu": [5, 6, 7], //更改显示记录数选项
                 ajax:{
-                    url:"/drugs/allitem",
-                    contentType:"application/json;charset=utf-8",
+                    url:"drug/queryAllItemPage",
+
                     type:"post",
                     dataSrc:function(f){
-                        if(f.status != 500){
+
+                        if(f.code == 200){
+                            alert(f.data.recordsFiltered)
                             f.draw = f.data.draw;
                             f.recordsTotal = f.data.recordsTotal;
                             f.recordsFiltered = f.data.recordsFiltered;
