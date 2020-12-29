@@ -31,6 +31,25 @@ public class ViewController {
     }
 
     /**
+
+     * 跳转到创建退货单的页面
+     * @return
+     */
+    @RequestMapping("/redirectionToReturnGoodsDan")
+    public String redirectionToReturnGoodsDan(){
+        return "/ReturnGoodsDan";
+    }
+
+    /**
+     * 跳转到创建结算单的页面
+     * @return
+     */
+    @RequestMapping("/redirectionToSettlementDan")
+    public String redirectionToSettlementDan(){
+        return "/SettlementDan";
+    }
+
+    /**
      * 药品目录查询页面
      * @return
      */
@@ -47,4 +66,5 @@ public class ViewController {
     public String DrugSelect(){
         return "/drugSelect";
     }
+
 }
