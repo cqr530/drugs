@@ -1,8 +1,6 @@
 package com.lianxi.drugs.dao;
 
-import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
-import com.lianxi.drugs.vo.DruginfoVO;
 import com.lianxi.drugs.vo.ItemVO;
 import org.apache.ibatis.annotations.Param;
 

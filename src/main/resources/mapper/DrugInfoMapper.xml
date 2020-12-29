@@ -27,28 +27,31 @@
     <result column="drug_specification" jdbcType="VARCHAR" property="drugSpecification" />
     <result column="drug_tranl_status" jdbcType="INTEGER" property="drugTranlStatus" />
     <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
+    <result column="drug_examine_status" jdbcType="INTEGER" property="drugExamineStatus" />
   </resultMap>
   <sql id="Base_Column_List">
     drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num, 
     factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status, 
     package_material, drug_pack_comp, lr_price, retail_price_from, quality_level, quality_level_spec, 
     test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status, 
-    drug_type
+    drug_type, drug_examine_status
   </sql>
+  
   <select id="selectAllDrugInfo" resultMap="BaseResultMap">
     select drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num,
     factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status,
     package_material, drug_pack_comp, lr_price, retail_price_from, quality_level, quality_level_spec,
     test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status,
-    drug_type
+    drug_type, drug_examine_status
     from drug_info
+	group by drug_id
   </select>
   <select id="selectAllDrugInfoLike" resultMap="BaseResultMap">
     select drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num,
     factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status,
     package_material, drug_pack_comp, lr_price, retail_price_from, quality_level, quality_level_spec,
     test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status,
-    drug_type
+    drug_type, drug_examine_status
     from drug_info
     <where>
       <if test="druginfoVO.serialNum != null and druginfoVO.serialNum != ''">
@@ -87,82 +90,106 @@
       <if test="druginfoVO.drugTranlStatus != null and druginfoVO.drugTranlStatus != ''">
         and drug_tranl_status = #{druginfoVO.drugTranlStatus}
       </if>
+	  <if test="druginfoVO.drugExamineStatus != null and druginfoVO.drugExamineStatus != ''">
+        and drug_examine_status = #{druginfoVO.drugExamineStatus}
+      </if>
     </where>
+	group by drug_id
   </select>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
@@ -182,7 +209,8 @@
       lr_price, retail_price_from, quality_level, 
       quality_level_spec, test_report_status, drug_report_id, 
       drug_report_id_date, drug_specification, 
-      drug_tranl_status, drug_type)
+      drug_tranl_status, drug_type, drug_examine_status
+      )
     values (#{drugId,jdbcType=INTEGER}, #{serialNum,jdbcType=INTEGER}, #{genericName,jdbcType=VARCHAR}, 
       #{reagentType,jdbcType=VARCHAR}, #{drugSize,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
       #{transverNum,jdbcType=INTEGER}, #{factoryName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
@@ -191,7 +219,8 @@
       #{lrPrice,jdbcType=DECIMAL}, #{retailPriceFrom,jdbcType=INTEGER}, #{qualityLevel,jdbcType=VARCHAR}, 
       #{qualityLevelSpec,jdbcType=VARCHAR}, #{testReportStatus,jdbcType=INTEGER}, #{drugReportId,jdbcType=INTEGER}, 
       #{drugReportIdDate,jdbcType=TIMESTAMP}, #{drugSpecification,jdbcType=VARCHAR}, 
-      #{drugTranlStatus,jdbcType=INTEGER}, #{drugType,jdbcType=VARCHAR})
+      #{drugTranlStatus,jdbcType=INTEGER}, #{drugType,jdbcType=VARCHAR}, #{drugExamineStatus,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.DrugInfo">
     insert into drug_info
@@ -271,6 +300,9 @@
       <if test="drugType != null">
         drug_type,
       </if>
+      <if test="drugExamineStatus != null">
+        drug_examine_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="drugId != null">
@@ -347,6 +379,9 @@
       </if>
       <if test="drugType != null">
         #{drugType,jdbcType=VARCHAR},
+      </if>
+      <if test="drugExamineStatus != null">
+        #{drugExamineStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -425,6 +460,9 @@
       <if test="drugType != null">
         drug_type = #{drugType,jdbcType=VARCHAR},
       </if>
+      <if test="drugExamineStatus != null">
+        drug_examine_status = #{drugExamineStatus,jdbcType=INTEGER},
+      </if>
     </set>
     where drug_id = #{drugId,jdbcType=INTEGER}
   </update>
@@ -453,7 +491,8 @@
       drug_report_id_date = #{drugReportIdDate,jdbcType=TIMESTAMP},
       drug_specification = #{drugSpecification,jdbcType=VARCHAR},
       drug_tranl_status = #{drugTranlStatus,jdbcType=INTEGER},
-      drug_type = #{drugType,jdbcType=VARCHAR}
+      drug_type = #{drugType,jdbcType=VARCHAR},
+      drug_examine_status = #{drugExamineStatus,jdbcType=INTEGER}
     where drug_id = #{drugId,jdbcType=INTEGER}
   </update>
 </mapper>
