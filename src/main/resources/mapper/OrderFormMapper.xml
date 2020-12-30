@@ -29,8 +29,10 @@
     from order_form
   </select>
   <select id="111">
-    select *
+    select or_id,or_code,or_buyname_id,or_hosp_id,or_createTime,or_submitTime,generic_name,product_name,reagent_type,
+    drug_size,company,transver_num,order_biddingPrice,order_TradingPrice,order_buyCount,order_buyPrice,factory_name,order_buyState
     from order_form of
     left join orderlist_info oi on of.or_id = oi.order_id
+    left join drug_info di on di.drug_id = oi.drug_id
   </select>
 </mapper>
