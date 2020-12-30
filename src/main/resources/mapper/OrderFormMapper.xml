@@ -14,14 +14,15 @@
     <result column="or_type" jdbcType="INTEGER" property="orType" />
     <result column="or_auditor" jdbcType="INTEGER" property="orAuditor" />
     <result column="or_auditOpinion" jdbcType="VARCHAR" property="orAuditopinion" />
-    <result column="or_Audit time" jdbcType="TIMESTAMP" property="orAuditTime" />
+    <result column="or_AuditTime" jdbcType="TIMESTAMP" property="orAuditTime" />
     <result column="or_state" jdbcType="INTEGER" property="orState" />
   </resultMap>
   <sql id="Base_Column_List">
-    or_id, or_code, or_hosp_id, or_user_id, or_buyname_id, or_createTime, or_updateTime, 
-    or_submitTime, or_remark, or_type, or_auditor, or_auditOpinion, "or_Audit time", 
+    or_id, or_code, or_hosp_id, or_user_id, or_buyname_id, or_createTime, or_updateTime,
+    or_submitTime, or_remark, or_type, or_auditor, or_auditOpinion, "or_AuditTime",
     or_state
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
@@ -198,4 +199,17 @@
     where or_id = #{orId,jdbcType=INTEGER}
   </update>
 
+  <select id="selectAllOrder" resultMap="BaseResultMap">
+    select or_id, or_code, or_hosp_id, or_user_id, or_buyname_id, or_createTime, or_updateTime,
+    or_submitTime, or_remark, or_type, or_auditor, or_auditOpinion, or_AuditTime,
+    or_state
+    from order_form
+  </select>
+  <select id="111">
+    select or_id,or_code,or_buyname_id,or_hosp_id,or_createTime,or_submitTime,generic_name,product_name,reagent_type,
+    drug_size,company,transver_num,order_biddingPrice,order_TradingPrice,order_buyCount,order_buyPrice,factory_name,order_buyState
+    from order_form of
+    left join orderlist_info oi on of.or_id = oi.order_id
+    left join drug_info di on di.drug_id = oi.drug_id
+  </select>
 </mapper>

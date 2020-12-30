@@ -3,6 +3,7 @@ package com.lianxi.drugs.controller;
 import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
+import com.lianxi.drugs.pojo.OrderForm;
 import com.lianxi.drugs.vo.DruginfoVO;
 import com.lianxi.drugs.vo.ItemVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class DrugController {
      */
     @RequestMapping("/denglu")
     public int findUser(@RequestParam("name")String name,@RequestParam("pwd") String pwd){
-        return drugSystemService.queryUser(name, pwd);
+        return drugSystemService.queryUser(name,pwd);
     }
 
     /**
@@ -73,4 +74,17 @@ public class DrugController {
     public List<DrugInfo> likeFindDrug(DruginfoVO druginfoVO){
         return drugSystemService.queryDrugLike(druginfoVO);
     }
+
+    /**
+     * 2020.12.30 陈泉润
+     * @return 查询所有订单
+     */
+    @RequestMapping("/orders")
+    public List<OrderForm> findOrders(){
+
+        List<OrderForm> ss = drugSystemService.queryAllOrder();
+        System.out.println(ss);
+        return ss;
+    }
+
 }
