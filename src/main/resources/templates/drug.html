@@ -152,11 +152,10 @@
                                 <label class="col-sm-4 col-form-label">药品类别:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="categoryYaoPinIndex">
-                                        <option>全部</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                        <option value="">全部</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
                                     </select>
                                 </div>
                             </div>
@@ -188,17 +187,22 @@
                                 <label class="col-sm-4 col-form-label">状态:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="statusYaoPinIndex">
-                                        <option>全部</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                        <option value="">全部</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-4">
+                        <div class="btn-group-lg">
+                            <button type="button" onclick="queryList()" class="btn btn-default">查询</button>
+                            <button type="button" class="btn btn-default">导出</button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -2705,13 +2709,6 @@
 </body>
 
 <script>
-    /*刷新页面*/
-    function queryList(){
-        $("#idDiv").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
-    }
-
-
-
     /*页面跳转*/
     function selectAndAddCaiGouDan(id) {
         location.href="/selectAndAddCaiGouDan"
@@ -2739,15 +2736,28 @@
                 "serverSide": true,//开启服务的模式
                 "searching":false,
                 "ordering":true,
+                "order":[
+                    [0,'asc']
+                    ,
+                    [1,'desc']
+                ],
                 "aLengthMenu": [5, 6, 7], //更改显示记录数选项
                 ajax:{
                     url:"drug/queryAllItemPage",
-
+                    data: function (d) {
+                        //添加额外的参数传给服务器
+                        d.drugCategoryId = $("#drugNumberYaoPinIndex").val()
+                        d.drugCategoryName = $("#commonNameYaoPinIndex").val()
+                        d.drugCategoryType = $("#dosageYaoPinIndex").val()
+                        d.drugCategoryStandard = $("#specificationYaoPinIndex").val()
+                        d.drugCategoryUnit = $("#unitYaoPinIndex").val()
+                        d.drugCategoryTran = $("#zhuanHuanXiShuYaoPinIndex").val()
+                        d.drugClazzId = $("#categoryYaoPinIndex").val()
+                        d.drugCategoryStatus = $("#statusYaoPinIndex").val()
+                    },
                     type:"post",
                     dataSrc:function(f){
-
                         if(f.code == 200){
-                            alert(f.data.recordsFiltered)
                             f.draw = f.data.draw;
                             f.recordsTotal = f.data.recordsTotal;
                             f.recordsFiltered = f.data.recordsFiltered;
@@ -2756,12 +2766,6 @@
                             return "";
                         }
                     },
-                    data:function(d){
-                        //DataTables在发送ajax请求的时候会发送一些自己的参数，比如说每页显示条数，起始条数等等。。。
-                        //通过param这个参数咱们可以设置自己需要传递的参数，比如说条件查询的值
-                        //添加额外的参数传给服务器
-                        return JSON.stringify(d);
-                    }
                 },
                 "columns": [
                     {"data": "drugCategoryId"},
@@ -2902,6 +2906,11 @@
         var html2 = $("[name=tableYaoPinJiaoYiMingXi]").html();
         $("#selectDiv").html(html1);
         $("#tableDiv").html(html2);
+    }
+
+    /*刷新页面*/
+    function queryList(){
+        $("#example").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
     }
 </script>
 

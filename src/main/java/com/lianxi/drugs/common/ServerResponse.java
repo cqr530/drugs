@@ -9,10 +9,26 @@ public class ServerResponse {
     /**
      *
      * @param data
-     * @return 返回一个data
+     * @return 操作成功，返回一个ServerResponse 包括了code msg data
      */
     public static ServerResponse success(Object data){
         return new ServerResponse(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(),data);
+    }
+
+    /**
+     *
+     * @return 执行成功后返回的状态码
+     */
+    public static ServerResponse success(){
+        return new ServerResponse(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg());
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static ServerResponse error(){
+        return new ServerResponse(ResponseEnum.ERROR.getCode(),ResponseEnum.ERROR.getMsg());
     }
 
 

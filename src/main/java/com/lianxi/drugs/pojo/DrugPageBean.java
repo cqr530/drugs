@@ -34,5 +34,4 @@ public class DrugPageBean {
 	public void setLength(Integer length) {
 		this.length = length;
 	}
-
 }
