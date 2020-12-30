@@ -26,7 +26,7 @@ public class DrugController {
      */
     @RequestMapping("/denglu")
     public int findUser(@RequestParam("name")String name,@RequestParam("pwd") String pwd){
-        return drugSystemService.queryUser(name, pwd);
+        return drugSystemService.queryUser(name,pwd);
     }
 
     /**

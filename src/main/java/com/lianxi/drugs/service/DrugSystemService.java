@@ -16,7 +16,7 @@ public interface DrugSystemService {
      * @param pwd
      * @return
      */
-    int queryUser (String name,String pwd);
+    Integer queryUser (String name,String pwd);
 
     /**
      * 查找全部药品信息
