@@ -22,5 +22,10 @@
     or_submitTime, or_remark, or_type, or_auditor, or_auditOpinion, "or_Audit time",
     or_state
   </sql>
-
+  <select id="selectAllOrder" resultMap="BaseResultMap">
+    select or_id, or_code, or_hosp_id, or_user_id, or_buyname_id, or_createTime, or_updateTime,
+    or_submitTime, or_remark, or_type, or_auditor, or_auditOpinion, "or_Audit time",
+    or_state
+    from order_form
+  </select>
 </mapper>
