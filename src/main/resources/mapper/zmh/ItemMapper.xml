@@ -16,17 +16,48 @@
     drug_category_unit, drug_category_tran, drug_clazz_id, drug_category_status
   </sql>
 
+  <sql id="select">
+    <where>
+      <if test="drugCategoryId !=null and drugCategoryId!=''">
+        and drug_category_id like concat('%',#{drugCategoryId},'%')
+      </if>
+      <if test="drugCategoryName !=null and drugCategoryName!=''">
+        and drug_category_name = #{drugCategoryName}
+      </if>
+      <if test="drugCategoryType !=null and drugCategoryType!=''">
+        and drug_category_type = #{drugCategoryType}
+      </if>
+      <if test="drugCategoryStandard !=null and drugCategoryStandard!=''">
+        and drug_category_standard = #{drugCategoryStandard}
+      </if>
+      <if test="drugCategoryUnit !=null and drugCategoryUnit!=''">
+        and drug_category_unit = #{drugCategoryUnit}
+      </if>
+      <if test="drugCategoryTran !=null and drugCategoryTran!=''">
+        and drug_category_tran = #{drugCategoryTran}
+      </if>
+      <if test="drugClazzId !=null and drugClazzId!=''">
+        and drug_clazz_id = #{drugClazzId}
+      </if>
+      <if test="drugCategoryStatus !=null and drugCategoryStatus!=''">
+        and drug_category_status = #{drugCategoryStatus}
+      </if>
+    </where>
+  </sql>
+
 
   <select id="queryItem" resultMap="BaseResultMap" parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
     select 
     <include refid="Base_Column_List"></include>
     from item
-    LIMIT 0,4
+    <include refid="select"></include>
+    limit #{start},#{length}
   </select>
 
   <select id="queryDrugItemCount" resultType="long"  parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
     select  count(*)
     from item
+    <include refid="select"></include>
   </select>
 
  <!-- <select id="selectAllItemLike" resultMap="BaseResultMap">

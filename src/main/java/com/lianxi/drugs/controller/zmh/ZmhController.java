@@ -1,5 +1,6 @@
 package com.lianxi.drugs.controller.zmh;
 
+import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.QueryDrugItemDto;
 import com.lianxi.drugs.pojo.DataTableResult;
 import com.lianxi.drugs.service.zmh.ZmgItemService;
@@ -24,17 +25,17 @@ public class ZmhController {
      */
     @RequestMapping("queryAllItemPage")
     @ResponseBody
-    public Map findItem(QueryDrugItemDto queryDrugItemDto){
+    public ServerResponse findItem(QueryDrugItemDto queryDrugItemDto){
         Map map = new HashMap<>();
         try {
             DataTableResult dataTableResult = zmgItemService.queryItem(queryDrugItemDto);
             map.put("code",200);
             map.put("data",dataTableResult);
+            return ServerResponse.success(dataTableResult);
         } catch (Exception e) {
             e.printStackTrace();
-            map.put("code",500);
+            return ServerResponse.error();
         }
-        return map;
     }
 
 }
