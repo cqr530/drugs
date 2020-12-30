@@ -81,7 +81,10 @@ public class DrugController {
      */
     @RequestMapping("/orders")
     public List<OrderForm> findOrders(){
-        return drugSystemService.queryAllOrder();
+
+        List<OrderForm> ss = drugSystemService.queryAllOrder();
+        System.out.println(ss);
+        return ss;
     }
 
 }
