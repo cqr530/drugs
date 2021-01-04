@@ -152,10 +152,6 @@
                                 <label class="col-sm-4 col-form-label">药品类别:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="categoryYaoPinIndex">
-                                        <option value="">全部</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
                                     </select>
                                 </div>
                             </div>
@@ -188,8 +184,8 @@
                                 <div class="col-sm-8">
                                     <select class="form-control" id="statusYaoPinIndex">
                                         <option value="">全部</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
+                                        <option value="1">正常</option>
+                                        <option value="2">非正常</option>
                                     </select>
                                 </div>
                             </div>
@@ -2783,7 +2779,7 @@
                         }},*/
                     {"data": "drugCategoryUnit"},
                     {"data": "drugCategoryTran"},
-                    {"data": "drugClazzId"},
+                    {"data": "drugClazzName"},
                     {"data": "drugCategoryStatus"},
                     {"data": "drugCategoryId",render: function(data) {
                             return '<div class="btn-group btn-group-xs">'+
@@ -2815,6 +2811,20 @@
                     "thousands": ","
                 }
             })
+
+        //查询药品品目类别id下拉框
+        $.ajax({
+            url:"drugs/drugclass",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                var str = "<option value=''>全部</option>";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].drugClazzId + ">" + data[i].drugClazzName + "</option>";
+                }
+                $("#categoryYaoPinIndex").html(str);
+            }
+        })
     }
     /*采购管理-药品信息查询*/
     function selectYaoPinInfo() {

@@ -37,7 +37,8 @@ public class DrugController {
      */
     @RequestMapping("/drugclass")
     public List<DrugClazz> findDrugClazz(){
-        return  drugSystemService.queryDrugClazz();
+        List<DrugClazz> drugClazzes = drugSystemService.queryDrugClazz();
+        return drugClazzes ;
     }
     /**
      * 2020.12.28 陈泉润
