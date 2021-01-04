@@ -7,6 +7,7 @@ import com.lianxi.drugs.pojo.OrderForm;
 import com.lianxi.drugs.service.DrugSystemService;
 import com.lianxi.drugs.vo.DruginfoVO;
 import com.lianxi.drugs.vo.ItemVO;
+import com.lianxi.drugs.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,7 +63,7 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     }
 
     @Override
-    public List<OrderForm> queryAllOrder() {
+    public List<OrderVO> queryAllOrder() {
         return orderFormMapper.selectAllOrder();
     }
 }

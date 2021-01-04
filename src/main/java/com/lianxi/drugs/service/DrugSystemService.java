@@ -6,6 +6,7 @@ import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.pojo.OrderForm;
 import com.lianxi.drugs.vo.DruginfoVO;
 import com.lianxi.drugs.vo.ItemVO;
+import com.lianxi.drugs.vo.OrderVO;
 
 import java.util.List;
 
@@ -55,5 +56,5 @@ public interface DrugSystemService {
      * 查询所有订单
      * @return
      */
-    List<OrderForm> queryAllOrder();
+    List<OrderVO> queryAllOrder();
 }
