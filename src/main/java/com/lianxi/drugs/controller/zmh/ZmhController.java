@@ -29,8 +29,6 @@ public class ZmhController {
         Map map = new HashMap<>();
         try {
             DataTableResult dataTableResult = zmgItemService.queryItem(queryDrugItemDto);
-            map.put("code",200);
-            map.put("data",dataTableResult);
             return ServerResponse.success(dataTableResult);
         } catch (Exception e) {
             e.printStackTrace();

@@ -46,10 +46,12 @@
   </sql>
 
 
-  <select id="queryItem" resultMap="BaseResultMap" parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
+  <select id="queryItem" resultType="com.lianxi.drugs.vo.ItemSelectVo" parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
     select 
-    <include refid="Base_Column_List"></include>
-    from item
+    <include refid="Base_Column_List"></include>,d.drug_clazz_name as drugClassName
+    from item i
+    left join drug_clazz d
+    on i.drug_clazz_id = d.drug_clazz_id
     <include refid="select"></include>
     limit #{start},#{length}
   </select>
@@ -57,6 +59,8 @@
   <select id="queryDrugItemCount" resultType="long"  parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
     select  count(*)
     from item
+    left join drug_clazz d
+    on i.drug_clazz_id = d.drug_clazz_id
     <include refid="select"></include>
   </select>
 
