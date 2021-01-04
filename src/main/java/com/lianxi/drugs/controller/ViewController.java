@@ -92,4 +92,13 @@ public class ViewController {
     public String maintainsupplierdrug(){
         return "/maintainsupplierdrug";
     }
+
+    /**
+     * 采购单处理查询
+     * @return
+     */
+    @RequestMapping("/Order")
+    public String Order() {
+        return "/Order";
+    }
 }
