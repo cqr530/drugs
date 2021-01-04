@@ -56,7 +56,4 @@
     left join orderlist_info oi on of.or_id = oi.order_id
     left join drug_info di on di.drug_id = oi.drug_id
   </select>
-
-
-
 </mapper>
