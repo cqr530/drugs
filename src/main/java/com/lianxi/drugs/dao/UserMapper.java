@@ -2,10 +2,9 @@ package com.lianxi.drugs.dao;
 
 import com.lianxi.drugs.pojo.User;
 import org.apache.ibatis.annotations.Param;
-
 public interface UserMapper {
 
-    int selectuser(@Param("name")String name, @Param("pwd") String pwd);
+    Integer selectuser(@Param("name")String name, @Param("pwd") String pwd);
 
 
 

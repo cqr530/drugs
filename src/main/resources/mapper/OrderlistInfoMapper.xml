@@ -14,9 +14,10 @@
     <result column="order_state" jdbcType="INTEGER" property="orderState" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, order_id, drug_id, supplier_id, order_biddingPrice, order_TradingPrice, order_buyCount, 
+    id, order_id, drug_id, supplier_id, order_biddingPrice, order_TradingPrice, order_buyCount,
     order_buyPrice, order_buyState, order_state
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
@@ -150,4 +151,5 @@
       order_state = #{orderState,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>

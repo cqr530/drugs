@@ -1,6 +1,7 @@
 package com.lianxi.drugs.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class OrderForm {
     private Integer orId;
@@ -30,6 +31,26 @@ public class OrderForm {
     private Date orAuditTime;
 
     private Integer orState;
+
+    private List<DrugInfo> drugInfoList;
+
+    private List<OrderlistInfo> orderlistInfoList;
+
+    public List<DrugInfo> getDrugInfoList() {
+        return drugInfoList;
+    }
+
+    public void setDrugInfoList(List<DrugInfo> drugInfoList) {
+        this.drugInfoList = drugInfoList;
+    }
+
+    public List<OrderlistInfo> getOrderlistInfoList() {
+        return orderlistInfoList;
+    }
+
+    public void setOrderlistInfoList(List<OrderlistInfo> orderlistInfoList) {
+        this.orderlistInfoList = orderlistInfoList;
+    }
 
     public Integer getOrId() {
         return orId;
@@ -140,6 +161,26 @@ public class OrderForm {
     }
 
     public void setOrState(Integer orState) {
+        this.orState = orState;
+    }
+
+    public OrderForm() {
+    }
+
+    public OrderForm(Integer orId, String orCode, Integer orHospId, String orUserId, String orBuynameId, Date orCreatetime, Date orUpdatetime, Date orSubmittime, String orRemark, Integer orType, Integer orAuditor, String orAuditopinion, Date orAuditTime, Integer orState) {
+        this.orId = orId;
+        this.orCode = orCode;
+        this.orHospId = orHospId;
+        this.orUserId = orUserId;
+        this.orBuynameId = orBuynameId;
+        this.orCreatetime = orCreatetime;
+        this.orUpdatetime = orUpdatetime;
+        this.orSubmittime = orSubmittime;
+        this.orRemark = orRemark;
+        this.orType = orType;
+        this.orAuditor = orAuditor;
+        this.orAuditopinion = orAuditopinion;
+        this.orAuditTime = orAuditTime;
         this.orState = orState;
     }
 }

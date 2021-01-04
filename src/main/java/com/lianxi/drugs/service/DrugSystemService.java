@@ -3,8 +3,10 @@ package com.lianxi.drugs.service;
 import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
+import com.lianxi.drugs.pojo.OrderForm;
 import com.lianxi.drugs.vo.DruginfoVO;
 import com.lianxi.drugs.vo.ItemVO;
+import com.lianxi.drugs.vo.OrderVO;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public interface DrugSystemService {
      * @param pwd
      * @return
      */
-    int queryUser (String name,String pwd);
+    Integer queryUser (String name,String pwd);
 
     /**
      * 查找全部药品信息
@@ -49,4 +51,10 @@ public interface DrugSystemService {
      * @return
      */
     List<Item> queryItemLike(ItemVO itemVO);
+
+    /**
+     * 查询所有订单
+     * @return
+     */
+    List<OrderVO> queryAllOrder();
 }
