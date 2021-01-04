@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lianxi.drugs.dao.DrugClazzMapper">
   <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.DrugClazz">
-    <id column="drug_clazz_id" jdbcType="INTEGER" property="drugClazzId" />
+    <id column="id" jdbcType="INTEGER" property="drugClazzId" />
     <result column="drug_clazz_name" jdbcType="VARCHAR" property="drugClazzName" />
     <result column="drug_clazz_status" jdbcType="INTEGER" property="drugClazzStatus" />
   </resultMap>
   <sql id="Base_Column_List">
-    drug_clazz_id, drug_clazz_name, drug_clazz_status
+    id, drug_clazz_name, drug_clazz_status
   </sql>
   <select id="selectDrugClazz" resultMap="BaseResultMap">
-    select drug_clazz_id, drug_clazz_name
+    select id, drug_clazz_name
     from drug_clazz
     where drug_clazz_status = 1
   </select>

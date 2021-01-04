@@ -11,8 +11,20 @@
     <result column="drug_clazz_id" jdbcType="INTEGER" property="drugClazzId" />
     <result column="drug_category_status" jdbcType="INTEGER" property="drugCategoryStatus" />
   </resultMap>
+
+  <resultMap id="BaseResultMapTwo" type="com.lianxi.drugs.vo.ItemSelectVo">
+    <id column="drug_category_id" jdbcType="VARCHAR" property="drugCategoryId" />
+    <result column="drug_category_name" jdbcType="VARCHAR" property="drugCategoryName" />
+    <result column="drug_category_type" jdbcType="VARCHAR" property="drugCategoryType" />
+    <result column="drug_category_standard" jdbcType="VARCHAR" property="drugCategoryStandard" />
+    <result column="drug_category_unit" jdbcType="VARCHAR" property="drugCategoryUnit" />
+    <result column="drug_category_tran" jdbcType="INTEGER" property="drugCategoryTran" />
+    <result column="drug_clazz_name" jdbcType="VARCHAR" property="drugClazzName" />
+    <result column="drug_category_status" jdbcType="INTEGER" property="drugCategoryStatus" />
+  </resultMap>
+
   <sql id="Base_Column_List">
-    drug_category_id, drug_category_name, drug_category_type, drug_category_standard, 
+    drug_category_id, drug_category_name, drug_category_type, drug_category_standard,
     drug_category_unit, drug_category_tran, drug_clazz_id, drug_category_status
   </sql>
 
@@ -46,12 +58,13 @@
   </sql>
 
 
-  <select id="queryItem" resultType="com.lianxi.drugs.vo.ItemSelectVo" parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
-    select 
-    <include refid="Base_Column_List"></include>,d.drug_clazz_name as drugClassName
+  <select id="queryItem" resultMap="BaseResultMapTwo" parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
+    select
+    drug_category_id, drug_category_name, drug_category_type, drug_category_standard,
+    drug_category_unit, drug_category_tran, d.drug_clazz_name, drug_category_status
     from item i
     left join drug_clazz d
-    on i.drug_clazz_id = d.drug_clazz_id
+    on i.drug_clazz_id = d.id
     <include refid="select"></include>
     limit #{start},#{length}
   </select>
@@ -59,8 +72,6 @@
   <select id="queryDrugItemCount" resultType="long"  parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
     select  count(*)
     from item
-    left join drug_clazz d
-    on i.drug_clazz_id = d.drug_clazz_id
     <include refid="select"></include>
   </select>
 
