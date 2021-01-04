@@ -25,7 +25,7 @@
     <result column="or_hosp_id" jdbcType="INTEGER" property="orHospId" />
     <result column="or_createTime" jdbcType="TIMESTAMP" property="orCreatetime" />
     <result column="or_submitTime" jdbcType="TIMESTAMP" property="orSubmittime" />
-    <association property="DrugInfo" javaType="com.lianxi.drugs.pojo.DrugInfo">
+    <!--<association property="drugInfoList" javaType="com.lianxi.drugs.pojo.DrugInfo">
       <result column="generic_name" property="genericName"/>
       <result column="product_name" property="productName"/>
       <result column="reagent_type" property="reagentType"/>
@@ -40,7 +40,23 @@
       <result column="order_buyPrice" property="orderBuyprice"/>
       <result column="order_buyCount" property="orderBuycount"/>
       <result column="order_buyState" property="orderBuystate"/>
-    </association>
+    </association>-->
+    <collection property="drugInfoList" ofType="com.lianxi.drugs.pojo.DrugInfo">
+      <result column="generic_name" property="genericName"/>
+      <result column="product_name" property="productName"/>
+      <result column="reagent_type" property="reagentType"/>
+      <result column="company" property="company"/>
+      <result column="drug_size" property="drugSize"/>
+      <result column="transver_num" property="transverNum"/>
+      <result column="factory_name" property="factoryName"/>
+    </collection>
+    <collection property="orderlistInfoList" ofType="com.lianxi.drugs.pojo.OrderlistInfo">
+      <result column="order_biddingPrice" property="orderBiddingprice"/>
+      <result column="order_TradingPrice" property="orderTradingprice"/>
+      <result column="order_buyPrice" property="orderBuyprice"/>
+      <result column="order_buyCount" property="orderBuycount"/>
+      <result column="order_buyState" property="orderBuystate"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     or_id, or_code, or_hosp_id, or_user_id, or_buyname_id, or_createTime, or_updateTime,

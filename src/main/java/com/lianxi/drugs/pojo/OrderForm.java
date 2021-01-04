@@ -1,6 +1,7 @@
 package com.lianxi.drugs.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class OrderForm {
     private Integer orId;
@@ -30,6 +31,26 @@ public class OrderForm {
     private Date orAuditTime;
 
     private Integer orState;
+
+    private List<DrugInfo> drugInfoList;
+
+    private List<OrderlistInfo> orderlistInfoList;
+
+    public List<DrugInfo> getDrugInfoList() {
+        return drugInfoList;
+    }
+
+    public void setDrugInfoList(List<DrugInfo> drugInfoList) {
+        this.drugInfoList = drugInfoList;
+    }
+
+    public List<OrderlistInfo> getOrderlistInfoList() {
+        return orderlistInfoList;
+    }
+
+    public void setOrderlistInfoList(List<OrderlistInfo> orderlistInfoList) {
+        this.orderlistInfoList = orderlistInfoList;
+    }
 
     public Integer getOrId() {
         return orId;
