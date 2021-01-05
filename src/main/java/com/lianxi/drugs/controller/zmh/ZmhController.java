@@ -3,15 +3,13 @@ package com.lianxi.drugs.controller.zmh;
 import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.QueryDrugItemDto;
 import com.lianxi.drugs.dto.QueryDrugMessageDto;
+import com.lianxi.drugs.dto.QueryPurchaseIndexDto;
 import com.lianxi.drugs.pojo.DataTableResult;
 import com.lianxi.drugs.service.zmh.ZmgItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("drug")
@@ -22,12 +20,12 @@ public class ZmhController {
     /**
      *
      * @param queryDrugItemDto 模糊查询需要的类
-     * @return  Map code 状态码  data 数据 啊
+     * @return ServerResponse code 状态码  data 数据 啊
+     * 分页条件查询药品品目
      */
     @RequestMapping("queryAllItemPage")
     @ResponseBody
     public ServerResponse findItem(QueryDrugItemDto queryDrugItemDto){
-        Map map = new HashMap<>();
         try {
             DataTableResult dataTableResult = zmgItemService.queryItem(queryDrugItemDto);
             return ServerResponse.success(dataTableResult);
@@ -37,10 +35,15 @@ public class ZmhController {
         }
     }
 
+    /**
+     *
+     * @param queryDrugMessageDto
+     * @return  ServerResponse
+     * 分页条件查询药品信息
+     */
     @RequestMapping("queryAllDrugMessagePage")
     @ResponseBody
     public ServerResponse findDrugMessage(QueryDrugMessageDto queryDrugMessageDto){
-        Map map = new HashMap<>();
         try {
             DataTableResult dataTableResult = zmgItemService.queryAllDrugMessage(queryDrugMessageDto);
             return ServerResponse.success(dataTableResult);
@@ -50,4 +53,21 @@ public class ZmhController {
         }
     }
 
+    /**
+     *
+     * @param queryPurchaseIndexDto
+     * @return  ServerResponse
+     * 分页，条件查询药品采购单目录 采购之前
+     */
+    @RequestMapping("queryAllCaiGouIndexPage")
+    @ResponseBody
+    public ServerResponse findAllCaiGouIndexPage(QueryPurchaseIndexDto queryPurchaseIndexDto){
+        try {
+            DataTableResult dataTableResult = zmgItemService.queryAllCaiGouIndexPage(queryPurchaseIndexDto);
+            return ServerResponse.success(dataTableResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
 }

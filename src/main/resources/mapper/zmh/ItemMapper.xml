@@ -110,6 +110,12 @@
       <if test="qualityLevel !=null and qualityLevel!=''">
         and quality_level = #{qualityLevel}
       </if>
+      <!--<if test="supply !=null and supply!=''">
+          and supply = #{supply}
+      </if>
+      <if test="supplyStaus !=null and supplyStaus!=''">
+          and supply_staus = #{supplyStaus}
+      </if>-->
       <if test="drugClazzId !=null and drugClazzId!=''">
         and drug_type = #{drugClazzId}
       </if>
@@ -122,11 +128,11 @@
   <!--查询药品品目-->
   <select id="queryItem" resultMap="BaseResultMapDrugItem" parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
     select
-    drug_category_id, drug_category_name, drug_category_type, drug_category_standard,
+    i.drug_category_id, drug_category_name, drug_category_type, drug_category_standard,
     drug_category_unit, drug_category_tran, d.drug_clazz_name, drug_category_status
     from item i
     left join drug_clazz d
-    on i.drug_clazz_id = d.id
+    on i.drug_clazz_id = d.drug_clazz_id
     <include refid="selectDrugItem"></include>
     order by drug_category_id asc
     limit #{start},#{length}
@@ -145,7 +151,7 @@
     tender_price,quality_level,d.drug_clazz_name,drug_tranl_status
     from drug_info i
     left join drug_clazz d
-    on i.drug_type = d.id
+    on i.drug_type = d.drug_clazz_id
     <include refid="selectDrugMessage"></include>
     order by drug_id asc
     limit #{start},#{length}
@@ -157,7 +163,24 @@
     <include refid="selectDrugMessage"></include>
   </select>
 
+  <!--采购目录查询-->
+  <select id="queryAllCaiGouIndexPage" resultMap="BaseResultMapDrugMessage" parameterType="com.lianxi.drugs.dto.QueryPurchaseIndexDto">
+        select
+        serial_num,generic_name,reagent_type,drug_size,company,transver_num,factory_name,product_name,
+        tender_price,quality_level,d.drug_clazz_name,drug_tranl_status
+        from drug_info i
+        left join drug_clazz d
+        on i.drug_type = d.drug_clazz_id
+        <include refid="selectDrugMessage"></include>
+        order by drug_id asc
+        limit #{start},#{length}
+    </select>
 
+  <select id="queryAllCaiGouIndexCount" resultType="long"  parameterType="com.lianxi.drugs.dto.QueryPurchaseIndexDto">
+        select  count(*)
+        from drug_info
+        <include refid="selectDrugMessage"></include>
+    </select>
 
 
 
@@ -291,7 +314,8 @@
 
 
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
     from item
