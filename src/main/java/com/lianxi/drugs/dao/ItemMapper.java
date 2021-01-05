@@ -11,4 +11,52 @@ public interface ItemMapper {
     List<Item> selectAllItem();
     //模糊查询
     List<Item> selectAllItemLike(@Param("itemVO") ItemVO itemVO);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    int deleteByPrimaryKey(String drugCategoryId);
+
+    int insert(Item record);
+
+    int insertSelective(Item record);
+
+    Item selectByPrimaryKey(String drugCategoryId);
+
+    int updateByPrimaryKeySelective(Item record);
+
+    int updateByPrimaryKey(Item record);
 }

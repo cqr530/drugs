@@ -3,6 +3,7 @@ package com.lianxi.drugs.service.zmh;
 import com.lianxi.drugs.dao.ZmhItemMapper;
 import com.lianxi.drugs.dto.QueryDrugItemDto;
 import com.lianxi.drugs.dto.QueryDrugMessageDto;
+import com.lianxi.drugs.dto.QueryPurchaseIndexDto;
 import com.lianxi.drugs.pojo.DataTableResult;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
@@ -32,4 +33,12 @@ public class ZmgItemServiceImpl implements ZmgItemService{
         long count = zmhItemMapper.queryAllDrugMessageCount(queryDrugMessageDto);
         DataTableResult dataTableResult = new DataTableResult(queryDrugMessageDto.getDraw(),count,count,drugInfoList);
         return dataTableResult;    }
+
+    @Override
+    public DataTableResult queryAllCaiGouIndexPage(QueryPurchaseIndexDto queryPurchaseIndexDto) {
+        List<DrugInfo> drugInfoList = zmhItemMapper.queryAllCaiGouIndexPage(queryPurchaseIndexDto);
+        long count = zmhItemMapper.queryAllCaiGouIndexCount(queryPurchaseIndexDto);
+        DataTableResult dataTableResult = new DataTableResult(queryPurchaseIndexDto.getDraw(),count,count,drugInfoList);
+        return dataTableResult;
+    }
 }

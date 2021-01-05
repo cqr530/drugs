@@ -93,6 +93,7 @@ public class ViewController {
         return "/maintainsupplierdrug";
     }
 
+
     /**
      * 采购单处理查询
      * @return
@@ -103,11 +104,12 @@ public class ViewController {
     }
 
     /**
-     * 采购单处理查询
+     * 退货单处理查询
      * @return
      */
     @RequestMapping("/creditorders")
     public String Creditorders() {
         return "/credit_order";
     }
+
 }

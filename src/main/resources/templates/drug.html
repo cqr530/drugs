@@ -72,8 +72,13 @@
                         <li><a href="/supplierdrug">选择供货</a></li>
                         <li><a href="/cancelsupplierdrug">取消供应商品选择</a></li>
                         <li><a href="/maintainsupplierdrug">供应商商品维护</a></li>
+
+                        <li><a href="#">发货管理</a></li>
+                        <li><a href="#">退货管理</a></li>
+
                         <li><a href="/Order">发货管理</a></li>
                         <li><a href="/creditorders">退货管理</a></li>
+
                         <li><a href="#">结算管理</a></li>
                         <li class="divider"></li>
                         <li><a href="#">交易查询统计</a></li>
@@ -405,21 +410,21 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">剂型:</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="selectDosageFormCaiGouIndexManage">
+                                    <input class="form-control" id="selectReagentTypeCaiGouIndexManage">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">单位:</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="selectNnitCaiGouIndexManage">
+                                    <input class="form-control" id="selectCompanyCaiGouIndexManage">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">生产企业:</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="selectManufacturerCaiGouIndexManage">
+                                    <input class="form-control" id="selectFactoryNameCaiGouIndexManage">
                                 </div>
                             </div>
 
@@ -438,9 +443,9 @@
                                 <label class="col-sm-4 col-form-label">供货商供货状态:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="selectDealStatusCaiGouIndexManage">
-                                        <option>全部</option>
-                                        <option>1</option>
-                                        <option>2</option>
+                                        <option value="">全部</option>
+                                        <option value="" selected>正常</option>
+                                        <option value="2">不正常</option>
                                     </select>
                                 </div>
                             </div>
@@ -450,39 +455,35 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">通用名:</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="selectCommonNameCaiGouIndexManage">
+                                    <input class="form-control" id="selectGenericNameCaiGouIndexManage">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">规格:</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="selectSpecificationCaiGouIndexManage">
+                                    <input class="form-control" id="selectDrugSizeCaiGouIndexManage">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">转换系数:</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="selectZhuanHuanXiShuCaiGouIndexManage">
+                                    <input class="form-control" id="selectTransverNumCaiGouIndexManage">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">商品名:</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="selectGoodsCaiGouIndexManage">
+                                    <input class="form-control" id="selectProductNameCaiGouIndexManage">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">药品类别:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="selectDrugCategoryCaiGouIndexManage">
-                                        <option>全部</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
+                                    <select class="form-control" id="selectDrugTypeCaiGouIndexManage">
                                     </select>
                                 </div>
                             </div>
@@ -490,10 +491,10 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">药品交易状态:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="selectDrugDealStatusCaiGouIndexManage">
-                                        <option>全部</option>
-                                        <option>正常</option>
-                                        <option>不正常</option>
+                                    <select class="form-control" id="selectDrugTranlStatusCaiGouIndexManage">
+                                        <option value="">全部</option>
+                                        <option value="1" selected>正常</option>
+                                        <option value="2">不正常</option>
                                     </select>
                                 </div>
                             </div>
@@ -519,12 +520,14 @@
         <div class="panel-heading">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox">全选
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox">反选
+                    <input type="checkbox" id="checkAll" onclick="checkAll()">全选
                 </label>
-                    &nbsp;&nbsp;
-                <button type="submit" class="btn btn-default">确认选择</button>
+                <label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" id="fanxuan" onclick="fanxuan()">反选
+                </label>
+                &nbsp;&nbsp;
+                <button type="submit" onclick="allRight()" class="btn btn-default">确认选择</button>
             </div>
         </div>
 
@@ -550,102 +553,8 @@
                     <th scope="col">操作</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">查看</button>
-                            <button type="button" class="btn btn-warning">修改</button>
-                            <button type="button" class="btn btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>Thornton</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">查看</button>
-                            <button type="button" class="btn btn-warning">修改</button>
-                            <button type="button" class="btn btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th  scope="row">3</th>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">查看</button>
-                            <button type="button" class="btn btn-warning">修改</button>
-                            <button type="button" class="btn btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
             </table>
-            <ul class="pagination">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li class="disabled"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
         </div>
-
-        <ul class="pager">
-            <li><a href="#">Previous</a></li>
-            <li><a href="#">Next</a></li>
-        </ul>
     </div>
 </div>
 
@@ -745,7 +654,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">药品类别:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="selectDrugCategoryCaiGouIndexWeiHu">
+                                    <select class="form-control" id="selectDrugTypeCaiGouIndexWeiHu">
                                         <option>全部</option>
                                         <option>1</option>
                                         <option>2</option>
@@ -2655,6 +2564,37 @@
 </body>
 
 <script>
+
+    /*全选*/
+    function checkAll(){
+      var checked = $("#checkAll").prop("checked")
+        $(".check-box").prop("checked",checked)
+    }
+    /*没有全部选中取消全部选中的状态*/
+    function checkboxs() {
+        var check=true
+        $.each($(".check-box"),function (index,item) {
+            if($(item).prop("checked")==false){
+                check=false
+            }
+        })
+
+        $("#checkAll").prop("checked",check)
+    }
+    /*反选*/
+    function fanxuan() {
+        $.each($(".check-box"),function (index,item) {
+            if($(item).prop("checked")==false){
+                $(item).prop("checked",true)
+            }else{
+                $(item).prop("checked",false)
+            }
+
+        })
+
+
+    }
+
     /*页面跳转*/
     function selectAndAddCaiGouDan(id) {
         location.href="/selectAndAddCaiGouDan"
@@ -2752,7 +2692,11 @@
                 {"data": "drugCategoryUnit"},
                 {"data": "drugCategoryTran"},
                 {"data": "drugClazzName"},
-                {"data": "drugCategoryStatus"},
+                {"data": "drugCategoryStatus",
+                    render:function (data) {
+                        return data==1?"正常":"不正常"
+                    }
+                },
                 {"data": "drugCategoryId",render: function(data) {
                         return '<div class="btn-group btn-group-xs">'+
                             '<button type="button" onclick="toUpdate(' + data + ')" class="btn btn-primary">'+
@@ -2926,7 +2870,136 @@
     function selectCaiGouIndexManage() {
         var html1 = $("#selectCaiGouIndexManage").html()
         $("#idDiv").html(html1)
+        table=$('#exampleThree').DataTable({
+            "processing": true,
+            "serverSide": true,//开启服务的模式
+            "searching":false,
+            "ordering":true,
+            "order":[
+                [0,'asc']
+                ,
+                [1,'desc']
+            ],
+            "aLengthMenu": [5, 6, 7], //更改显示记录数选项
+            ajax:{
+                url:"drug/queryAllCaiGouIndexPage",
+                data: function (d) {
+                    //添加额外的参数传给服务器
+                    d.serialNum = $("#selectSerialNumberCaiGouIndexManage").val()
+                    d.reagentType = $("#selectReagentTypeCaiGouIndexManage").val()
+                    d.company = $("#selectCompanyCaiGouIndexManage").val()
+                    d.factoryName = $("#selectFactoryNameCaiGouIndexManage").val()
+                    d.minTenderPrice = $("#selectMinPriceCaiGouIndexManage").val()
+                    d.maxTenderPrice = $("#selectMaxPriceCaiGouIndexManage").val()
+                    /*供货状态*/
+                    d.company = $("#selectDealStatusCaiGouIndexManage").val()
+                    d.genericName = $("#selectGenericNameCaiGouIndexManage").val()
+                    d.drugSize = $("#selectDrugSizeCaiGouIndexManage").val()
+                    d.transverNum = $("#selectTransverNumCaiGouIndexManage").val()
+                    d.productName = $("#selectProductNameCaiGouIndexManage").val()
+                    d.drugClazzId = $("#selectDrugTypeCaiGouIndexManage").val()
+                    d.drugTranlStatus = $("#selectDrugTranlStatusCaiGouIndexManage").val()
+                },
+                type:"post",
+                dataSrc:function(f){
+                    if(f.code == 200){
+                        f.draw = f.data.draw;
+                        f.recordsTotal = f.data.recordsTotal;
+                        f.recordsFiltered = f.data.recordsFiltered;
+                        return f.data.data;
+                    }else{
+                        return "";
+                    }
+                },
+            },
+            "columns": [
+                {"data": "drugId"},
+                {"data": "drugId",
+                    render:function (data) {
+                    var html="<input type='checkbox' onclick='checkboxs()' class='check-box' value="+data+">"
+                        return html
+                    }
+                },
+                {"data": "serialNum"},
+                {"data": "genericName"},
+                {"data": "reagentType"},
+                {"data": "drugSize"},
+                {"data": "company"},
+                {"data": "transverNum"},
+                {"data": "factoryName"},
+                {"data": "productName"},
+                {"data": "tenderPrice"},
+                {"data": "drugClazzName"},
+                {"data": "drugTranlStatus",
+                    render:function(data){
+                        return data==1?"正常":"不正常"
+                    }
+                },
+                /*供货商*/
+                {"data": "factoryName",
+                    render:function (data) {
+                        return data="河南九州通医药有限公司"
+                    }
+                },
+                /*供货状态*/
+                {"data": "factoryName",
+                    render:function (data) {
+                        return data="正常"
+                    }
+                },
+                {"data": "drugId",render: function(data) {
+                        return '<div class="btn-group btn-group-xs">'+
+                            '<button type="button" onclick="toUpdate(' + data + ')" class="btn btn-primary">'+
+                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
+                            '</button>'+
+                            '</div>';
+                    }
+                }
+            ],
+            "language": {                              // 这是修改语言的显示
+                buttons: {
+                    pageLength: {
+                        _: "显示%d条",
+                        '-1': "全部显示"
+                    }
+                },
+                paginate: {
+                    first: "首条",
+                    previous: "前一页",
+                    next: "下一页",
+                    last: "末页"
+                },
+                "info": "第_PAGE_页,共_PAGES_页",
+                "infoEmpty": "未找到相关数据",
+                "search": "关键字",
+                "zeroRecords": "未找到相关数据",
+                "decimal": ".",
+                "thousands": ","
+            }
+        })
 
+        //查询药品品目类别id下拉框
+        $.ajax({
+            url:"drugs/drugclass",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                var str = "<option value=''>全部</option>";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].drugClazzId + ">" + data[i].drugClazzName + "</option>";
+                }
+                $("#selectDrugTypeCaiGouIndexManage").html(str);
+            }
+        })
+    }
+    /*确认提交*/
+    function allRight() {
+        if(confirm("确认要提交吗")==true){
+            $.ajax({
+                url:"",
+
+            })
+        }
     }
 
     /*采购管理-采购目录维护 医院仓库*/

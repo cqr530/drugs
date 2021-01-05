@@ -2,6 +2,7 @@ package com.lianxi.drugs.dao;
 
 import com.lianxi.drugs.dto.QueryDrugItemDto;
 import com.lianxi.drugs.dto.QueryDrugMessageDto;
+import com.lianxi.drugs.dto.QueryPurchaseIndexDto;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
 
@@ -17,4 +18,9 @@ public interface ZmhItemMapper {
     List<DrugInfo> queryAllDrugMessage(QueryDrugMessageDto queryDrugMessageDto);
 
     long queryAllDrugMessageCount(QueryDrugMessageDto queryDrugMessageDto);
+
+    /*查询采购目录*/
+    List<DrugInfo> queryAllCaiGouIndexPage(QueryPurchaseIndexDto queryPurchaseIndexDto);
+
+    long queryAllCaiGouIndexCount(QueryPurchaseIndexDto queryPurchaseIndexDto);
 }
