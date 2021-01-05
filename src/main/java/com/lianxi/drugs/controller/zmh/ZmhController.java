@@ -2,6 +2,7 @@ package com.lianxi.drugs.controller.zmh;
 
 import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.QueryDrugItemDto;
+import com.lianxi.drugs.dto.QueryDrugMessageDto;
 import com.lianxi.drugs.pojo.DataTableResult;
 import com.lianxi.drugs.service.zmh.ZmgItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,19 @@ public class ZmhController {
         Map map = new HashMap<>();
         try {
             DataTableResult dataTableResult = zmgItemService.queryItem(queryDrugItemDto);
+            return ServerResponse.success(dataTableResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    @RequestMapping("queryAllDrugMessagePage")
+    @ResponseBody
+    public ServerResponse findDrugMessage(QueryDrugMessageDto queryDrugMessageDto){
+        Map map = new HashMap<>();
+        try {
+            DataTableResult dataTableResult = zmgItemService.queryAllDrugMessage(queryDrugMessageDto);
             return ServerResponse.success(dataTableResult);
         } catch (Exception e) {
             e.printStackTrace();

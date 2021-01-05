@@ -195,7 +195,7 @@
                     <div class="col-sm-5"></div>
                     <div class="col-sm-4">
                         <div class="btn-group-lg">
-                            <button type="button" onclick="queryList()" class="btn btn-default">查询</button>
+                            <button type="button" onclick="queryListOne()" class="btn btn-default">查询</button>
                             <button type="button" class="btn btn-default">导出</button>
                         </div>
                     </div>
@@ -207,7 +207,7 @@
     <!--表格-->
     <div class="panel panel-default">
         <div class="panel-body">
-            <table class="table" id="example">
+            <table class="table" id="exampleOne">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">药品品目好号</th>
@@ -282,10 +282,7 @@
                                 <label class="col-sm-4 col-form-label">药品类别:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="selectDrugCategoryYaoPinInfo">
-                                        <option>全部</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
+
                                     </select>
                                 </div>
                             </div>
@@ -316,7 +313,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">商品名:</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="selectGoodsYaoPinInfo">
+                                    <input class="form-control" id="selectDrugName">
                                 </div>
                             </div>
 
@@ -324,9 +321,11 @@
                                 <label class="col-sm-4 col-form-label">质量层次:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="selectMassYaoPinInfo">
-                                        <option>全部</option>
-                                        <option>1</option>
-                                        <option>2</option>
+                                        <option value="">全部</option>
+                                        <option value="1">国家一类新药</option>
+                                        <option value="2">国家二类新药</option>
+                                        <option value="3">国家三类新药</option>
+                                        <option value="4">国家科学进步奖</option>
                                     </select>
                                 </div>
                             </div>
@@ -335,9 +334,9 @@
                                 <label class="col-sm-4 col-form-label">药品交易状态:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="selectDealStatusYaoPinInfo">
-                                        <option>全部</option>
-                                        <option>1</option>
-                                        <option>2</option>
+                                        <option value="">全部</option>
+                                        <option value="1">正常</option>
+                                        <option value="2">不正常</option>
                                     </select>
                                 </div>
                             </div>
@@ -347,7 +346,7 @@
                 <div class="col-sm-5"></div>
                 <div class="col-sm-4">
                     <div class="btn-group-lg">
-                        <button type="button" class="btn btn-default">查询</button>
+                        <button type="button" onclick="queryListTwo()" class="btn btn-default">查询</button>
                         <button type="button" class="btn btn-default">导出</button>
                     </div>
                 </div>
@@ -360,75 +359,26 @@
     <!--表格-->
     <div class="panel panel-default">
         <div class="panel-body">
-            <table class="table">
+            <table class="table" id="exampleTwo" >
                 <thead class="thead-light">
                 <tr>
-                    <th scope="col">序号</th>
-                    <th scope="col">选择药品</th>
                     <th scope="col">药品流水号</th>
                     <th scope="col">通用名</th>
                     <th scope="col">剂型</th>
                     <th scope="col">规格</th>
                     <th scope="col">单位</th>
                     <th scope="col">转换系数</th>
-                    <th scope="col">质量层次</th>
                     <th scope="col">生产企业</th>
+                    <th scope="col">商品名称</th>
                     <th scope="col">中标价</th>
-                    <th scope="col">交易价</th>
-                    <th scope="col">采购量</th>
-                    <th scope="col">采购总金额</th>
-                    <th scope="col">供货企业</th>
-                    <th scope="col">修改供货企业</th>
-                    <th scope="col">采购状态</th>
+                    <th scope="col">质量层次</th>
+                    <th scope="col">药品类别</th>
+                    <th scope="col">交易状态</th>
                     <th scope="col">详细</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">查看</button>
-                            <button type="button" class="btn btn-warning">修改</button>
-                            <button type="button" class="btn btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
             </table>
-            <ul class="pagination">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li class="disabled"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
         </div>
-
-        <ul class="pager">
-            <li><a href="#">Previous</a></li>
-            <li><a href="#">Next</a></li>
-        </ul>
     </div>
 </div>
 
@@ -554,8 +504,8 @@
                 <div class="col-sm-5"></div>
                 <div class="col-sm-4">
                     <div class="btn-group-lg">
-                        <button type="button" class="btn btn-default">select</button>
-                        <button type="reset" class="btn btn-default">reset</button>
+                        <button type="button" onclick="queryListThree()" class="btn btn-default">查询</button>
+                        <button type="reset" class="btn btn-default">重置</button>
                     </div>
                 </div>
                 <div class="col-sm-6"></div>
@@ -579,7 +529,7 @@
         </div>
 
         <div class="panel-body">
-            <table class="table">
+            <table class="table" id="exampleThree">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">序号</th>
@@ -2719,6 +2669,28 @@
     function redirectionToSettlementDan(){
         location.href="/redirectionToSettlementDan"
     }
+
+    /*刷新页面One 药品品目*/
+    function queryListOne(){
+        $("#exampleOne").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+    }
+    /*刷新页面Two 药品信息*/
+    function queryListTwo(){
+        $("#exampleTwo").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+    }
+    /*刷新页面Three 采购目录管理 商场*/
+    function queryListThree(){
+        $("#exampleThree").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+    }
+    /*刷新页面One*/
+    function queryList(){
+        $("#example").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+    }
+    /*刷新页面One*/
+    function queryList(){
+        $("#example").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+    }
+
     /*----------------------------------------------*/
     /*导航栏单击事件*/
     /*采购管理-药品目录查询*/
@@ -2726,91 +2698,91 @@
         var html = $("#selectYaoPinIndex").html()
         $("#idDiv").html(html)
         //分页查询
-            var buttons="";
-            table=$('#example').DataTable({
-                "processing": true,
-                "serverSide": true,//开启服务的模式
-                "searching":false,
-                "ordering":true,
-                "order":[
-                    [0,'asc']
-                    ,
-                    [1,'desc']
-                ],
-                "aLengthMenu": [5, 6, 7], //更改显示记录数选项
-                ajax:{
-                    url:"drug/queryAllItemPage",
-                    data: function (d) {
-                        //添加额外的参数传给服务器
-                        d.drugCategoryId = $("#drugNumberYaoPinIndex").val()
-                        d.drugCategoryName = $("#commonNameYaoPinIndex").val()
-                        d.drugCategoryType = $("#dosageYaoPinIndex").val()
-                        d.drugCategoryStandard = $("#specificationYaoPinIndex").val()
-                        d.drugCategoryUnit = $("#unitYaoPinIndex").val()
-                        d.drugCategoryTran = $("#zhuanHuanXiShuYaoPinIndex").val()
-                        d.drugClazzId = $("#categoryYaoPinIndex").val()
-                        d.drugCategoryStatus = $("#statusYaoPinIndex").val()
-                    },
-                    type:"post",
-                    dataSrc:function(f){
-                        if(f.code == 200){
-                            f.draw = f.data.draw;
-                            f.recordsTotal = f.data.recordsTotal;
-                            f.recordsFiltered = f.data.recordsFiltered;
-                            return f.data.data;
-                        }else{
-                            return "";
-                        }
-                    },
+        var buttons="";
+        table=$('#exampleOne').DataTable({
+            "processing": true,
+            "serverSide": true,//开启服务的模式
+            "searching":false,
+            "ordering":true,
+            "order":[
+                [0,'asc']
+                ,
+                [1,'desc']
+            ],
+            "aLengthMenu": [5, 6, 7], //更改显示记录数选项
+            ajax:{
+                url:"drug/queryAllItemPage",
+                data: function (d) {
+                    //添加额外的参数传给服务器
+                    d.drugCategoryId = $("#drugNumberYaoPinIndex").val()
+                    d.drugCategoryName = $("#commonNameYaoPinIndex").val()
+                    d.drugCategoryType = $("#dosageYaoPinIndex").val()
+                    d.drugCategoryStandard = $("#specificationYaoPinIndex").val()
+                    d.drugCategoryUnit = $("#unitYaoPinIndex").val()
+                    d.drugCategoryTran = $("#zhuanHuanXiShuYaoPinIndex").val()
+                    d.drugClazzId = $("#categoryYaoPinIndex").val()
+                    d.drugCategoryStatus = $("#statusYaoPinIndex").val()
                 },
-                "columns": [
-                    {"data": "drugCategoryId"},
-                    {"data": "drugCategoryName"},
-                    /*{"data": "sex",
-                        render:function (data) {
-                            return data==1?"雄":"雌"
-                        }
-                    },*/
-                    {"data": "drugCategoryType"},
-                    {"data": "drugCategoryStandard"},
-                    /*{"data": "filepath",render: function(data){
-                            buttons = '<img src="'+data+'" width="80px" />'
-                            return buttons;
-                        }},*/
-                    {"data": "drugCategoryUnit"},
-                    {"data": "drugCategoryTran"},
-                    {"data": "drugClazzName"},
-                    {"data": "drugCategoryStatus"},
-                    {"data": "drugCategoryId",render: function(data) {
-                            return '<div class="btn-group btn-group-xs">'+
-                                '<button type="button" onclick="toUpdate(' + data + ')" class="btn btn-primary">'+
-                                '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
-                                '</button>'+
-                                '</div>';
-                        }
+                type:"post",
+                dataSrc:function(f){
+                    if(f.code == 200){
+                        f.draw = f.data.draw;
+                        f.recordsTotal = f.data.recordsTotal;
+                        f.recordsFiltered = f.data.recordsFiltered;
+                        return f.data.data;
+                    }else{
+                        return "";
                     }
-                ],
-                "language": {                              // 这是修改语言的显示
-                    buttons: {
-                        pageLength: {
-                            _: "显示%d条",
-                            '-1': "全部显示"
-                        }
-                    },
-                    paginate: {
-                        first: "首条",
-                        previous: "前一页",
-                        next: "下一页",
-                        last: "末页"
-                    },
-                    "info": "第_PAGE_页,共_PAGES_页",
-                    "infoEmpty": "未找到相关数据",
-                    "search": "关键字",
-                    "zeroRecords": "未找到相关数据",
-                    "decimal": ".",
-                    "thousands": ","
+                },
+            },
+            "columns": [
+                {"data": "drugCategoryId"},
+                {"data": "drugCategoryName"},
+                /*{"data": "sex",
+                    render:function (data) {
+                        return data==1?"雄":"雌"
+                    }
+                },*/
+                {"data": "drugCategoryType"},
+                {"data": "drugCategoryStandard"},
+                /*{"data": "filepath",render: function(data){
+                        buttons = '<img src="'+data+'" width="80px" />'
+                        return buttons;
+                    }},*/
+                {"data": "drugCategoryUnit"},
+                {"data": "drugCategoryTran"},
+                {"data": "drugClazzName"},
+                {"data": "drugCategoryStatus"},
+                {"data": "drugCategoryId",render: function(data) {
+                        return '<div class="btn-group btn-group-xs">'+
+                            '<button type="button" onclick="toUpdate(' + data + ')" class="btn btn-primary">'+
+                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
+                            '</button>'+
+                            '</div>';
+                    }
                 }
-            })
+            ],
+            "language": {                              // 这是修改语言的显示
+                buttons: {
+                    pageLength: {
+                        _: "显示%d条",
+                        '-1': "全部显示"
+                    }
+                },
+                paginate: {
+                    first: "首条",
+                    previous: "前一页",
+                    next: "下一页",
+                    last: "末页"
+                },
+                "info": "第_PAGE_页,共_PAGES_页",
+                "infoEmpty": "未找到相关数据",
+                "search": "关键字",
+                "zeroRecords": "未找到相关数据",
+                "decimal": ".",
+                "thousands": ","
+            }
+        })
 
         //查询药品品目类别id下拉框
         $.ajax({
@@ -2826,10 +2798,128 @@
             }
         })
     }
+
     /*采购管理-药品信息查询*/
     function selectYaoPinInfo() {
         var html1 = $("#selectYaoPinInfo").html()
         $("#idDiv").html(html1)
+        //分页查询
+        var buttons="";
+        table=$('#exampleTwo').DataTable({
+            "processing": true,
+            "serverSide": true,//开启服务的模式
+            "searching":false,
+            "ordering":true,
+            "order":[
+                [0,'asc']
+                ,
+                [1,'desc']
+            ],
+            "aLengthMenu": [5, 6, 7], //更改显示记录数选项
+            ajax:{
+                url:"drug/queryAllDrugMessagePage",
+                data: function (d) {
+                    //添加额外的参数传给服务器
+                    d.serialNum = $("#selectSerialNumberYaoPinInfo").val()
+                    d.reagentType = $("#selectDosageFormYaoPinInfo").val()
+                    d.company = $("#selectNnitYaoPinInfo").val()
+                    d.factoryName = $("#selectManufacturerYaoPinInfo").val()
+                    d.minTenderPrice = $("#selectMinPriceYaoPinInfo").val()
+                    d.maxTenderPrice = $("#selectMaxPriceYaoPinInfo").val()
+                    d.drugClazzId = $("#selectDrugCategoryYaoPinInfo").val()
+                    d.genericName = $("#selectCommonNameYaoPinInfo").val()
+                    d.drugSize = $("#selectSpecificationYaoPinInfo").val()
+                    d.transverNum = $("#selectZhuanHuanXiShuYaoPinInfo").val()
+                    d.productName = $("#selectDrugName").val()
+                    d.qualityLevel = $("#selectMassYaoPinInfo").val()
+                    d.drugTranlStatus = $("#selectDealStatusYaoPinInfo").val()
+                },
+                type:"post",
+                dataSrc:function(f){
+                    if(f.code == 200){
+                        f.draw = f.data.draw;
+                        f.recordsTotal = f.data.recordsTotal;
+                        f.recordsFiltered = f.data.recordsFiltered;
+                        return f.data.data;
+                    }else{
+                        return "";
+                    }
+                },
+            },
+            "columns": [
+                {"data": "serialNum"},
+                {"data": "genericName"},
+                {"data": "reagentType"},
+                {"data": "drugSize"},
+                {"data": "company"},
+                {"data": "transverNum"},
+                {"data": "factoryName"},
+                {"data": "productName"},
+                {"data": "tenderPrice"},
+                {"data": "qualityLevel",
+                    render:function (data) {
+                        if(data==1){
+                            return data="国家一类新药"
+                        }else if(data==2){
+                            return data="国家二类新药"
+                        }else if(data==3){
+                            return data="国家三类新药"
+                        }else if(data==4){
+                            return data="国家科学进步奖"
+                        }
+                    }
+                },
+                {"data": "drugClazzName"},
+                {"data": "drugTranlStatus",
+                    render:function (data) {
+                        return data==1?"正常":"不正常"
+                    }
+
+                },
+                {"data": "drugId",render: function(data) {
+                        return '<div class="btn-group btn-group-xs">'+
+                            '<button type="button" onclick="toUpdate(' + data + ')" class="btn btn-primary">'+
+                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
+                            '</button>'+
+                            '</div>';
+                    }
+                }
+            ],
+            "language": {                              // 这是修改语言的显示
+                buttons: {
+                    pageLength: {
+                        _: "显示%d条",
+                        '-1': "全部显示"
+                    }
+                },
+                paginate: {
+                    first: "首条",
+                    previous: "前一页",
+                    next: "下一页",
+                    last: "末页"
+                },
+                "info": "第_PAGE_页,共_PAGES_页",
+                "infoEmpty": "未找到相关数据",
+                "search": "关键字",
+                "zeroRecords": "未找到相关数据",
+                "decimal": ".",
+                "thousands": ","
+            }
+        })
+
+        //查询药品品目类别id下拉框
+        $.ajax({
+            url:"drugs/drugclass",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                var str = "<option value=''>全部</option>";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].drugClazzId + ">" + data[i].drugClazzName + "</option>";
+                }
+                $("#selectDrugCategoryYaoPinInfo").html(str);
+            }
+        })
     }
 
     /*采购管理-采购目录管理 商场*/
@@ -2918,10 +3008,7 @@
         $("#tableDiv").html(html2);
     }
 
-    /*刷新页面*/
-    function queryList(){
-        $("#example").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
-    }
+
 </script>
 
 </html>
