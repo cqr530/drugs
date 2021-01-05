@@ -1,10 +1,12 @@
 package com.lianxi.drugs.service.impl;
 
+import com.lianxi.drugs.dao.CreditOrderMapper;
 import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.pojo.OrderForm;
 import com.lianxi.drugs.service.DrugSystemService;
+import com.lianxi.drugs.vo.CreditOrderVO;
 import com.lianxi.drugs.vo.DruginfoVO;
 import com.lianxi.drugs.vo.ItemVO;
 import com.lianxi.drugs.vo.OrderVO;
@@ -31,6 +33,9 @@ public class DrugSystemServiceImpl implements DrugSystemService {
 
     @Autowired
     private com.lianxi.drugs.dao.OrderFormMapper orderFormMapper;
+
+    @Autowired
+    private com.lianxi.drugs.dao.CreditOrderMapper creditOrderMapper;
 
     @Override
     public Integer queryUser(String name, String pwd) {
@@ -65,5 +70,10 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     @Override
     public List<OrderVO> queryAllOrder() {
         return orderFormMapper.selectAllOrder();
+    }
+
+    @Override
+    public List<CreditOrderVO> queryAllCreditOrder() {
+        return creditOrderMapper.selectAllCreditOrder();
     }
 }

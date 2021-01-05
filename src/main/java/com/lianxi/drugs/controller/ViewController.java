@@ -101,4 +101,13 @@ public class ViewController {
     public String Order() {
         return "/Order";
     }
+
+    /**
+     * 采购单处理查询
+     * @return
+     */
+    @RequestMapping("/creditorders")
+    public String Creditorders() {
+        return "/credit_order";
+    }
 }
