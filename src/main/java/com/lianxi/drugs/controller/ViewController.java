@@ -92,4 +92,24 @@ public class ViewController {
     public String maintainsupplierdrug(){
         return "/maintainsupplierdrug";
     }
+
+
+    /**
+     * 采购单处理查询
+     * @return
+     */
+    @RequestMapping("/Order")
+    public String Order() {
+        return "/Order";
+    }
+
+    /**
+     * 退货单处理查询
+     * @return
+     */
+    @RequestMapping("/creditorders")
+    public String Creditorders() {
+        return "/credit_order";
+    }
+
 }

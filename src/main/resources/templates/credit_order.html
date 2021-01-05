@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>采购单处理</title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope,$http){
+            $scope.load=function(){
+                $http.get("http://localhost:8000/drugs/creditorders").then(function (response){
+                    $scope.list = response.data;
+                    console.log(response.data)
+                });
+            }
+        })
+    </script>
+    <style>
+        body,ul,ol,p,h1,h2,h3,h4,h5,h6,div{
+            margin: 0px;
+            padding: 0px;
+        }
+        .container-fluid{
+            height: 650px;
+        }
+        .container-fluid:after{
+            content:"";
+            display:block;
+            clear:both;
+            height:0;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="load()">
+<div class="container-fluid">
+    <div class="container1" style="background-color: #EEF7FC">
+    <form id="form1" action="/likeFindItem" method="get">
+        <table class="table">
+            <thead>
+            <tr style="background-color: #eef7fc">
+                <th>退货单处理</th>
+                <th>  </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="background-color: #F3F3F3">
+                <td>退货单编号:<input style="margin-left: 15px" type="text"></td>
+                <td>退货单名称:<input style="margin-left: 55px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>退货状态:<select style="margin-left: 30px" id="wuranluv">
+                    <option value="">请选择</option>
+                    <option value="1">未确认发货</option>
+                    <option value="2">已发货</option>
+                    <option value="3">已入库</option>
+                </select></td>
+                <td>退货时间:<input style="margin-left: 31px" type="text">至<input type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>下单医院:<input style="margin-left: 53px" type="text"></td>
+                <td>采购时间:<input style="margin-left: 31px" type="text">至<input type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>采购单编号:<input style="margin-left: 47px" type="text"></td>
+                <td>采购单名称:<input style="margin-left: 102px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>药品流水号:<input style="margin-left: 61px" type="text"></td>
+                <td>通用名:<input style="margin-left: 100px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>剂型:<input style="margin-left: 31px" type="text"></td>
+                <td>规格:<input style="margin-left: 68px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>单位:<input style="margin-left: 48px" type="text"></td>
+                <td>转换系数:<input style="margin-left: 48px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>生产企业:<input style="margin-left: 48px" type="text"></td>
+                <td>商品名:<input style="margin-left: 48px" type="text"></td>
+            </tr>
+            <tr style="background-color: #F3F3F3">
+                <td>质量层次:<select style="margin-left: 68px" >
+                    <option value="">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="0">暂停交易</option>
+                </select></td>
+                <td>药品类别:<select style="margin-left: 68px" id="stuta">
+                    <option value="">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="0">暂停交易</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td><button style="margin-left: 350px" type="button" class="btn btn-primary">查询</button></td>
+                <td><button type="button" class="btn btn-primary">导出</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</div>
+<div class="container-fluid">
+        <div class="container2">
+            <table class="table table-bordered" style="font-size: 10px;width: 1349px">
+                <thead>
+                <tr>
+                    <th><button type="button" class="btn btn-primary">确认退货</button></th>
+                </tr>
+                <tr>
+                    <th>序号</th>
+                    <th>选择</th>
+                    <th>退货单编号</th>
+                    <th>退货单名称</th>
+                    <th>下单医院</th>
+                    <th>开始采购时间</th>
+                    <th>结束采购时间</th>
+                    <th>对应采购编号</th>
+                    <th>对应采购单名称</th>
+                    <th>流水号</th>
+                    <th>通用名</th>
+                    <th>商品名</th>
+                    <th>剂型</th>
+                    <th>规格</th>
+                    <th>单位</th>
+                    <th>转换系数</th>
+                    <th>质量层次</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="order in list">
+                    <td>{{order.coId}}</td>
+                    <td><input onclick="click()" value="${order.coId}" type="checkbox"></td>
+                    <td>{{order.coNumber}}</td>
+                    <td>{{order.coName}}</td>
+                    <td>{{order.hospitalId}}</td>
+                    <td>{{order.coCreatetime}}</td>
+                    <td>{{order.coInputtime}}</td>
+                    <td>{{order.orCode}}</td>
+                    <td>{{order.orBuynameId}}</td>
+                    <td>666</td>
+                    <td>{{order.genericName}}</td>
+                    <td>{{order.productName}}</td>
+                    <td>{{order.reagentType}}</td>
+                    <td>{{order.drugSize}}</td>
+                    <td>{{order.company}}</td>
+                    <td>{{order.transverNum}}</td>
+                    <td>{{order.qualityLevel}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
