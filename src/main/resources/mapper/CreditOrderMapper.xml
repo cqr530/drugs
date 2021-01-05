@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.CreditOrderMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.CreditOrder">
+    <id column="co_id" jdbcType="INTEGER" property="coId" />
+    <result column="co_number" jdbcType="VARCHAR" property="coNumber" />
+    <result column="co_name" jdbcType="VARCHAR" property="coName" />
+    <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
+    <result column="co_contacts" jdbcType="VARCHAR" property="coContacts" />
+    <result column="co_phone" jdbcType="VARCHAR" property="coPhone" />
+    <result column="co_createpeople" jdbcType="VARCHAR" property="coCreatepeople" />
+    <result column="co_createtime" jdbcType="TIMESTAMP" property="coCreatetime" />
+    <result column="co_inputtime" jdbcType="TIMESTAMP" property="coInputtime" />
+    <result column="co_remark" jdbcType="VARCHAR" property="coRemark" />
+    <result column="co_state" jdbcType="INTEGER" property="coState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    co_id, co_number, co_name, hospital_id, co_contacts, co_phone, co_createpeople, co_createtime, 
+    co_inputtime, co_remark, co_state
+  </sql>
+
+</mapper>

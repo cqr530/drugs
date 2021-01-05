@@ -41,4 +41,6 @@ public class OrderVO {
     private Integer orderBuystate;
 
     private String factoryName;
+
+    private Integer supplierId;
 }

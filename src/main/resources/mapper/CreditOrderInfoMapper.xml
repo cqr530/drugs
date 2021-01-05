@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.CreditOrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.CreditOrderInfo">
+    <id column="coi_id" jdbcType="INTEGER" property="coiId" />
+    <result column="or_id" jdbcType="INTEGER" property="orId" />
+    <result column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="co_id" jdbcType="INTEGER" property="coId" />
+    <result column="coi_rate" jdbcType="INTEGER" property="coiRate" />
+    <result column="coi_money" jdbcType="INTEGER" property="coiMoney" />
+    <result column="coi_state" jdbcType="INTEGER" property="coiState" />
+    <result column="coi_reason" jdbcType="VARCHAR" property="coiReason" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    coi_id, or_id, drug_id, co_id, coi_rate, coi_money, coi_state, coi_reason
+  </sql>
+
+</mapper>
