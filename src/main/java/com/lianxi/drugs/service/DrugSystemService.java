@@ -67,4 +67,10 @@ public interface DrugSystemService {
      * @return
      */
     List<PayoffTabVO> queryAllPayoffTab();
+
+    /**
+     * 按采购单查询
+     * @return
+     */
+    List<OrderlistVO> queryAllOrderlistInfo();
 }

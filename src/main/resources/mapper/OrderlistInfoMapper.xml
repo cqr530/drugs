@@ -17,139 +17,25 @@
     id, order_id, drug_id, supplier_id, order_biddingPrice, order_TradingPrice, order_buyCount,
     order_buyPrice, order_buyState, order_state
   </sql>
-
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from orderlist_info
-    where id = #{id,jdbcType=INTEGER}
+  <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.OrderlistVO">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="or_hosp_id" jdbcType="INTEGER" property="orHospId" />
+    <result column="or_code" jdbcType="VARCHAR" property="orCode" />
+    <result column="or_buyname_id" jdbcType="VARCHAR" property="orBuynameId" />
+    <result column="order_buyState" jdbcType="INTEGER" property="orderBuystate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="or_createTime" jdbcType="TIMESTAMP" property="orCreatetime" />
+    <result column="or_submitTime" jdbcType="TIMESTAMP" property="orSubmittime" />
+    <result column="or_AuditTime" jdbcType="TIMESTAMP" property="orAuditTime" />
+    <result column="order_buyPrice" jdbcType="REAL" property="orderBuyprice" />
+  </resultMap>
+  <select id="selectAllOrderInfo" resultMap="BaseResultMap">
+    select order_id,or_hosp_id,supplier_id,or_code,or_buyname_id,order_buyState,create_time,input_time,
+    or_createTime,or_submitTime,or_AuditTime,order_buyPrice
+    from orderlist_info oi
+    left join order_form of on of.or_id = oi.order_id
+    left join payoff_tab pt on of.or_id = pt.payoff_tab_id
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from orderlist_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.lianxi.drugs.pojo.OrderlistInfo">
-    insert into orderlist_info (id, order_id, drug_id, 
-      supplier_id, order_biddingPrice, order_TradingPrice, 
-      order_buyCount, order_buyPrice, order_buyState, 
-      order_state)
-    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{drugId,jdbcType=INTEGER}, 
-      #{supplierId,jdbcType=INTEGER}, #{orderBiddingprice,jdbcType=REAL}, #{orderTradingprice,jdbcType=REAL}, 
-      #{orderBuycount,jdbcType=INTEGER}, #{orderBuyprice,jdbcType=REAL}, #{orderBuystate,jdbcType=INTEGER}, 
-      #{orderState,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.OrderlistInfo">
-    insert into orderlist_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="orderId != null">
-        order_id,
-      </if>
-      <if test="drugId != null">
-        drug_id,
-      </if>
-      <if test="supplierId != null">
-        supplier_id,
-      </if>
-      <if test="orderBiddingprice != null">
-        order_biddingPrice,
-      </if>
-      <if test="orderTradingprice != null">
-        order_TradingPrice,
-      </if>
-      <if test="orderBuycount != null">
-        order_buyCount,
-      </if>
-      <if test="orderBuyprice != null">
-        order_buyPrice,
-      </if>
-      <if test="orderBuystate != null">
-        order_buyState,
-      </if>
-      <if test="orderState != null">
-        order_state,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="orderId != null">
-        #{orderId,jdbcType=INTEGER},
-      </if>
-      <if test="drugId != null">
-        #{drugId,jdbcType=INTEGER},
-      </if>
-      <if test="supplierId != null">
-        #{supplierId,jdbcType=INTEGER},
-      </if>
-      <if test="orderBiddingprice != null">
-        #{orderBiddingprice,jdbcType=REAL},
-      </if>
-      <if test="orderTradingprice != null">
-        #{orderTradingprice,jdbcType=REAL},
-      </if>
-      <if test="orderBuycount != null">
-        #{orderBuycount,jdbcType=INTEGER},
-      </if>
-      <if test="orderBuyprice != null">
-        #{orderBuyprice,jdbcType=REAL},
-      </if>
-      <if test="orderBuystate != null">
-        #{orderBuystate,jdbcType=INTEGER},
-      </if>
-      <if test="orderState != null">
-        #{orderState,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.pojo.OrderlistInfo">
-    update orderlist_info
-    <set>
-      <if test="orderId != null">
-        order_id = #{orderId,jdbcType=INTEGER},
-      </if>
-      <if test="drugId != null">
-        drug_id = #{drugId,jdbcType=INTEGER},
-      </if>
-      <if test="supplierId != null">
-        supplier_id = #{supplierId,jdbcType=INTEGER},
-      </if>
-      <if test="orderBiddingprice != null">
-        order_biddingPrice = #{orderBiddingprice,jdbcType=REAL},
-      </if>
-      <if test="orderTradingprice != null">
-        order_TradingPrice = #{orderTradingprice,jdbcType=REAL},
-      </if>
-      <if test="orderBuycount != null">
-        order_buyCount = #{orderBuycount,jdbcType=INTEGER},
-      </if>
-      <if test="orderBuyprice != null">
-        order_buyPrice = #{orderBuyprice,jdbcType=REAL},
-      </if>
-      <if test="orderBuystate != null">
-        order_buyState = #{orderBuystate,jdbcType=INTEGER},
-      </if>
-      <if test="orderState != null">
-        order_state = #{orderState,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.pojo.OrderlistInfo">
-    update orderlist_info
-    set order_id = #{orderId,jdbcType=INTEGER},
-      drug_id = #{drugId,jdbcType=INTEGER},
-      supplier_id = #{supplierId,jdbcType=INTEGER},
-      order_biddingPrice = #{orderBiddingprice,jdbcType=REAL},
-      order_TradingPrice = #{orderTradingprice,jdbcType=REAL},
-      order_buyCount = #{orderBuycount,jdbcType=INTEGER},
-      order_buyPrice = #{orderBuyprice,jdbcType=REAL},
-      order_buyState = #{orderBuystate,jdbcType=INTEGER},
-      order_state = #{orderState,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-
 </mapper>

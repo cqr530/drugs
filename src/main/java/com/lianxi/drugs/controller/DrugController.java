@@ -101,4 +101,12 @@ public class DrugController {
     public List<PayoffTabVO> findPayoffTab(){
         return drugSystemService.queryAllPayoffTab();
     }
+    /**
+     * 2021.1.6 陈泉润
+     * @return 按采购单查询所有
+     */
+    @RequestMapping("/orderinfo")
+    public List<OrderlistVO> findOrderlistInfo(){
+        return drugSystemService.queryAllOrderlistInfo();
+    }
 }

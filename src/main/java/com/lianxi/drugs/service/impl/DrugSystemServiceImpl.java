@@ -37,6 +37,9 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     @Autowired
     private com.lianxi.drugs.dao.PayoffTabMapper payoffTabMapper;
 
+    @Autowired
+    private com.lianxi.drugs.dao.OrderlistInfoMapper orderlistInfoMapper;
+
     @Override
     public Integer queryUser(String name, String pwd) {
         return usermapper.selectuser(name, pwd);
@@ -80,5 +83,10 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     @Override
     public List<PayoffTabVO> queryAllPayoffTab() {
         return payoffTabMapper.selectAllPayoffTab();
+    }
+
+    @Override
+    public List<OrderlistVO> queryAllOrderlistInfo() {
+        return orderlistInfoMapper.selectAllOrderInfo();
     }
 }
