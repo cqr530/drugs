@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.PayoffTabMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.PayoffTab">
+    <id column="payoff_tab_id" jdbcType="INTEGER" property="payoffTabId" />
+    <result column="payoff_tab_num" jdbcType="VARCHAR" property="payoffTabNum" />
+    <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
+    <result column="hospital_id" jdbcType="VARCHAR" property="hospitalId" />
+    <result column="contacts" jdbcType="VARCHAR" property="contacts" />
+    <result column="contacts_phone" jdbcType="VARCHAR" property="contactsPhone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="payoff_tab_postil" jdbcType="VARCHAR" property="payoffTabPostil" />
+    <result column="payoff_tab_status" jdbcType="INTEGER" property="payoffTabStatus" />
+    <result column="payoff_price" jdbcType="REAL" property="payoffPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    payoff_tab_id, payoff_tab_num, payoff_tab_name, hospital_id, contacts, contacts_phone, 
+    create_time, input_time, payoff_tab_postil, payoff_tab_status, payoff_price
+  </sql>
+  <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.PayoffTabVO">
+    <id column="payoff_tab_id" jdbcType="INTEGER" property="payoffTabId" />
+    <result column="payoff_tab_num" jdbcType="VARCHAR" property="payoffTabNum" />
+    <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
+    <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="or_code" jdbcType="VARCHAR" property="orCode" />
+    <result column="or_buyname_id" jdbcType="VARCHAR" property="orBuynameId" />
+    <result column="generic_name" jdbcType="VARCHAR" property="genericName" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="reagent_type" jdbcType="VARCHAR" property="reagentType" />
+    <result column="drug_size" jdbcType="VARCHAR" property="drugSize" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="transver_num" jdbcType="INTEGER" property="transverNum" />
+    <result column="quality_level" jdbcType="VARCHAR" property="qualityLevel" />
+
+    <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+    <result column="order_biddingPrice" jdbcType="REAL" property="orderBiddingprice" />
+    <result column="order_TradingPrice" jdbcType="REAL" property="orderTradingprice" />
+    <result column="order_buyCount" jdbcType="INTEGER" property="orderBuycount" />
+    <result column="order_buyPrice" jdbcType="REAL" property="orderBuyprice" />
+  </resultMap>
+
+  <select id="selectAllPayoffTab" resultMap="BaseResultMapOne">
+    select pt.payoff_tab_id,payoff_tab_num,payoff_tab_name,hospital_id,create_time,input_time,or_code,
+    or_buyname_id,generic_name,product_name,reagent_type,drug_size,company,transver_num,quality_level,
+    factory_name,order_biddingPrice,order_TradingPrice,order_buyCount,order_buyPrice
+    from payoff_tab pt
+    left join order_form of on of.or_id = pt.payoff_tab_id
+	left join orderlist_info oli on of.or_id = oli.order_id
+    left join payoff_tab_info pti on pti.payoff_tab_id = pt.payoff_tab_id
+    left join drug_info di on di.drug_id = pti.drug_info_id
+  </select>
+</mapper>

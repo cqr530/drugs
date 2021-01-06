@@ -112,4 +112,12 @@ public class ViewController {
         return "/credit_order";
     }
 
+    /**
+     * 结算单处理查询
+     * @return
+     */
+    @RequestMapping("/payofftab")
+    public String Payofftab(){
+        return "/payoff_tab";
+    }
 }

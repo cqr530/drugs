@@ -4,10 +4,7 @@ import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.pojo.OrderForm;
-import com.lianxi.drugs.vo.CreditOrderVO;
-import com.lianxi.drugs.vo.DruginfoVO;
-import com.lianxi.drugs.vo.ItemVO;
-import com.lianxi.drugs.vo.OrderVO;
+import com.lianxi.drugs.vo.*;
 
 import java.util.List;
 
@@ -64,4 +61,10 @@ public interface DrugSystemService {
      * @return
      */
     List<CreditOrderVO> queryAllCreditOrder();
+
+    /**
+     * 查询所有结算单
+     * @return
+     */
+    List<PayoffTabVO> queryAllPayoffTab();
 }

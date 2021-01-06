@@ -4,10 +4,7 @@ import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.pojo.OrderForm;
-import com.lianxi.drugs.vo.CreditOrderVO;
-import com.lianxi.drugs.vo.DruginfoVO;
-import com.lianxi.drugs.vo.ItemVO;
-import com.lianxi.drugs.vo.OrderVO;
+import com.lianxi.drugs.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,5 +91,14 @@ public class DrugController {
     @RequestMapping("/creditorders")
     public List<CreditOrderVO> findCreditOrders(){
         return drugSystemService.queryAllCreditOrder();
+    }
+
+    /**
+     * 2021.1.6 陈泉润
+     * @return 查询所有结算单
+     */
+    @RequestMapping("/payofftab")
+    public List<PayoffTabVO> findPayoffTab(){
+        return drugSystemService.queryAllPayoffTab();
     }
 }
