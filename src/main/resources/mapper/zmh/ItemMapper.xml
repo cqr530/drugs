@@ -67,7 +67,7 @@
         and drug_category_tran = #{drugCategoryTran}
       </if>
       <if test="drugClazzId !=null and drugClazzId!=''">
-        and drug_clazz_id = #{drugClazzId}
+        and i.drug_clazz_id = #{drugClazzId}
       </if>
       <if test="drugCategoryStatus !=null and drugCategoryStatus!=''">
         and drug_category_status = #{drugCategoryStatus}
@@ -140,7 +140,7 @@
 
   <select id="queryDrugItemCount" resultType="long"  parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
     select  count(*)
-    from item
+    from item i
     <include refid="selectDrugItem"></include>
   </select>
 
@@ -166,7 +166,7 @@
   <!--采购目录查询-->
   <select id="queryAllCaiGouIndexPage" resultMap="BaseResultMapDrugMessage" parameterType="com.lianxi.drugs.dto.QueryPurchaseIndexDto">
         select
-        serial_num,generic_name,reagent_type,drug_size,company,transver_num,factory_name,product_name,
+        drug_id,serial_num,generic_name,reagent_type,drug_size,company,transver_num,factory_name,product_name,
         tender_price,quality_level,d.drug_clazz_name,drug_tranl_status
         from drug_info i
         left join drug_clazz d

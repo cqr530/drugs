@@ -2916,7 +2916,7 @@
                 {"data": "drugId"},
                 {"data": "drugId",
                     render:function (data) {
-                    var html="<input type='checkbox' onclick='checkboxs()' class='check-box' value="+data+">"
+                    var html="<input type='checkbox' name='checkbox' onclick='checkboxs()' class='check-box' value="+data+">"
                         return html
                     }
                 },
@@ -2992,12 +2992,28 @@
             }
         })
     }
-    /*确认提交*/
+    /*确认提交 添加药品到医院药品目录*/
     function allRight() {
+        var arr=[]
+        $("input[name=checkbox]:checked").each(function () {
+            arr.push($(this).val())
+        })
+        alert(arr)
         if(confirm("确认要提交吗")==true){
             $.ajax({
-                url:"",
-
+                url:"drugs/insertDrugToHospital",
+                type:"get",
+                dataType:"json",
+                data:{
+                    "idArr[]":arr
+                },
+                success:function (data) {
+                    var str = "<option value=''>全部</option>";
+                    for (var i = 0; i < data.length; i++) {
+                        str += "<option value=" + data[i].drugClazzId + ">" + data[i].drugClazzName + "</option>";
+                    }
+                    $("#selectDrugTypeCaiGouIndexManage").html(str);
+                }
             })
         }
     }

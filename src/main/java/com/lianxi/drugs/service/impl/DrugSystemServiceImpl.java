@@ -1,10 +1,9 @@
 package com.lianxi.drugs.service.impl;
 
-import com.lianxi.drugs.dao.CreditOrderMapper;
 import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
-import com.lianxi.drugs.pojo.OrderForm;
+import com.lianxi.drugs.pojo.User;
 import com.lianxi.drugs.service.DrugSystemService;
 import com.lianxi.drugs.vo.CreditOrderVO;
 import com.lianxi.drugs.vo.DruginfoVO;
@@ -38,8 +37,9 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     private com.lianxi.drugs.dao.CreditOrderMapper creditOrderMapper;
 
     @Override
-    public Integer queryUser(String name, String pwd) {
-        return usermapper.selectuser(name, pwd);
+    public User queryUser(String name, String pwd) {
+      User user = usermapper.selectuser(name, pwd);
+        return user;
     }
 
     @Override
