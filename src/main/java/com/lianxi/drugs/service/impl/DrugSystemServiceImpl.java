@@ -5,10 +5,7 @@ import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
 import com.lianxi.drugs.pojo.User;
 import com.lianxi.drugs.service.DrugSystemService;
-import com.lianxi.drugs.vo.CreditOrderVO;
-import com.lianxi.drugs.vo.DruginfoVO;
-import com.lianxi.drugs.vo.ItemVO;
-import com.lianxi.drugs.vo.OrderVO;
+import com.lianxi.drugs.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +32,12 @@ public class DrugSystemServiceImpl implements DrugSystemService {
 
     @Autowired
     private com.lianxi.drugs.dao.CreditOrderMapper creditOrderMapper;
+
+    @Autowired
+    private com.lianxi.drugs.dao.PayoffTabMapper payoffTabMapper;
+
+    @Autowired
+    private com.lianxi.drugs.dao.OrderlistInfoMapper orderlistInfoMapper;
 
     @Override
     public User queryUser(String name, String pwd) {
@@ -75,5 +78,15 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     @Override
     public List<CreditOrderVO> queryAllCreditOrder() {
         return creditOrderMapper.selectAllCreditOrder();
+    }
+
+    @Override
+    public List<PayoffTabVO> queryAllPayoffTab() {
+        return payoffTabMapper.selectAllPayoffTab();
+    }
+
+    @Override
+    public List<OrderlistVO> queryAllOrderlistInfo() {
+        return orderlistInfoMapper.selectAllOrderInfo();
     }
 }

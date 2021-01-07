@@ -11,6 +11,8 @@ import com.lianxi.drugs.vo.CreditOrderVO;
 import com.lianxi.drugs.vo.DruginfoVO;
 import com.lianxi.drugs.vo.ItemVO;
 import com.lianxi.drugs.vo.OrderVO;
+import com.lianxi.drugs.pojo.OrderForm;
+import com.lianxi.drugs.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -125,20 +127,36 @@ public class DrugController {
      * @return 将药品信息添加到医院的药品目录
      */
     @RequestMapping("/insertDrugToHospital")
-    public ServerResponse insertDrugToHospital(@RequestParam(value = "idArr[]")int[] idArr){
+    public ServerResponse insertDrugToHospital(@RequestParam(value = "idArr[]")int[] idArr) {
 
         try {
             HttpSession session1 = request.getSession();
             User user = (User) session1.getAttribute("user");
             Integer userId = user.getUserId();
-           Integer code = drugIndexService.insertDrugToHospital(userId,idArr);
-           if(code>0){
-               return ServerResponse.success();
-           }
+            Integer code = drugIndexService.insertDrugToHospital(userId, idArr);
+            if (code > 0) {
+                return ServerResponse.success();
+            }
             return ServerResponse.error();
         } catch (Exception e) {
             e.printStackTrace();
             return ServerResponse.error();
         }
+    }
+     /**
+     * 2021.1.6 陈泉润
+     * @return 查询所有结算单
+     */
+    @RequestMapping("/payofftab")
+    public List<PayoffTabVO> findPayoffTab(){
+        return drugSystemService.queryAllPayoffTab();
+    }
+    /**
+     * 2021.1.6 陈泉润
+     * @return 按采购单查询所有
+     */
+    @RequestMapping("/orderinfo")
+    public List<OrderlistVO> findOrderlistInfo(){
+        return drugSystemService.queryAllOrderlistInfo();
     }
 }
