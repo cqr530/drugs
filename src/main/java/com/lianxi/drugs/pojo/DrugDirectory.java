@@ -1,6 +1,8 @@
 package com.lianxi.drugs.pojo;
 
 public class DrugDirectory {
+    private Integer id;
+
     private Integer hospitalId;
 
     private Integer drugId;
@@ -8,6 +10,14 @@ public class DrugDirectory {
     private Integer companyId;
 
     private Integer drugInventory;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getHospitalId() {
         return hospitalId;
