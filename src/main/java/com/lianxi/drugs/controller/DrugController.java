@@ -1,8 +1,16 @@
 package com.lianxi.drugs.controller;
 
+import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
+import com.lianxi.drugs.pojo.User;
+import com.lianxi.drugs.service.DrugIndexService;
+import com.lianxi.drugs.service.UserService;
+import com.lianxi.drugs.vo.CreditOrderVO;
+import com.lianxi.drugs.vo.DruginfoVO;
+import com.lianxi.drugs.vo.ItemVO;
+import com.lianxi.drugs.vo.OrderVO;
 import com.lianxi.drugs.pojo.OrderForm;
 import com.lianxi.drugs.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -18,6 +28,13 @@ public class DrugController {
     @Autowired
     private com.lianxi.drugs.service.DrugSystemService drugSystemService;
 
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private DrugIndexService drugIndexService;
+    @Autowired
+    private HttpServletRequest request;
+
     /**
      *2020.12.24 陈泉润
      * @param name
@@ -25,8 +42,20 @@ public class DrugController {
      * @return 登录接口
      */
     @RequestMapping("/denglu")
-    public int findUser(@RequestParam("name")String name,@RequestParam("pwd") String pwd){
-        return drugSystemService.queryUser(name,pwd);
+    public ServerResponse findUser(@RequestParam("name")String name, @RequestParam("pwd") String pwd,HttpSession session){
+        try {
+                User user = userService.queryUserByName(name);
+                if(user!=null){
+                if(user.getUserPwd().equals(pwd)){
+                    session.setAttribute("user",user);
+                    return ServerResponse.success();
+                }
+            }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
     }
 
     /**
@@ -94,6 +123,26 @@ public class DrugController {
     }
 
     /**
+     * 2021.1.6     zmh
+     * @return 将药品信息添加到医院的药品目录
+     */
+    @RequestMapping("/insertDrugToHospital")
+    public ServerResponse insertDrugToHospital(@RequestParam(value = "idArr[]")int[] idArr){
+
+        try {
+            HttpSession session1 = request.getSession();
+            User user = (User) session1.getAttribute("user");
+            Integer userId = user.getUserId();
+           Integer code = drugIndexService.insertDrugToHospital(userId,idArr);
+           if(code>0){
+               return ServerResponse.success();
+           }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+     /*
      * 2021.1.6 陈泉润
      * @return 查询所有结算单
      */

@@ -9,7 +9,7 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
-<body ng-app="myapp" ng-controller="myCtrl">
+<body>
 
 
     <div class="container" >
@@ -121,7 +121,7 @@
             type:"post",
             data:{name:name,pwd:password},
             success:function (data) {
-                if(data==1){
+                if(data.code==200){
                     alert("登陆成功")
                     location.href="/drug"
                 }else{

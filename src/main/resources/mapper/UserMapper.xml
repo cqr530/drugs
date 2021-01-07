@@ -16,11 +16,18 @@
     user_id, user_name, user_pwd, user_type, user_company, user_state, user_phone, user_email, 
     ﻿user_linkman
   </sql>
-  <select id="selectuser" resultType="Integer">
+  <select id="selectuser" resultMap="BaseResultMap">
     select *
     from user
     where user_name=#{name} and user_pwd=#{pwd}
   </select>
+
+  <select id="selectuserByName" resultMap="BaseResultMap">
+    select user_id, user_name, user_pwd
+    from user
+    where user_name=#{name}
+  </select>
+
 
 
 

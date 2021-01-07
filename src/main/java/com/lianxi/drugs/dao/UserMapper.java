@@ -4,9 +4,10 @@ import com.lianxi.drugs.pojo.User;
 import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
 
-    Integer selectuser(@Param("name") String name, @Param("pwd") String pwd);
+    User selectuser(@Param("name") String name, @Param("pwd") String pwd);
 
-
+    /*查询前台传入的用户名数据库是否存在*/
+    User selectuserByName(String name);
 
 
 
