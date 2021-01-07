@@ -23,7 +23,6 @@
     <result column="drug_category_status" jdbcType="INTEGER" property="drugCategoryStatus" />
   </resultMap>
 
-
   <resultMap id="BaseResultMapDrugMessage" type="com.lianxi.drugs.vo.DruginfoVO">
     <id column="drug_id" jdbcType="VARCHAR" property="drugId" />
     <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
@@ -40,12 +39,28 @@
     <result column="drug_tranl_status" jdbcType="INTEGER" property="drugTranlStatus" />
   </resultMap>
 
+  <resultMap id="BaseResultMapHospitalDrug" type="com.lianxi.drugs.vo.HospitalDrugVo">
+    <id column="drug_id" jdbcType="VARCHAR" property="drugId" />
+    <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
+    <result column="generic_name" jdbcType="VARCHAR" property="genericName" />
+    <result column="reagent_type" jdbcType="VARCHAR" property="reagentType" />
+    <result column="drug_size" jdbcType="VARCHAR" property="drugSize" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="transver_num" jdbcType="INTEGER" property="transverNum" />
+    <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="tender_price" jdbcType="DECIMAL" property="tenderPrice" />
+    <result column="drug_clazz_name" jdbcType="VARCHAR" property="drugClazzName" />
+    <result column="drug_tranl_status" jdbcType="INTEGER" property="drugTranlStatus" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     drug_category_id, drug_category_name, drug_category_type, drug_category_standard,
     drug_category_unit, drug_category_tran, drug_clazz_id, drug_category_status
   </sql>
 
   <!--条件查询-->
+  <!--药品品目查询-->
   <sql id="selectDrugItem">
     <where>
       <if test="drugCategoryId !=null and drugCategoryId!=''">
@@ -74,8 +89,59 @@
       </if>
     </where>
   </sql>
-
+  <!--药品信息查询-->
   <sql id="selectDrugMessage">
+    <where>
+      <if test="serialNum !=null and serialNum!=''">
+        and serial_num like concat('%',#{serialNum},'%')
+      </if>
+      <if test="genericName !=null and genericName!=''">
+        and generic_name = #{genericName}
+      </if>
+      <if test="reagentType !=null and reagentType!=''">
+        and reagent_type = #{reagentType}
+      </if>
+      <if test="drugSize !=null and drugSize!=''">
+        and drug_size = #{drugSize}
+      </if>
+      <if test="company !=null and company!=''">
+        and company = #{company}
+      </if>
+      <if test="qualityLevel !=null and qualityLevel!=''">
+        and quality_level = #{qualityLevel}
+      </if>
+      <if test="transverNum !=null and transverNum!=''">
+        and transver_num = #{transverNum}
+      </if>
+      <if test="factoryName !=null and factoryName!=''">
+        and factory_name = #{factoryName}
+      </if>
+      <if test="productName !=null and productName!=''">
+        and product_name = #{productName}
+      </if>
+      <if test="maxTenderPrice!=null and maxTenderPrice!=''">
+        and tender_price &lt;=#{maxTenderPrice}
+      </if>
+      <if test="minTenderPrice!=null and minTenderPrice!=''">
+        and tender_price &gt;=#{minTenderPrice}
+      </if>
+      <!--<if test="supply !=null and supply!=''">
+          and supply = #{supply}
+      </if>
+      <if test="supplyStaus !=null and supplyStaus!=''">
+          and supply_staus = #{supplyStaus}
+      </if>-->
+      <if test="drugClazzId !=null and drugClazzId!=''">
+        and drug_type = #{drugClazzId}
+      </if>
+      <if test="drugTranlStatus !=null and drugTranlStatus!=''">
+        and drug_tranl_status = #{drugTranlStatus}
+      </if>
+    </where>
+  </sql>
+
+  <!--药品目录-->
+  <sql id="selectDrugMessageIndex">
     <where>
       <if test="serialNum !=null and serialNum!=''">
         and serial_num like concat('%',#{serialNum},'%')
@@ -107,23 +173,62 @@
       <if test="minTenderPrice!=null and minTenderPrice!=''">
         and tender_price &gt;=#{minTenderPrice}
       </if>
-      <if test="qualityLevel !=null and qualityLevel!=''">
-        and quality_level = #{qualityLevel}
-      </if>
-      <!--<if test="supply !=null and supply!=''">
-          and supply = #{supply}
-      </if>
-      <if test="supplyStaus !=null and supplyStaus!=''">
-          and supply_staus = #{supplyStaus}
-      </if>-->
       <if test="drugClazzId !=null and drugClazzId!=''">
         and drug_type = #{drugClazzId}
       </if>
       <if test="drugTranlStatus !=null and drugTranlStatus!=''">
         and drug_tranl_status = #{drugTranlStatus}
       </if>
+
+
+      <!--供货状态-->
+
     </where>
   </sql>
+
+  <!--医院药品目录条件查询-->
+  <sql id="selectHospitalDrugIndex">
+    <where>
+      <if test="serialNum !=null and serialNum!=''">
+        and di.serial_num like concat('%',#{serialNum},'%')
+      </if>
+      <if test="genericName !=null and genericName!=''">
+        and di.generic_name = #{genericName}
+      </if>
+      <if test="reagentType !=null and reagentType!=''">
+        and di.reagent_type = #{reagentType}
+      </if>
+      <if test="drugSize !=null and drugSize!=''">
+        and di.drug_size = #{drugSize}
+      </if>
+      <if test="company !=null and company!=''">
+        and di.company = #{company}
+      </if>
+      <if test="transverNum !=null and transverNum!=''">
+        and di.transver_num = #{transverNum}
+      </if>
+      <if test="factoryName !=null and factoryName!=''">
+        and di.factory_name = #{factoryName}
+      </if>
+      <if test="productName !=null and productName!=''">
+        and di.product_name = #{productName}
+      </if>
+      <if test="maxTenderPrice!=null and maxTenderPrice!=''">
+        and di.tender_price &lt;=#{maxTenderPrice}
+      </if>
+      <if test="minTenderPrice!=null and minTenderPrice!=''">
+        and di.tender_price &gt;=#{minTenderPrice}
+      </if>
+      <if test="drugClazzId !=null and drugClazzId!=''">
+        and di.drug_type = #{drugClazzId}
+      </if>
+      <if test="drugTranlStatus !=null and drugTranlStatus!=''">
+        and di.drug_tranl_status = #{drugTranlStatus}
+      </if>
+    </where>
+  </sql>
+
+
 
   <!--查询药品品目-->
   <select id="queryItem" resultMap="BaseResultMapDrugItem" parameterType="com.lianxi.drugs.dto.QueryDrugItemDto">
@@ -144,6 +249,7 @@
     <include refid="selectDrugItem"></include>
   </select>
 
+
   <!--查询药品信息-->
   <select id="queryAllDrugMessage" resultMap="BaseResultMapDrugMessage" parameterType="com.lianxi.drugs.dto.QueryDrugMessageDto">
     select
@@ -163,15 +269,16 @@
     <include refid="selectDrugMessage"></include>
   </select>
 
+
   <!--采购目录查询-->
   <select id="queryAllCaiGouIndexPage" resultMap="BaseResultMapDrugMessage" parameterType="com.lianxi.drugs.dto.QueryPurchaseIndexDto">
         select
         drug_id,serial_num,generic_name,reagent_type,drug_size,company,transver_num,factory_name,product_name,
-        tender_price,quality_level,d.drug_clazz_name,drug_tranl_status
+        tender_price,d.drug_clazz_name,drug_tranl_status
         from drug_info i
         left join drug_clazz d
         on i.drug_type = d.drug_clazz_id
-        <include refid="selectDrugMessage"></include>
+        <include refid="selectDrugMessageIndex"></include>
         order by drug_id asc
         limit #{start},#{length}
     </select>
@@ -179,11 +286,34 @@
   <select id="queryAllCaiGouIndexCount" resultType="long"  parameterType="com.lianxi.drugs.dto.QueryPurchaseIndexDto">
         select  count(*)
         from drug_info
-        <include refid="selectDrugMessage"></include>
+        <include refid="selectDrugMessageIndex"></include>
     </select>
 
 
+  <!--医院采购目录-->
+  <select id="queryAllHospitalDrugPage" resultMap="BaseResultMapHospitalDrug" parameterType="com.lianxi.drugs.dto.HospitalDrugIndexDto">
+    select
+    di.drug_id,di.serial_num,di.generic_name,di.reagent_type,di.drug_size,di.company,di.transver_num,
+    di.factory_name,di.product_name,di.tender_price,dc.drug_clazz_name,di.drug_tranl_status
+    from drug_directory dd
+    left join user us	 on dd.hospital_id = us.user_company
+    left join drug_info di	on dd.drug_id = di.drug_id
+    left join drug_clazz dc on di.drug_type = dc.drug_clazz_id
+    <include refid="selectHospitalDrugIndex"></include>
+    and dd.hospital_id = #{userCompany}
+    order by di.drug_id asc
+    limit #{start},#{length}
+  </select>
 
+  <select id="queryAllHospitalDrugCount" resultType="long" parameterType="com.lianxi.drugs.dto.HospitalDrugIndexDto">
+    select  count(*)
+    from drug_directory dd
+    left join user us	 on dd.hospital_id = us.user_company
+    left join drug_info di	on dd.drug_id = di.drug_id
+    left join drug_clazz dc on di.drug_type = dc.drug_clazz_id
+    <include refid="selectHospitalDrugIndex"></include>
+    and dd.hospital_id = #{userCompany}
+  </select>
 
 
 
@@ -315,7 +445,8 @@
 
 
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
     from item
