@@ -127,22 +127,23 @@ public class DrugController {
      * @return 将药品信息添加到医院的药品目录
      */
     @RequestMapping("/insertDrugToHospital")
-    public ServerResponse insertDrugToHospital(@RequestParam(value = "idArr[]")int[] idArr){
+    public ServerResponse insertDrugToHospital(@RequestParam(value = "idArr[]")int[] idArr) {
 
         try {
             HttpSession session1 = request.getSession();
             User user = (User) session1.getAttribute("user");
             Integer userId = user.getUserId();
-           Integer code = drugIndexService.insertDrugToHospital(userId,idArr);
-           if(code>0){
-               return ServerResponse.success();
-           }
+            Integer code = drugIndexService.insertDrugToHospital(userId, idArr);
+            if (code > 0) {
+                return ServerResponse.success();
+            }
             return ServerResponse.error();
         } catch (Exception e) {
             e.printStackTrace();
             return ServerResponse.error();
         }
-     /*
+    }
+     /**
      * 2021.1.6 陈泉润
      * @return 查询所有结算单
      */
