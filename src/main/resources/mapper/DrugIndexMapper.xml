@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lianxi.drugs.dao.DrugIndexMapper">
 
-
   <insert id="insertDrugToHospital">
       insert into drug_directory (hospital_id,drug_id)
       values
