@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.DrugDirectoryMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.DrugDirectory">
+    <id column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
+    <result column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="drug_inventory" jdbcType="INTEGER" property="drugInventory" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    hospital_id, drug_id, company_id, drug_inventory
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from drug_directory
+    where hospital_id = #{hospitalId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drug_directory
+    where hospital_id = #{hospitalId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lianxi.drugs.pojo.DrugDirectory">
+    insert into drug_directory (hospital_id, drug_id, company_id, 
+      drug_inventory)
+    values (#{hospitalId,jdbcType=INTEGER}, #{drugId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, 
+      #{drugInventory,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.DrugDirectory">
+    insert into drug_directory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hospitalId != null">
+        hospital_id,
+      </if>
+      <if test="drugId != null">
+        drug_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="drugInventory != null">
+        drug_inventory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hospitalId != null">
+        #{hospitalId,jdbcType=INTEGER},
+      </if>
+      <if test="drugId != null">
+        #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="drugInventory != null">
+        #{drugInventory,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianxi.drugs.pojo.DrugDirectory">
+    update drug_directory
+    <set>
+      <if test="drugId != null">
+        drug_id = #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="drugInventory != null">
+        drug_inventory = #{drugInventory,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hospital_id = #{hospitalId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianxi.drugs.pojo.DrugDirectory">
+    update drug_directory
+    set drug_id = #{drugId,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=INTEGER},
+      drug_inventory = #{drugInventory,jdbcType=INTEGER}
+    where hospital_id = #{hospitalId,jdbcType=INTEGER}
+  </update>
+</mapper>
