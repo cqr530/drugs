@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.PayoffTabInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.PayoffTabInfo">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="drug_info_id" jdbcType="INTEGER" property="drugInfoId" />
+    <result column="payoff_tab_id" jdbcType="INTEGER" property="payoffTabId" />
+    <result column="payoff_count" jdbcType="INTEGER" property="payoffCount" />
+    <result column="payoff_price" jdbcType="REAL" property="payoffPrice" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lianxi.drugs.pojo.PayoffTabInfo">
+    insert into payoff_tab_info (id, drug_info_id, payoff_tab_id, 
+      payoff_count, payoff_price)
+    values (#{id,jdbcType=INTEGER}, #{drugInfoId,jdbcType=INTEGER}, #{payoffTabId,jdbcType=INTEGER}, 
+      #{payoffCount,jdbcType=INTEGER}, #{payoffPrice,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.PayoffTabInfo">
+    insert into payoff_tab_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="drugInfoId != null">
+        drug_info_id,
+      </if>
+      <if test="payoffTabId != null">
+        payoff_tab_id,
+      </if>
+      <if test="payoffCount != null">
+        payoff_count,
+      </if>
+      <if test="payoffPrice != null">
+        payoff_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="drugInfoId != null">
+        #{drugInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="payoffTabId != null">
+        #{payoffTabId,jdbcType=INTEGER},
+      </if>
+      <if test="payoffCount != null">
+        #{payoffCount,jdbcType=INTEGER},
+      </if>
+      <if test="payoffPrice != null">
+        #{payoffPrice,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>
