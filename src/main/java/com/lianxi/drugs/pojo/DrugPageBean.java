@@ -4,10 +4,10 @@ public class DrugPageBean {
 	
 	//不用管
 	private Integer draw;
-	
+
 	//起始下标
 	private Integer start;
-	
+
 	//每页显示条数
 	private Integer length;
 

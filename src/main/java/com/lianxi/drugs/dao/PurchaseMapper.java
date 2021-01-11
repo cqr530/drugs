@@ -1,8 +1,20 @@
 package com.lianxi.drugs.dao;
 
+import com.lianxi.drugs.dto.CaiGouDanDto;
 import com.lianxi.drugs.pojo.Purchase;
 
 public interface PurchaseMapper {
+
+    int caiGouDanMapper(CaiGouDanDto caiGouDanDto);
+
+
+
+
+
+
+
+
+
     int deleteByPrimaryKey(Integer payoffTabId);
 
     int insert(Purchase record);
@@ -14,4 +26,6 @@ public interface PurchaseMapper {
     int updateByPrimaryKeySelective(Purchase record);
 
     int updateByPrimaryKey(Purchase record);
+
+    Integer toDeleteCaiGouDan(Integer id);
 }

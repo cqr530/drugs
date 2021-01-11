@@ -54,6 +54,27 @@
     <result column="drug_tranl_status" jdbcType="INTEGER" property="drugTranlStatus" />
   </resultMap>
 
+  <resultMap id="BaseResultMapPurchase" type="com.lianxi.drugs.vo.CaiGouDanVo">
+    <id column="payoff_tab_id" jdbcType="INTEGER" property="id" />
+    <result column="payoff_tab_num" jdbcType="INTEGER" property="payoffTabNum" />
+    <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
+    <result column="start_time" jdbcType="DATE" property="startTime" />
+    <result column="end_time" jdbcType="DATE" property="endTime" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="input_time" jdbcType="DATE" property="inputTime" />
+    <result column="examine_time" jdbcType="DATE" property="examineTime" />
+    <result column="payoff_tab_status" jdbcType="INTEGER" property="payoffTabStatus" />
+    <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapHospital" type="com.lianxi.drugs.vo.HospitalVo">
+    <id column="hospital_id" jdbcType="INTEGER" property="id" />
+    <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
+    <result column="hosptal_area" jdbcType="VARCHAR" property="hosptalArea" />
+    <result column="hospital_levl" jdbcType="VARCHAR" property="hospitalLevl" />
+    <result column="hospital_type" jdbcType="VARCHAR" property="hospitalType" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     drug_category_id, drug_category_name, drug_category_type, drug_category_standard,
     drug_category_unit, drug_category_tran, drug_clazz_id, drug_category_status
@@ -228,6 +249,33 @@
     </where>
   </sql>
 
+  <!--采购单查询-->
+  <sql id="selectPurchase">
+    <where>
+      <if test="hospitalId != null and hospitalId !=''">
+        and p.hospital_id = #{hospitalId}
+      </if>
+      <if test="payoffTabNum !=null and payoffTabNum!=''">
+        and p.payoff_tab_num = #{payoffTabNum}
+      </if>
+      <if test="payoffTabName !=null and payoffTabName!=''">
+        and p.payoff_tab_name = #{payoffTabName}
+      </if>
+      <if test="payoffTabStatus !=null and payoffTabStatus!=''">
+        and p.payoff_tab_status = #{payoffTabStatus}
+      </if>
+      <if test="maxStartTime!=null and maxStartTime!=''">
+        and p.start_time &lt;=#{maxStartTime}
+      </if>
+      <if test="minStartTime!=null and minStartTime!=''">
+        and p.start_time &gt;=#{minStartTime}
+      </if>
+      <if test="hospitalName !=null and hospitalName!=''">
+        and p.hospital_name like concat('%',#{hospitalName},'%')
+      </if>
+
+    </where>
+  </sql>
 
 
   <!--查询药品品目-->
@@ -300,7 +348,6 @@
     left join drug_info di	on dd.drug_id = di.drug_id
     left join drug_clazz dc on di.drug_type = dc.drug_clazz_id
     <include refid="selectHospitalDrugIndex"></include>
-    and dd.hospital_id = #{userCompany}
     order by di.drug_id asc
     limit #{start},#{length}
   </select>
@@ -316,8 +363,27 @@
   </select>
 
 
+  <!--采购单查询-->
+  <select id="queryAllCaiGouDanPage" resultMap="BaseResultMapPurchase" parameterType="com.lianxi.drugs.dto.CaiGouDanDto">
+    select
+    payoff_tab_id,p.hospital_name,p.payoff_tab_num,p.payoff_tab_name,p.start_time,
+    p.end_time,p.create_time,p.input_time,p.examine_time,p.payoff_tab_status
+    from purchase p
+    <include refid="selectPurchase"></include>
+    order by p.payoff_tab_id asc
+    limit #{start},#{length}
+  </select>
+
+  <select id="queryAllCaiGouDanCount" resultType="long" parameterType="com.lianxi.drugs.dto.CaiGouDanDto">
+    select  count(*)
+    from purchase p
+    <include refid="selectPurchase"></include>
+  </select>
 
 
+  <select id="queryHospital" resultMap="BaseResultMapHospital">
+      select * from hospital
+  </select>
 
 
 

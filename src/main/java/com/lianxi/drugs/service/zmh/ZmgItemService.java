@@ -1,10 +1,10 @@
 package com.lianxi.drugs.service.zmh;
 
-import com.lianxi.drugs.dto.HospitalDrugIndexDto;
-import com.lianxi.drugs.dto.QueryDrugItemDto;
-import com.lianxi.drugs.dto.QueryDrugMessageDto;
-import com.lianxi.drugs.dto.QueryPurchaseIndexDto;
+import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.DataTableResult;
+import com.lianxi.drugs.pojo.Hospital;
+
+import java.util.List;
 
 public interface ZmgItemService {
     DataTableResult queryItem(QueryDrugItemDto queryDrugItemDto);
@@ -14,4 +14,8 @@ public interface ZmgItemService {
     DataTableResult queryAllCaiGouIndexPage(QueryPurchaseIndexDto queryPurchaseIndexDto);
 
     DataTableResult queryAllHospitalDrugPage(HospitalDrugIndexDto hospitalDrugIndexDto);
+
+    DataTableResult queryAllCaiGouDanPage(CaiGouDanDto caiGouDanDto);
+
+    List<Hospital> findHospital();
 }
