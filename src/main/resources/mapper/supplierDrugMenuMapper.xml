@@ -10,7 +10,7 @@
   <sql id="Base_Column_List">
     id, company_id, drug_id, origanzition_control_status
   </sql>
-  <insert id="addDrugs" parameterType="java.util.List">
+  <insert id="insertDrugs" parameterType="java.util.List">
     insert into supplier_drug_menu(company_id,drug_id,origanzition_control_status)
     values
         <foreach collection="list" open="(" close=")" separator="),(" item="drugId">
@@ -18,4 +18,11 @@
         </foreach>
   </insert>
 
+  <delete id="deleteDrugs" parameterType="java.util.List">
+    Delete from supplier_drug_menu
+    where company_id=1 and drug_id=
+    <foreach collection="list" separator=",drug_id=" item="drugId">
+      #{drugId}
+    </foreach>
+  </delete>
 </mapper>

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface supplierDrugMenuMapper {
     //选择供货
-    Integer addDrugs(@Param("list") Integer[] list);
-
+    Integer insertDrugs(@Param("list") Integer[] list);
+    //取消供货
+    Integer deleteDrugs(@Param("list") Integer[] list);
 }

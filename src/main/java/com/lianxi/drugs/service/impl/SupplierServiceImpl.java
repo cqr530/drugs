@@ -14,6 +14,11 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Integer saveDrugs(Integer[] list) {
-        return supplierDrugMenuMapper.addDrugs(list);
+        return supplierDrugMenuMapper.insertDrugs(list);
+    }
+
+    @Override
+    public Integer cncelDrugs(Integer[] list) {
+        return supplierDrugMenuMapper.deleteDrugs(list);
     }
 }
