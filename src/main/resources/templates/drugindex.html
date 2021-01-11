@@ -15,10 +15,14 @@
     <script>
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope,$http){
+            $scope.num=0;
             $scope.load=function(){
                 $http.get("http://localhost:8000/drugs/alldrug").then(function (response){
                     $scope.list = response.data;
-                    console.log(response.data)
+                    /*for (let i=1;i<response.data.length+1;i++) {
+                        $scope.num=i;
+                    }*/
+                    console.log($scope.num)
                 });
             }
         })
