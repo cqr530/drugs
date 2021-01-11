@@ -1,17 +1,9 @@
 package com.lianxi.drugs.controller;
 
 import com.lianxi.drugs.common.ServerResponse;
-import com.lianxi.drugs.pojo.DrugClazz;
-import com.lianxi.drugs.pojo.DrugInfo;
-import com.lianxi.drugs.pojo.Item;
-import com.lianxi.drugs.pojo.User;
+import com.lianxi.drugs.pojo.*;
 import com.lianxi.drugs.service.DrugIndexService;
 import com.lianxi.drugs.service.UserService;
-import com.lianxi.drugs.vo.CreditOrderVO;
-import com.lianxi.drugs.vo.DruginfoVO;
-import com.lianxi.drugs.vo.ItemVO;
-import com.lianxi.drugs.vo.OrderVO;
-import com.lianxi.drugs.pojo.OrderForm;
 import com.lianxi.drugs.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -132,10 +125,20 @@ public class DrugController {
         try {
             HttpSession session1 = request.getSession();
             User user = (User) session1.getAttribute("user");
-            Integer userId = user.getUserId();
-            Integer code = drugIndexService.insertDrugToHospital(userId, idArr);
+            Integer userCompany = user.getUserCompany();
+
+            List<DrugDirectory> list = new ArrayList<>();
+
+            for (int i = 0; i < idArr.length; i++) {
+                DrugDirectory drugDirectory = new DrugDirectory();
+                drugDirectory.setDrugId(idArr[i]);
+                drugDirectory.setHospitalId(userCompany);
+                list.add(drugDirectory);
+            }
+
+            Integer code = drugIndexService.insertDrugToHospital(list);
             if (code > 0) {
-                return ServerResponse.success();
+                return ServerResponse.success(code);
             }
             return ServerResponse.error();
         } catch (Exception e) {
@@ -143,6 +146,26 @@ public class DrugController {
             return ServerResponse.error();
         }
     }
+
+    /**
+     * 2021.1.7     zmh
+     * @return 将药品信息添加到医院的药品目录
+     */
+    @RequestMapping("/deleteDrugToHospital")
+    public ServerResponse deleteDrugToHospital(@RequestParam(value = "idArr[]")int[] idArr) {
+
+        try {
+            Integer code = drugIndexService.deleteDrugToHospital(idArr);
+            if (code > 0) {
+                return ServerResponse.success(code);
+            }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
      /**
      * 2021.1.6 陈泉润
      * @return 查询所有结算单

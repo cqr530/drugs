@@ -12,7 +12,7 @@ public class User {
 
     private Integer userType;
 
-    private String userCompany;
+    private Integer userCompany;
 
     private Integer userState;
 

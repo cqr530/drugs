@@ -23,7 +23,7 @@
   </select>
 
   <select id="selectuserByName" resultMap="BaseResultMap">
-    select user_id, user_name, user_pwd
+    select user_id, user_name, user_pwd,user_company
     from user
     where user_name=#{name}
   </select>
