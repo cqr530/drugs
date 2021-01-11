@@ -21,12 +21,11 @@
                     console.log(response.data)
                 });
             }
-            $scope.maxclick = function () {
+            $scope.allclick = function () {
                 var chked=$(".maxch").prop("checked");
                 $(".minch").prop("checked",chked);
-                console.log(111)
             }
-            $scope.minclick = function () {
+            $scope.oneclick = function () {
                 var chked=true;
                 $.each($(".minch"),function (index,item) {
                     if ($(item).prop("checked")==false){
@@ -34,12 +33,11 @@
                     }
                 })
                 $(".maxch").prop("checked",chked);
-                console.log(222)
             }
-            $scope.updateByList = function (id) {
+            $scope.updateByList = function (drugId) {
                 var list=new Array();
-                if(id!=null){
-                    list.push(id);
+                if(drugId!=null){
+                    list.push(drugId);
                 }else {
                     $.each($(".minch:checked"),function (index,item) {
                         list.push($(item).val());
@@ -49,13 +47,12 @@
                     alert("请勾选数据再点击批量删除")
                 }else {
                     $.ajax({
-                        url:"/delete",
-                        data:{"idlist":list},
+                        url:"http://localhost:8000/drugs/adddrugs",
+                        data:{"list":list},
                         dataType:"json",
                         type:"post",
                         success:function (data) {
                             alert(data);
-                            $scope.realList();
                         }
                     })
                 }
@@ -143,7 +140,7 @@
             <table class="table table-bordered" style="font-size: 10px;width: 1349px">
                 <thead>
                 <tr>
-                    <th class="w1"><input onclick="maxclick()" type="checkbox" class="maxch" value="">全选</th>
+                    <th class="w1"><input ng-click="allclick()" type="checkbox" class="maxch" value="">全选</th>
                     <th><button ng-click="updateByList()" type="button" class="btn btn-primary">确认选择供货</button></th>
                 </tr>
                 <tr>
@@ -167,7 +164,7 @@
                 <tbody>
                 <tr ng-repeat="drug in list">
                     <td>{{drug.drugId}}</td>
-                    <td><input class="minch" onclick="minclick()" value="{{drug.drugId}}" type="checkbox"></td>
+                    <td><input class="minch" ng-click="oneclick()" value="{{drug.drugId}}" type="checkbox"></td>
                     <td>{{drug.serialNum}}</td>
                     <td>{{drug.genericName}}</td>
                     <td>{{drug.reagentType}}</td>
