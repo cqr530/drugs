@@ -1,11 +1,9 @@
 package com.lianxi.drugs.controller.zmh;
 
 import com.lianxi.drugs.common.ServerResponse;
-import com.lianxi.drugs.dto.HospitalDrugIndexDto;
-import com.lianxi.drugs.dto.QueryDrugItemDto;
-import com.lianxi.drugs.dto.QueryDrugMessageDto;
-import com.lianxi.drugs.dto.QueryPurchaseIndexDto;
+import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.DataTableResult;
+import com.lianxi.drugs.pojo.Hospital;
 import com.lianxi.drugs.pojo.User;
 import com.lianxi.drugs.service.zmh.ZmgItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("drug")
@@ -64,7 +64,7 @@ public class ZmhController {
      *
      * @param queryPurchaseIndexDto
      * @return  ServerResponse
-     * 分页，条件查询药品采购单目录 采购之前
+     * 分页，条件查询采购目录
      */
     @RequestMapping("queryAllCaiGouIndexPage")
     @ResponseBody
@@ -93,6 +93,46 @@ public class ZmhController {
             hospitalDrugIndexDto.setUserCompany(userCompany);
 
             DataTableResult dataTableResult = zmgItemService.queryAllHospitalDrugPage(hospitalDrugIndexDto);
+            return ServerResponse.success(dataTableResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     *
+     * @param caiGouDanDto
+     * @return  ServerResponse
+     * 分页，条件查询采购单
+     */
+    @RequestMapping("queryAllCaiGouDanPage")
+    @ResponseBody
+    public ServerResponse findAllCaiGouDanPage(CaiGouDanDto caiGouDanDto){
+        try {
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            caiGouDanDto.setHospitalId(user.getUserCompany());
+
+            DataTableResult dataTableResult = zmgItemService.queryAllCaiGouDanPage(caiGouDanDto);
+            return ServerResponse.success(dataTableResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     *
+     * @param
+     * @return  ServerResponse
+     * 查询医院
+     */
+    @RequestMapping("queryHospital")
+    @ResponseBody
+    public ServerResponse findHospital(){
+        try {
+            List<Hospital> dataTableResult = zmgItemService.findHospital();
             return ServerResponse.success(dataTableResult);
         } catch (Exception e) {
             e.printStackTrace();

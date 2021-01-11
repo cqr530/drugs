@@ -1,12 +1,7 @@
 package com.lianxi.drugs.dao;
 
-import com.lianxi.drugs.dto.HospitalDrugIndexDto;
-import com.lianxi.drugs.dto.QueryDrugItemDto;
-import com.lianxi.drugs.dto.QueryDrugMessageDto;
-import com.lianxi.drugs.dto.QueryPurchaseIndexDto;
-import com.lianxi.drugs.pojo.DrugInfo;
-import com.lianxi.drugs.pojo.HospitalDrug;
-import com.lianxi.drugs.pojo.Item;
+import com.lianxi.drugs.dto.*;
+import com.lianxi.drugs.pojo.*;
 
 import java.util.List;
 
@@ -31,4 +26,10 @@ public interface ZmhItemMapper {
 
     long queryAllHospitalDrugCount(HospitalDrugIndexDto hospitalDrugIndexDto);
 
+    /*采购单查询*/
+    List<Purchase> queryAllCaiGouDanPage(CaiGouDanDto caiGouDanDto);
+
+    long queryAllCaiGouDanCount(CaiGouDanDto caiGouDanDto);
+
+    List<Hospital> queryHospital();
 }

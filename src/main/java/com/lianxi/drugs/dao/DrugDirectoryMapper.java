@@ -3,13 +3,13 @@ package com.lianxi.drugs.dao;
 import com.lianxi.drugs.pojo.DrugDirectory;
 
 public interface DrugDirectoryMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer hospitalId);
 
     int insert(DrugDirectory record);
 
     int insertSelective(DrugDirectory record);
 
-    DrugDirectory selectByPrimaryKey(Integer id);
+    DrugDirectory selectByPrimaryKey(Integer hospitalId);
 
     int updateByPrimaryKeySelective(DrugDirectory record);
 
