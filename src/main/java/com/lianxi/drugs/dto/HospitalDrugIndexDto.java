@@ -1,13 +1,12 @@
-package com.lianxi.drugs.vo;
+package com.lianxi.drugs.dto;
 
+import com.lianxi.drugs.pojo.DrugPageBean;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class DruginfoVO {
-
-    private String drugId;
+public class HospitalDrugIndexDto extends DrugPageBean {
 
     /*药品流水号*/
     private String serialNum;
@@ -33,19 +32,17 @@ public class DruginfoVO {
     /*商品名*/
     private String productName;
 
-    /*中标价*/
-    private BigDecimal tenderPrice;
-
-    /*质量层次*/
-    private String qualityLevel;
+    /*最大中标价*/
+    private BigDecimal maxTenderPrice;
+    /*最小中标价*/
+    private BigDecimal minTenderPrice;
 
     /*药品类别*/
-    private String drugClazzName;
+    private Integer drugClazzId;
 
     /*药品交易状态*/
     private Integer drugTranlStatus;
 
-    /*供货商*/
-
-    /*供货状态*/
+    /*医院id*/
+    private Integer userCompany;
 }

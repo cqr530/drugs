@@ -1,5 +1,8 @@
 package com.lianxi.drugs.pojo;
 
+import lombok.Data;
+
+@Data
 public class DrugDirectory {
     private Integer id;
 

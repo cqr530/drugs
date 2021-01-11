@@ -1,5 +1,6 @@
 package com.lianxi.drugs.service.zmh;
 
+import com.lianxi.drugs.dto.HospitalDrugIndexDto;
 import com.lianxi.drugs.dto.QueryDrugItemDto;
 import com.lianxi.drugs.dto.QueryDrugMessageDto;
 import com.lianxi.drugs.dto.QueryPurchaseIndexDto;
@@ -11,4 +12,6 @@ public interface ZmgItemService {
     DataTableResult queryAllDrugMessage(QueryDrugMessageDto queryDrugMessageDto);
 
     DataTableResult queryAllCaiGouIndexPage(QueryPurchaseIndexDto queryPurchaseIndexDto);
+
+    DataTableResult queryAllHospitalDrugPage(HospitalDrugIndexDto hospitalDrugIndexDto);
 }
