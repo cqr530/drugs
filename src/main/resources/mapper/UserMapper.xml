@@ -6,7 +6,7 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
     <result column="user_type" jdbcType="INTEGER" property="userType" />
-    <result column="user_company" jdbcType="VARCHAR" property="userCompany" />
+    <result column="user_company" jdbcType="INTEGER" property="userCompany" />
     <result column="user_state" jdbcType="INTEGER" property="userState" />
     <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
     <result column="user_email" jdbcType="VARCHAR" property="userEmail" />

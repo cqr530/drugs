@@ -24,6 +24,7 @@
             $scope.maxclick = function () {
                 var chked=$(".maxch").prop("checked");
                 $(".minch").prop("checked",chked);
+                console.log(111)
             }
             $scope.minclick = function () {
                 var chked=true;
@@ -33,6 +34,7 @@
                     }
                 })
                 $(".maxch").prop("checked",chked);
+                console.log(222)
             }
             $scope.updateByList = function (id) {
                 var list=new Array();
@@ -141,8 +143,8 @@
             <table class="table table-bordered" style="font-size: 10px;width: 1349px">
                 <thead>
                 <tr>
-                    <th class="w1"><input onclick="maxclick()" type="checkbox" id="checkbox1" value="">全选</th>
-                    <th><button type="button" class="btn btn-primary">确认选择供货</button></th>
+                    <th class="w1"><input onclick="maxclick()" type="checkbox" class="maxch" value="">全选</th>
+                    <th><button ng-click="updateByList()" type="button" class="btn btn-primary">确认选择供货</button></th>
                 </tr>
                 <tr>
                     <th>序号</th>
@@ -165,7 +167,7 @@
                 <tbody>
                 <tr ng-repeat="drug in list">
                     <td>{{drug.drugId}}</td>
-                    <td><input class="minch" onclick="click()" value="${drug.drugId}" type="checkbox"></td>
+                    <td><input class="minch" onclick="minclick()" value="{{drug.drugId}}" type="checkbox"></td>
                     <td>{{drug.serialNum}}</td>
                     <td>{{drug.genericName}}</td>
                     <td>{{drug.reagentType}}</td>
