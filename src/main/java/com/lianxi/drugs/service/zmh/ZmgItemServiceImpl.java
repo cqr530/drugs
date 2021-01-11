@@ -1,14 +1,8 @@
 package com.lianxi.drugs.service.zmh;
 
 import com.lianxi.drugs.dao.ZmhItemMapper;
-import com.lianxi.drugs.dto.HospitalDrugIndexDto;
-import com.lianxi.drugs.dto.QueryDrugItemDto;
-import com.lianxi.drugs.dto.QueryDrugMessageDto;
-import com.lianxi.drugs.dto.QueryPurchaseIndexDto;
-import com.lianxi.drugs.pojo.DataTableResult;
-import com.lianxi.drugs.pojo.DrugInfo;
-import com.lianxi.drugs.pojo.HospitalDrug;
-import com.lianxi.drugs.pojo.Item;
+import com.lianxi.drugs.dto.*;
+import com.lianxi.drugs.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +44,18 @@ public class ZmgItemServiceImpl implements ZmgItemService{
         long count = zmhItemMapper.queryAllHospitalDrugCount(hospitalDrugIndexDto);
         DataTableResult dataTableResult = new DataTableResult(hospitalDrugIndexDto.getDraw(),count,count,hospitalDrugList);
         return dataTableResult;
+    }
+
+    @Override
+    public DataTableResult queryAllCaiGouDanPage(CaiGouDanDto caiGouDanDto) {
+        List<Purchase> purchaseList = zmhItemMapper.queryAllCaiGouDanPage(caiGouDanDto);
+        long count = zmhItemMapper.queryAllCaiGouDanCount(caiGouDanDto);
+        DataTableResult dataTableResult = new DataTableResult(caiGouDanDto.getDraw(),count,count,purchaseList);
+        return dataTableResult;
+    }
+
+    @Override
+    public List<Hospital> findHospital() {
+        return zmhItemMapper.queryHospital();
     }
 }

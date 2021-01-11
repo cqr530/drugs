@@ -16,8 +16,32 @@
     <result column="payoff_tab_status" jdbcType="INTEGER" property="payoffTabStatus" />
     <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
   </resultMap>
+
+  <insert id="caiGouDanMapper" parameterType="com.lianxi.drugs.dto.CaiGouDanDto">
+    insert into purchase (hospital_id,hospital_name,payoff_tab_num,payoff_tab_name,start_time,
+    end_time,create_time,input_time,examine_time,examine_end,payoff_tab_status)
+    values
+    (#{hospitalId},#{hospitalName},#{payoffTabNum},#{payoffTabName},#{startTime},#{endTime},
+    #{createTime},#{inputTime},#{examineTime},#{examineEnd},#{payoffTabStatus})
+  </insert>
+
+  <delete id="toDeleteCaiGouDan" parameterType="java.lang.Integer">
+      delete from purchase where  payoff_tab_id = #{payoffTabId}
+  </delete>
+
+
+
+
+
+
+
+
+
+
+
+
   <sql id="Base_Column_List">
-    payoff_tab_id, payoff_tab_num, payoff_tab_name, hospital_id, examine, examine_end, 
+    payoff_tab_id, payoff_tab_num, payoff_tab_name, hospital_id, examine, examine_end,
     start_time, end_time, create_time, input_time, examine_time, payoff_tab_status, hospital_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -31,15 +55,15 @@
     where payoff_tab_id = #{payoffTabId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lianxi.drugs.pojo.Purchase">
-    insert into purchase (payoff_tab_id, payoff_tab_num, payoff_tab_name, 
-      hospital_id, examine, examine_end, 
-      start_time, end_time, create_time, 
-      input_time, examine_time, payoff_tab_status, 
+    insert into purchase (payoff_tab_id, payoff_tab_num, payoff_tab_name,
+      hospital_id, examine, examine_end,
+      start_time, end_time, create_time,
+      input_time, examine_time, payoff_tab_status,
       hospital_name)
-    values (#{payoffTabId,jdbcType=INTEGER}, #{payoffTabNum,jdbcType=INTEGER}, #{payoffTabName,jdbcType=VARCHAR}, 
-      #{hospitalId,jdbcType=INTEGER}, #{examine,jdbcType=VARCHAR}, #{examineEnd,jdbcType=INTEGER}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{inputTime,jdbcType=TIMESTAMP}, #{examineTime,jdbcType=TIMESTAMP}, #{payoffTabStatus,jdbcType=INTEGER}, 
+    values (#{payoffTabId,jdbcType=INTEGER}, #{payoffTabNum,jdbcType=INTEGER}, #{payoffTabName,jdbcType=VARCHAR},
+      #{hospitalId,jdbcType=INTEGER}, #{examine,jdbcType=VARCHAR}, #{examineEnd,jdbcType=INTEGER},
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP},
+      #{inputTime,jdbcType=TIMESTAMP}, #{examineTime,jdbcType=TIMESTAMP}, #{payoffTabStatus,jdbcType=INTEGER},
       #{hospitalName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lianxi.drugs.pojo.Purchase">

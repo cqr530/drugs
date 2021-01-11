@@ -10,17 +10,9 @@ public class DrugDirectory {
 
     private Integer drugId;
 
-    private String companyId;
+    private Integer companyId;
 
     private Integer drugInventory;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getHospitalId() {
         return hospitalId;
@@ -38,11 +30,11 @@ public class DrugDirectory {
         this.drugId = drugId;
     }
 
-    public String getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 

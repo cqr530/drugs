@@ -1,10 +1,17 @@
 package com.lianxi.drugs.dao;
 
 import com.lianxi.drugs.pojo.supplierDrugMenu;
-import org.apache.ibatis.annotations.Param;
 
 public interface supplierDrugMenuMapper {
-    //选择供货
-    Integer addDrugs(@Param("list") Integer[] list);
+    int deleteByPrimaryKey(Integer id);
 
+    int insert(supplierDrugMenu record);
+
+    int insertSelective(supplierDrugMenu record);
+
+    supplierDrugMenu selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(supplierDrugMenu record);
+
+    int updateByPrimaryKey(supplierDrugMenu record);
 }

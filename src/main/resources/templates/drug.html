@@ -754,9 +754,9 @@
                                 <label class="col-sm-4 col-form-label">采购单状态:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="selectDosageFormCaiGouDanManage">
-                                        <option>全部</option>
-                                        <option>1</option>
-                                        <option>2</option>
+                                        <option value="">全部</option>
+                                        <option value="1">正常</option>
+                                        <option value="0">暂停交易</option>
                                     </select>
                                 </div>
                             </div>
@@ -782,9 +782,9 @@
                                 <label class="col-sm-4 col-form-label">采购时间:</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <input type="text" id="selectMinCaiGouTimeCaiGouIndexManage" class="form-control">
+                                        <input type="date" id="selectMinCaiGouTimeCaiGouIndexManage" class="form-control">
                                         <span class="input-group-addon">—</span>
-                                        <input type="text" id="selectMaxCaiGouTimeCaiGouIndexManage" class="form-control">
+                                        <input type="date" id="selectMaxCaiGouTimeCaiGouIndexManage" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -820,18 +820,6 @@
                             <div class="row">
                                 <form class="form-horizontal" role="form">
                                     <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="hospitalNumber" class="col-sm-4 control-label">医院编号</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="hospitalNumber" placeholder="请输入医院编号">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="caiGouDanNumber" class="col-sm-4 control-label">采购单编号</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="caiGouDanNumber" placeholder="请输入采购单编号">
-                                            </div>
-                                        </div>
                                         <div class="form-group row">
                                             <label class="col-sm-4 control-label">供货时间:</label>
                                             <div class="col-sm-8">
@@ -842,38 +830,21 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="person" class="col-sm-4 control-label">联系人</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="person">
-                                            </div>
-                                        </div>
+
                                         <div class="form-group">
                                             <label for="caiGouDanStatus" class="col-sm-4 control-label">采购单状态</label>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" readonly id="caiGouDanStatus">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="remark" class="col-sm-4 control-label">备注</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="remark">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="auditingPerson" class="col-sm-4 control-label">审核人</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" readonly id="auditingPerson">
-                                            </div>
-                                        </div>
-
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="hospitalName" class="col-sm-4 control-label">医院名称</label>
+                                            <label for="selectHospitalName" class="col-sm-4 control-label">医院名称</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="hospitalName" placeholder="请输入医院编号">
+                                                <select class="form-control" id="selectHospitalName">
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -886,12 +857,6 @@
                                             <label for="createDanTime" class="col-sm-4 control-label">建单时间</label>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" readonly id="createDanTime">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="telephoneNum" class="col-sm-4 control-label">联系电话</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="telephoneNum">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -919,15 +884,15 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">保存采购单</button>
+                            <button type="button" id="close" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" onclick="createCaiGouDan()" class="btn btn-primary">保存采购单</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="panel-body">
-            <table class="table">
+            <table class="table" id="exampleFive">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">医院名称</th>
@@ -942,43 +907,8 @@
                     <th scope="col">详细</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" onclick="selectAndAddCaiGouDan(id)" class="btn btn-primary">查看</button>
-                            <button type="button" class="btn btn-warning">修改</button>
-                            <button type="button" class="btn btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
             </table>
-            <ul class="pagination">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li class="disabled"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
         </div>
-
-        <ul class="pager">
-            <li><a href="#">Previous</a></li>
-            <li><a href="#">Next</a></li>
-        </ul>
     </div>
 </div>
 
@@ -1947,15 +1877,7 @@
         </tr>
         </tbody>
     </table>
-    <ul class="pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li class="disabled"><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </ul>
+
 </div>
 
 <!--交易查询统计-采购医院查询 select-->
@@ -2536,8 +2458,8 @@
     }
 
     /*刷新页面One*/
-    function queryList(){
-        $("#example").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+    function queryListFive(){
+        $("#exampleFive").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
     }
 
     /*----------------------------------------------*/
@@ -2907,7 +2829,6 @@
         $("input[name=checkbox]:checked").each(function () {
             arr.push($(this).val())
         })
-        alert(arr)
         if(confirm("确认要提交吗")==true){
             $.ajax({
                 url:"drugs/insertDrugToHospital",
@@ -2927,6 +2848,7 @@
             })
         }
     }
+
 
     /*采购管理-采购目录维护 医院仓库4*/
     function selectCaiGouIndexWeiHu() {
@@ -3040,7 +2962,6 @@
             }
         })
 
-
         //查询药品品目类别id下拉框
         $.ajax({
             url:"drugs/drugclass",
@@ -3061,7 +2982,6 @@
         $("input[name=checkbox]:checked").each(function () {
             arr.push($(this).val())
         })
-        alert(arr)
 
         if(confirm("确认要删除吗")==true){
             $.ajax({
@@ -3082,11 +3002,164 @@
             })
         }
     }
+
+
     /*采购管理-采购单管理*/
     function selectCaiGouDanManage(){
         var html1 = $("#selectCaiGouDanManage").html()
         $("#idDiv").html(html1)
+
+        table=$('#exampleFive').DataTable({
+            "processing": true,
+            "serverSide": true,//开启服务的模式
+            "searching":false,
+            "ordering":true,
+            "order":[
+                [0,'asc']
+                ,
+                [1,'desc']
+            ],
+            "aLengthMenu": [5, 6, 7], //更改显示记录数选项
+            ajax:{
+                url:"drug/queryAllCaiGouDanPage",
+                data: function (d) {
+                    //添加额外的参数传给服务器
+                    d.payoffTabNum = $("#selectSerialNumberCaiGouDanManage").val()
+                    d.payoffTabName = $("#selectCaiGouDanNameCaiGouDanManage").val()
+                    d.payoffTabStatus = $("#selectDosageFormCaiGouDanManage").val()
+                    d.hospitalName = $("#selectHospitalNameCaiGouDanManage").val()
+                },
+                type:"post",
+                dataSrc:function(f){
+                    if(f.code == 200){
+                        f.draw = f.data.draw;
+                        f.recordsTotal = f.data.recordsTotal;
+                        f.recordsFiltered = f.data.recordsFiltered;
+                        return f.data.data;
+                    }else{
+                        return "";
+                    }
+                },
+            },
+            "columns": [
+                {"data": "hospitalName"},
+                {"data": "payoffTabNum"},
+                {"data": "payoffTabName"},
+                {"data": "startTime"},
+                {"data": "endTime"},
+                {"data": "createTime"},
+                {"data": "inputTime"},
+                {"data": "examineTime"},
+                {"data": "payoffTabStatus"},
+                {"data": "id",render: function(data) {
+                        return '<div class="btn-group btn-group-xs">'+
+                                    '<button type="button" onclick="look(' + data + ')" class="btn btn-primary">'+
+                                    '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
+                                    '</button>'+
+                                    '<button type="button" onclick="toUpdate(' + data + ')" class="btn btn-primary">'+
+                                    '<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改'+
+                                    '</button>'+
+                                    '<button type="button" onclick="todeleteCaiGouDan(' + data + ')" class="btn btn-primary">'+
+                                    '<span class="glyphicon glyphicon-pencil"></span>&nbsp;删除'+
+                                    '</button>'+
+                                '</div>';
+                    }
+                }
+            ],
+            "language": {                              // 这是修改语言的显示
+                buttons: {
+                    pageLength: {
+                        _: "显示%d条",
+                        '-1': "全部显示"
+                    }
+                },
+                paginate: {
+                    first: "首条",
+                    previous: "前一页",
+                    next: "下一页",
+                    last: "末页"
+                },
+                "info": "第_PAGE_页,共_PAGES_页",
+                "infoEmpty": "未找到相关数据",
+                "search": "关键字",
+                "zeroRecords": "未找到相关数据",
+                "decimal": ".",
+                "thousands": ","
+            }
+        })
     }
+
+    /*创建采购单*/
+    function createCaiGouDan(){
+       var obj=document.getElementById("selectHospitalName");
+        for(i=0;i<obj.length;i++) {//下拉框的长度就是它的选项数.
+            if (obj[i].selected == true) {
+                var text = obj[i].text;//获取当前选择项的文本.
+            }
+        }
+        var CaiGouDan = {
+             hospitalId : $("#selectHospitalName").val(),
+             hospitalName : text,
+             payoffTabName : $("#caiGouDanName").val(),
+             payoffTabStatus : $("#caiGouDanStatus").val()
+        }
+        /*创建采购单*/
+        $.ajax({
+            url:"drugs/createCaiGouDan",
+            dataType:"json",
+            type:"post",
+            contentType:"application/json;charset=utf-8",
+            data:JSON.stringify(CaiGouDan),
+            success:function (data) {
+                if(data.code==200){
+                    alert("成功创建采购单")
+                    $("#close").trigger('click');
+
+                }
+            }
+        })
+    }
+    $(function(){
+        queryHospital()
+    })
+    /*查询医院集合*/
+    function queryHospital(){
+        $.ajax({
+            url:"drug/queryHospital",
+            dataType:"json",
+            type:"post",
+            success:function (data) {
+                if(data.code==200){
+                   var result = data.data
+                    var str = "<option value=''>全部</option>";
+                    for (var i = 0; i < result.length; i++) {
+                        str += "<option value=" + result[i].id + ">" + result[i].hospitalName + "</option>";
+                    }
+                    $("#selectHospitalName").html(str);
+                }
+            }
+        })
+    }
+    /*删除采购单*/
+    function todeleteCaiGouDan(id){
+        if(confirm("你确定要删除吗")){
+            $.ajax({
+                url:"drugs/toDeleteCaiGouDan",
+                data:{"id":id},
+                dataType:"json",
+                type:"post",
+                success:function (data) {
+                    if(data.code==200){
+                        queryListFive()
+                        alert("删除成功")
+                    }
+                }
+            })
+        }
+    }
+
+
+
 
     /*采购管理-采购入库*/
     function selectCaiGouWarehouseIn() {
@@ -3153,7 +3226,6 @@
         $("#selectDiv").html(html1);
         $("#tableDiv").html(html2);
     }
-
 
 </script>
 

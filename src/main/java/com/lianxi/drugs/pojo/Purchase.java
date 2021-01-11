@@ -2,6 +2,9 @@ package com.lianxi.drugs.pojo;
 
 import java.util.Date;
 
+/**
+ * 采购单
+ */
 public class Purchase {
     private Integer payoffTabId;
 

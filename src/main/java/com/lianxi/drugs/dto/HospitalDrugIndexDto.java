@@ -21,7 +21,7 @@ public class HospitalDrugIndexDto extends DrugPageBean {
     private String drugSize;
 
     /*单位*/
-    private Integer company;
+    private String company;
 
     /*转换系数*/
     private Integer transverNum;
