@@ -1,21 +1,25 @@
 package com.lianxi.drugs.controller;
 
+import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.CaiGouDanDto;
 import com.lianxi.drugs.pojo.*;
 import com.lianxi.drugs.service.CaiGouDanService;
 import com.lianxi.drugs.service.DrugIndexService;
+import com.lianxi.drugs.service.SupplierService;
 import com.lianxi.drugs.service.UserService;
 import com.lianxi.drugs.vo.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,6 +41,10 @@ public class DrugController {
     @Autowired
     private CaiGouDanService caiGouDanService;
 
+    @Autowired
+    private SupplierService supplierService;
+    @Autowired
+    DefaultKaptcha defaultKaptcha;
     /**
      *2020.12.24 陈泉润
      * @param name
@@ -247,5 +255,73 @@ public class DrugController {
     @RequestMapping("/orderinfo")
     public List<OrderlistVO> findOrderlistInfo(){
         return drugSystemService.queryAllOrderlistInfo();
+    }
+
+
+    /**
+     * 2021.1.11 陈泉润
+     * @param
+     * @return添加供货药品
+     */
+    @RequestMapping("/adddrugs")
+    public Integer adddrugs(@RequestParam("list[]") Integer[] list){
+        return supplierService.saveDrugs(list);
+    }
+
+    @RequestMapping()
+
+    /**
+     * 2021.1.11 陈泉润
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @throws Exception
+     * 获取验证码
+     */
+    @RequestMapping("/getCode")
+    public void defaultKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception{
+        byte[] captchaChallengeAsJpeg = null;
+        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+        try {
+            //生产验证码字符串并保存到session中
+            String createText = defaultKaptcha.createText();
+            httpServletRequest.getSession().setAttribute("vrifyCode", createText);
+            //使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
+            BufferedImage challenge = defaultKaptcha.createImage(createText);
+            ImageIO.write(challenge, "jpg", jpegOutputStream);
+        } catch (IllegalArgumentException e) {
+            httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        //定义response输出类型为image/jpeg类型，使用response输出流输出图片的byte数组
+        captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
+        httpServletResponse.setHeader("Cache-Control", "no-store");
+        httpServletResponse.setHeader("Pragma", "no-cache");
+        httpServletResponse.setDateHeader("Expires", 0);
+        httpServletResponse.setContentType("image/jpeg");
+        ServletOutputStream responseOutputStream =
+                httpServletResponse.getOutputStream();
+        responseOutputStream.write(captchaChallengeAsJpeg);
+        responseOutputStream.flush();
+        responseOutputStream.close();
+    }
+
+    /**
+     * 2021.1.11 陈泉润
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @return 验证码验证
+     */
+    @RequestMapping("/checkCode")
+    @ResponseBody
+    public boolean imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+        String captchaId = (String) httpServletRequest.getSession().getAttribute("vrifyCode");
+        String parameter = httpServletRequest.getParameter("code");
+        System.out.println("Session  vrifyCode ---->"+captchaId+"---- form code --->"+parameter);
+        if (!captchaId.equals(parameter)) {
+            System.out.println("错误的验证码");
+            return false;
+        } else {
+            return true;
+        }
     }
 }
