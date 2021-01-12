@@ -268,7 +268,15 @@ public class DrugController {
         return supplierService.saveDrugs(list);
     }
 
-    @RequestMapping()
+    /**
+     * 2021.1.12 陈泉润
+     * @param list
+     * @return
+     */
+    @RequestMapping("/removedrugs")
+    public Integer removedrugs(@RequestParam("list[]") Integer[] list){
+        return supplierService.cncelDrugs(list);
+    }
 
     /**
      * 2021.1.11 陈泉润
