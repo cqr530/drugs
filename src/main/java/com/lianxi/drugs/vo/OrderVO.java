@@ -44,4 +44,5 @@ public class OrderVO {
     //采购状态
     private Integer orderBuystate;
 
+
 }
