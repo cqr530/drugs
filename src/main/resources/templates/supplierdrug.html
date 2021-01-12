@@ -46,13 +46,14 @@
                 if(list.length<=0){
                     alert("请勾选数据再点击批量删除")
                 }else {
+                    console.log(list)
                     $.ajax({
                         url:"http://localhost:8000/drugs/adddrugs",
                         data:{"list":list},
                         dataType:"json",
                         type:"post",
                         success:function (data) {
-                            alert(data);
+                            alert("成功添加"+data+"条");
                         }
                     })
                 }
@@ -141,7 +142,7 @@
                 <thead>
                 <tr>
                     <th class="w1"><input ng-click="allclick()" type="checkbox" class="maxch" value="">全选</th>
-                    <th><button type="button" class="btn btn-primary">确认选择供货</button></th>
+                    <th><button ng-click="updateByList()" type="button" class="btn btn-primary">确认选择供货</button></th>
                 </tr>
                 <tr>
                     <th>序号</th>

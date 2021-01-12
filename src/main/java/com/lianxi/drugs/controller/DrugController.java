@@ -271,7 +271,7 @@ public class DrugController {
     /**
      * 2021.1.12 陈泉润
      * @param list
-     * @return
+     * @return删除供货药品
      */
     @RequestMapping("/removedrugs")
     public Integer removedrugs(@RequestParam("list[]") Integer[] list){

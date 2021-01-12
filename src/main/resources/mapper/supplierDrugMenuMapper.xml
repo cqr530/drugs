@@ -20,8 +20,8 @@
 
   <delete id="deleteDrugs" parameterType="java.util.List">
     Delete from supplier_drug_menu
-    where company_id=1 and drug_id=
-    <foreach collection="list" separator=",drug_id=" item="drugId">
+    where company_id=1 and drug_id in
+    <foreach collection="list" open="(" close=")" separator="," item="drugId">
       #{drugId}
     </foreach>
   </delete>
