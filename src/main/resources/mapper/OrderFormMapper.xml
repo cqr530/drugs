@@ -18,14 +18,14 @@
     <result column="or_state" jdbcType="INTEGER" property="orState" />
   </resultMap>
 
-  <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.pojo.OrderForm">
+  <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.OrderVO">
     <id column="or_id" jdbcType="INTEGER" property="orId" />
     <result column="or_code" jdbcType="VARCHAR" property="orCode" />
     <result column="or_buyname_id" jdbcType="VARCHAR" property="orBuynameId" />
     <result column="or_hosp_id" jdbcType="INTEGER" property="orHospId" />
     <result column="or_createTime" jdbcType="TIMESTAMP" property="orCreatetime" />
     <result column="or_submitTime" jdbcType="TIMESTAMP" property="orSubmittime" />
-    <collection property="drugInfoList" ofType="com.lianxi.drugs.pojo.DrugInfo">
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
       <result column="generic_name" property="genericName"/>
       <result column="product_name" property="productName"/>
       <result column="reagent_type" property="reagentType"/>
@@ -33,14 +33,11 @@
       <result column="drug_size" property="drugSize"/>
       <result column="transver_num" property="transverNum"/>
       <result column="factory_name" property="factoryName"/>
-    </collection>
-    <collection property="orderlistInfoList" ofType="com.lianxi.drugs.pojo.OrderlistInfo">
       <result column="order_biddingPrice" property="orderBiddingprice"/>
       <result column="order_TradingPrice" property="orderTradingprice"/>
       <result column="order_buyPrice" property="orderBuyprice"/>
       <result column="order_buyCount" property="orderBuycount"/>
       <result column="order_buyState" property="orderBuystate"/>
-    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     or_id, or_code, or_hosp_id, or_user_id, or_buyname_id, or_createTime, or_updateTime,
@@ -49,7 +46,7 @@
   </sql>
   
   <select id="selectAllOrder" resultMap="BaseResultMapOne">
-    select or_id,or_code,or_buyname_id,or_hosp_id,or_createTime,or_submitTime,generic_name,product_name,reagent_type,
+    select or_id,or_code,or_buyname_id,or_hosp_id,or_createTime,or_submitTime,generic_name,product_name,reagent_type,supplier_id,
     drug_size,company,transver_num,order_biddingPrice,order_TradingPrice,order_buyCount,order_buyPrice,factory_name,order_buyState
     from order_form of
     left join orderlist_info oi on of.or_id = oi.order_id

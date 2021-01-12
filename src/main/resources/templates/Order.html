@@ -131,22 +131,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="drug in list">
-                    <td>{{drug.drugId}}</td>
-                    <td><input onclick="click()" value="${drug.drugId}" type="checkbox"></td>
-                    <td>{{drug.serialNum}}</td>
-                    <td>{{drug.genericName}}</td>
-                    <td>{{drug.reagentType}}</td>
-                    <td>{{drug.drugSize}}</td>
-                    <td>{{drug.company}}</td>
-                    <td>{{drug.transverNum}}</td>
-                    <td>{{drug.factoryName}}</td>
-                    <td>{{drug.productName}}</td>
-                    <td>{{drug.tenderPrice}}</td>
-                    <td>{{drug.qualityLevel}}</td>
-                    <td>{{drug.drugType}}</td>
-                    <td>{{drug.drugTranlStatus}}</td>
-                    <td><a>查看</a></td>
+                <tr ng-repeat="order in list">
+                    <td>{{order.orId}}</td>
+                    <td><input onclick="click()" value="${order.orCode}" type="checkbox"></td>
+                    <td>{{order.orCode}}</td>
+                    <td>{{order.orBuynameId}}</td>
+                    <td>{{order.orHospId}}</td>
+                    <td>{{order.orCreatetime}}</td>
+                    <td>{{order.orSubmittime}}</td>
+                    <td>666</td>
+                    <td>{{order.genericName}}</td>
+                    <td>{{order.productName}}</td>
+                    <td>{{order.reagentType}}</td>
+                    <td>{{order.drugSize}}</td>
+                    <td>{{order.company}}</td>
+                    <td>{{order.transverNum}}</td>
+                    <td>{{order.factoryName}}</td>
+                    <td>{{order.orderBiddingprice}}</td>
+                    <td>{{order.orderTradingprice}}</td>
+                    <td>{{order.orderBuycount}}</td>
+                    <td>{{order.orderBuyprice}}</td>
+                    <td>{{order.supplierId}}</td>
+                    <td>{{order.orderBuystate}}</td>
                 </tr>
                 </tbody>
             </table>
