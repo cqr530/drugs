@@ -16,7 +16,7 @@
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope,$http){
             $scope.load=function(){
-                $http.get("http://localhost:8000/drugs/alldrug").then(function (response){
+                $http.get("http://localhost:8000/drugs/orders").then(function (response){
                     $scope.list = response.data;
                     console.log(response.data)
                 });
