@@ -11,8 +11,13 @@ public class CaiGouDanVo {
     /*id*/
     private Integer id;
 
+    /*医院编号*/
+    private String hospitalId;
+
     /*医院名称*/
     private String hospitalName;
+
+    private String examine;
 
     /*采购单编号*/
     private String payoffTabNum;

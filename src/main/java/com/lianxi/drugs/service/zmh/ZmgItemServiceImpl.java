@@ -1,5 +1,7 @@
 package com.lianxi.drugs.service.zmh;
 
+import com.lianxi.drugs.dao.PurchaseDrugMapper;
+import com.lianxi.drugs.dao.PurchaseMapper;
 import com.lianxi.drugs.dao.ZmhItemMapper;
 import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.*;
@@ -12,6 +14,9 @@ import java.util.List;
 public class ZmgItemServiceImpl implements ZmgItemService{
     @Autowired
     private ZmhItemMapper zmhItemMapper;
+
+    @Autowired
+    private PurchaseDrugMapper purchaseDrugMapper;
 
     /*药品品目*/
     @Override
@@ -58,4 +63,11 @@ public class ZmgItemServiceImpl implements ZmgItemService{
     public List<Hospital> findHospital() {
         return zmhItemMapper.queryHospital();
     }
+
+    @Override
+    public List<DrugInfo> findPurchaseDrugById(Integer id) {
+        return purchaseDrugMapper.queryPurchaseDrugById(id);
+    }
+
+
 }

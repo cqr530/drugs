@@ -1,8 +1,13 @@
 package com.lianxi.drugs.pojo;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 
+@Data
 public class PurchaseDrug {
+    private Integer id;
+
     private Integer orderNum;
 
     private Integer drugId;
