@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lianxi.drugs.dao.PurchaseDrugMapper">
   <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.PurchaseDrug">
-    <id column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
     <result column="drug_id" jdbcType="INTEGER" property="drugId" />
     <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
     <result column="order_biddingPrice" jdbcType="DECIMAL" property="orderBiddingprice" />
@@ -10,6 +11,70 @@
     <result column="order_buyCount" jdbcType="INTEGER" property="orderBuycount" />
     <result column="order_buyPrice" jdbcType="DECIMAL" property="orderBuyprice" />
   </resultMap>
+
+  <resultMap id="BaseResultMapCaiGouDrugVo" type="com.lianxi.drugs.vo.CaiGouDrugVo">
+    <result column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
+    <result column="generic_name" jdbcType="VARCHAR" property="genericName" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="reagent_type" jdbcType="VARCHAR" property="reagentType" />
+    <result column="drug_size" jdbcType="VARCHAR" property="drugSize" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="transver_num" jdbcType="INTEGER" property="transverNum" />
+    <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+    <result column="tender_price" jdbcType="DECIMAL" property="tenderPrice" />
+    <result column="order_TradingPrice" jdbcType="DECIMAL" property="orderTradingPrice" />
+    <result column="order_buyCount" jdbcType="INTEGER" property="orderBuyCount" />
+    <result column="order_buyPrice" jdbcType="DECIMAL" property="orderBuyPrice" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="payoff_tab_status" jdbcType="INTEGER" property="payoffTabStatus" />
+
+    <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
+    <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
+    <result column="payoff_tab_num" jdbcType="INTEGER" property="payofftabNum" />
+    <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
+    <result column="start_time" jdbcType="DATE" property="startTime" />
+    <result column="end_time" jdbcType="DATE" property="endTime" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="input_time" jdbcType="DATE" property="inputTime" />
+    <result column="examine_time" jdbcType="DATE" property="examineTime" />
+    <result column="examine" jdbcType="VARCHAR" property="examine" />
+
+  </resultMap>
+
+
+  <insert id="addDrugToCaiGouDan" parameterType="java.util.List">
+    insert into purchase_drug (order_num,drug_id)
+    values
+    <foreach collection="list" item="item" separator="," >
+      (#{item.orderNum},#{item.drugId})
+    </foreach>
+  </insert>
+
+  <select id="queryPurchaseDrugById" parameterType="java.lang.Integer" resultMap="BaseResultMapCaiGouDrugVo">
+    select di.drug_id,di.serial_num,di.generic_name,di.product_name,di.reagent_type,
+    di.drug_size,di.company,di.transver_num,di.factory_name,di.tender_price,pd.order_TradingPrice,
+    pd.order_buyCount,pd.order_buyPrice,pd.supplier_id,pur.payoff_tab_status,
+    pur.hospital_id,pur.hospital_name,pur.payoff_tab_num,pur.payoff_tab_name,pur.start_time,
+    pur.end_time,pur.create_time,pur.input_time,pur.examine_time,pur.examine
+     drug_id
+      from purchase_drug pd
+      left join drug_info di on pd.drug_id = di.drug_id
+      left join purchase pur on pd.order_num = pur.payoff_tab_id
+     where pd.order_num = #{id}
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
   <sql id="Base_Column_List">
     order_num, drug_id, supplier_id, order_biddingPrice, order_TradingPrice, order_buyCount, 
     order_buyPrice

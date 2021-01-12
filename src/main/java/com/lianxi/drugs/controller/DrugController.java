@@ -4,10 +4,7 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.CaiGouDanDto;
 import com.lianxi.drugs.pojo.*;
-import com.lianxi.drugs.service.CaiGouDanService;
-import com.lianxi.drugs.service.DrugIndexService;
-import com.lianxi.drugs.service.SupplierService;
-import com.lianxi.drugs.service.UserService;
+import com.lianxi.drugs.service.*;
 import com.lianxi.drugs.vo.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +37,9 @@ public class DrugController {
 
     @Autowired
     private CaiGouDanService caiGouDanService;
+
+    @Autowired
+    private PurchaseDrugService purchaseDrugService;
 
     @Autowired
     private SupplierService supplierService;
@@ -237,6 +237,34 @@ public class DrugController {
         }
     }
 
+    /**
+     * 2021.1.11     zmh
+     * @return 医院目录药品添加到采购单
+     */
+    @RequestMapping("/addDrugToCaiGouDan")
+    public ServerResponse addDrugToCaiGouDan(@RequestParam(value = "idArr[]")int[] idArr,
+                                             @RequestParam(value = "caiGouDanId")Integer caiGouDanId) {
+
+        try {
+            List<PurchaseDrug> list = new ArrayList<>();
+            for (int i : idArr) {
+                PurchaseDrug purchaseDrug = new PurchaseDrug();
+                purchaseDrug.setDrugId(i);
+                purchaseDrug.setOrderNum(caiGouDanId);
+                list.add(purchaseDrug);
+            }
+
+
+            Integer code = purchaseDrugService.addDrugToCaiGouDan(list);
+            if (code > 0) {
+                return ServerResponse.success(code);
+            }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
 
 
 

@@ -2,9 +2,12 @@ package com.lianxi.drugs.service.impl;
 
 import com.lianxi.drugs.dao.PurchaseMapper;
 import com.lianxi.drugs.dto.CaiGouDanDto;
+import com.lianxi.drugs.pojo.PurchaseDrug;
 import com.lianxi.drugs.service.CaiGouDanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CaiGouDanServiceImpl implements CaiGouDanService {
@@ -21,4 +24,6 @@ public class CaiGouDanServiceImpl implements CaiGouDanService {
     public Integer toDeleteCaiGouDan(Integer id) {
         return caiGouDanMapper.toDeleteCaiGouDan(id);
     }
+
+
 }

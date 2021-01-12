@@ -12,9 +12,6 @@ public interface PurchaseMapper {
 
 
 
-
-
-
     int deleteByPrimaryKey(Integer payoffTabId);
 
     int insert(Purchase record);
