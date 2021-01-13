@@ -19,10 +19,10 @@
     create_time, input_time, payoff_tab_postil, payoff_tab_status, payoff_price
   </sql>
   <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.PayoffTabVO">
-    <id column="payoff_tab_id" jdbcType="INTEGER" property="payoffTabId" />
+    <id column="id" jdbcType="INTEGER" property="Id" />
     <result column="payoff_tab_num" jdbcType="VARCHAR" property="payoffTabNum" />
     <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
-    <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
+    <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
     <result column="or_code" jdbcType="VARCHAR" property="orCode" />
@@ -43,7 +43,7 @@
   </resultMap>
 
   <select id="selectAllPayoffTab" resultMap="BaseResultMapOne">
-    select pt.payoff_tab_id,payoff_tab_num,payoff_tab_name,hospital_id,create_time,input_time,or_code,
+    select oli.id,payoff_tab_num,payoff_tab_name,hospital_name,create_time,input_time,or_code,
     or_buyname_id,generic_name,product_name,reagent_type,drug_size,company,transver_num,quality_level,
     factory_name,order_biddingPrice,order_TradingPrice,order_buyCount,order_buyPrice
     from payoff_tab pt
@@ -51,5 +51,8 @@
 	left join orderlist_info oli on of.or_id = oli.order_id
     left join payoff_tab_info pti on pti.payoff_tab_id = pt.payoff_tab_id
     left join drug_info di on di.drug_id = pti.drug_info_id
+    left join hospital hp on of.or_hosp_id= hp.hospital_id
+    where payoff_tab_status = 1
+    order by id
   </select>
 </mapper>

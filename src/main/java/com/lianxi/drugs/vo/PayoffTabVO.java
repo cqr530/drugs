@@ -5,13 +5,13 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class PayoffTabVO {
-    private Integer payoffTabId;//序号
+    private Integer Id;//序号
 
     private String payoffTabNum;//结算单号
 
     private String payoffTabName;//结算单名称
 
-    private String hospitalId;//下单医院
+    private String hospitalName;//下单医院
 
     private Date createTime;//开始采购时间
 

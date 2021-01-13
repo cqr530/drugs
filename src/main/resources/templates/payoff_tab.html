@@ -114,11 +114,9 @@
 </div>
 <div class="container-fluid">
         <div class="container2">
+            <button type="button" class="btn btn-primary">确认退货</button>
             <table class="table table-bordered" style="font-size: 10px;width: 1349px">
                 <thead>
-                <tr>
-                    <th><button type="button" class="btn btn-primary">确认退货</button></th>
-                </tr>
                 <tr>
                     <th>序号</th>
                     <th>选择</th>
@@ -146,11 +144,11 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="order in list">
-                    <td>{{order.payoffTabId}}</td>
-                    <td><input onclick="click()" value="${order.payoffTabId}" type="checkbox"></td>
+                    <td>{{order.id}}</td>
+                    <td><input onclick="click()" value="${order.id}" type="checkbox"></td>
                     <td>{{order.payoffTabNum}}</td>
                     <td>{{order.payoffTabName}}</td>
-                    <td>{{order.hospitalId}}</td>
+                    <td>{{order.hospitalName}}</td>
                     <td>{{order.createTime}}</td>
                     <td>{{order.inputTime}}</td>
                     <td>{{order.orCode}}</td>
