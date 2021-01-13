@@ -273,9 +273,33 @@ public class DrugController {
                 purchaseDrug.setOrderNum(caiGouDanId);
                 list.add(purchaseDrug);
             }
-
-
             Integer code = purchaseDrugService.addDrugToCaiGouDan(list);
+            if (code > 0) {
+                return ServerResponse.success(code);
+            }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+
+    /**
+     * 2021.1.13     zmh
+     * @return 医院目录药品添加到采购单
+     */
+    @RequestMapping("/batchDeleteCaiGouDrug")
+    public ServerResponse batchDeleteCaiGouDrug(@RequestParam(value = "idArr[]")int[] idArr,
+                                                @RequestParam(value = "caigoudanId")int caigoudanId) {
+        try {
+           List<PurchaseDrug> purchaseDrugList = purchaseDrugService.queryPurchaseDrug(idArr,caigoudanId);
+            List list = new ArrayList();
+            for (PurchaseDrug i : purchaseDrugList) {
+               list.add(i.getId());
+            }
+
+            Integer code = purchaseDrugService.batchDeleteCaiGouDrug(list);
             if (code > 0) {
                 return ServerResponse.success(code);
             }

@@ -1,7 +1,9 @@
 package com.lianxi.drugs.dao;
 
-import com.lianxi.drugs.pojo.DrugInfo;
+import com.lianxi.drugs.dto.PurchaseDrugDto;
 import com.lianxi.drugs.pojo.PurchaseDrug;
+import com.lianxi.drugs.vo.CaiGouDrugVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,7 +11,38 @@ public interface PurchaseDrugMapper {
 
     Integer addDrugToCaiGouDan(List<PurchaseDrug> list);
 
-    List<DrugInfo> queryPurchaseDrugById(Integer id);
+
+
+    List<CaiGouDrugVo> queryPurchaseDrugById(PurchaseDrugDto purchaseDrugDto);
+
+    long queryPurchaseDrugCount(PurchaseDrugDto purchaseDrugDto);
+
+    PurchaseDrug queryCaiGouDugById(Integer id);
+
+    List<PurchaseDrug> queryPurchaseDrug(@Param("idArr") int[] idArr,@Param("caigoudanId") int caigoudanId);
+
+    Integer batchDeleteCaiGouDrug(List list);
+
+    Integer deleteCaiGouDrug(Integer id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -31,6 +64,7 @@ public interface PurchaseDrugMapper {
     int updateByPrimaryKeySelective(PurchaseDrug record);
 
     int updateByPrimaryKey(PurchaseDrug record);
+
 
 
 }
