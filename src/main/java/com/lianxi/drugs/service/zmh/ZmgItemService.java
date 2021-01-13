@@ -2,8 +2,9 @@ package com.lianxi.drugs.service.zmh;
 
 import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.DataTableResult;
-import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Hospital;
+import com.lianxi.drugs.pojo.Purchase;
+import com.lianxi.drugs.pojo.PurchaseDrug;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ public interface ZmgItemService {
 
     List<Hospital> findHospital();
 
-    List<DrugInfo> findPurchaseDrugById(Integer id);
+    DataTableResult findPurchaseDrugById(PurchaseDrugDto purchaseDrugDto);
 
+    Purchase findCaiGouDanByIdEcho(Integer id);
+
+    Integer deleteCaiGouDrug(Integer id);
+
+    PurchaseDrug queryCaiGouDugById(Integer id);
 }

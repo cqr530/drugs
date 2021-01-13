@@ -18,4 +18,17 @@ public class PurchaseDrugServiceImpl implements PurchaseDrugService {
     public Integer addDrugToCaiGouDan(List<PurchaseDrug> list) {
         return purchaseDrugMapper.addDrugToCaiGouDan(list);
     }
+
+    @Override
+    public List<PurchaseDrug> queryPurchaseDrug(int[] idArr,int caigoudanId) {
+        return purchaseDrugMapper.queryPurchaseDrug(idArr,caigoudanId);
+    }
+
+    @Override
+    public Integer batchDeleteCaiGouDrug(List list) {
+        return purchaseDrugMapper.batchDeleteCaiGouDrug(list);
+    }
+
+
+
 }

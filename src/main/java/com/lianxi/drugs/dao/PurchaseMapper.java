@@ -7,7 +7,7 @@ public interface PurchaseMapper {
 
     int caiGouDanMapper(CaiGouDanDto caiGouDanDto);
 
-
+    Purchase findCaiGouDanByIdEcho(Integer id);
 
 
 
@@ -25,4 +25,6 @@ public interface PurchaseMapper {
     int updateByPrimaryKey(Purchase record);
 
     Integer toDeleteCaiGouDan(Integer id);
+
+
 }
