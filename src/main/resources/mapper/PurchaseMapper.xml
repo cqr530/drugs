@@ -29,9 +29,9 @@
       delete from purchase where  payoff_tab_id = #{payoffTabId}
   </delete>
 
-
-
-
+    <select id="queryCaiGouDanById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select * from purchase where payoff_tab_id = #{payoffTabId}
+  </select>
 
 
 

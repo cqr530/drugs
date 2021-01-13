@@ -3,6 +3,7 @@ package com.lianxi.drugs.controller.zmh;
 import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.DataTableResult;
+import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Hospital;
 import com.lianxi.drugs.pojo.User;
 import com.lianxi.drugs.service.zmh.ZmgItemService;
@@ -139,4 +140,25 @@ public class ZmhController {
             return ServerResponse.error();
         }
     }
+
+    /**
+     *
+     * @param   id
+     * @return  ServerResponse
+     * 根据采购单id查询采购单信息
+     */
+    @RequestMapping("queryCaiGouDanById")
+    @ResponseBody
+    public ServerResponse findCaiGouDanById(Integer id){
+        try {
+            /*通过采购单id获取采购单中的商品集合*/
+            List<DrugInfo> drugInfoList = zmgItemService.findPurchaseDrugById(id);
+            return ServerResponse.success(drugInfoList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+
 }

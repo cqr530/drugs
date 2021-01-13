@@ -6,4 +6,5 @@ public interface CaiGouDanService {
     int createCaiGouDan(CaiGouDanDto caiGouDanDto);
 
     Integer toDeleteCaiGouDan(Integer id);
+
 }

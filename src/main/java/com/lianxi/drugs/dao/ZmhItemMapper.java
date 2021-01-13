@@ -32,4 +32,5 @@ public interface ZmhItemMapper {
     long queryAllCaiGouDanCount(CaiGouDanDto caiGouDanDto);
 
     List<Hospital> queryHospital();
+
 }
