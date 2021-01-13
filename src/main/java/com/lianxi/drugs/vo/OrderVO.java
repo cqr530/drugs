@@ -6,13 +6,13 @@ import java.util.Date;
 @Data
 public class OrderVO {
     //序号
-    private Integer orId;
+    private Integer Id;
     //采购单号
     private String orCode;
     //采购单名
     private String orBuynameId;
     //采购医院
-    private Integer orHospId;
+    private String hospitalName;
     //开始采购时间
     private Date orCreatetime;
     //结束采购时间
@@ -40,7 +40,7 @@ public class OrderVO {
     //生产企业
     private String factoryName;
     //供货企业
-    private Integer supplierId;
+    private String companyName;
     //采购状态
     private Integer orderBuystate;
 

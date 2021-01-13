@@ -21,6 +21,43 @@
                     console.log(response.data)
                 });
             }
+            $scope.allclick = function () {
+                var chked=$(".maxch").prop("checked");
+                $(".minch").prop("checked",chked);
+            }
+            $scope.oneclick = function () {
+                var chked=true;
+                $.each($(".minch"),function (index,item) {
+                    if ($(item).prop("checked")==false){
+                        chked=false;
+                    }
+                })
+                $(".maxch").prop("checked",chked);
+            }
+            $scope.updateByList = function (drugId) {
+                var list=new Array();
+                if(drugId!=null){
+                    list.push(drugId);
+                }else {
+                    $.each($(".minch:checked"),function (index,item) {
+                        list.push($(item).val());
+                    })
+                }
+                if(list.length<=0){
+                    alert("请勾选数据再点击批量发货")
+                }else {
+                    $.ajax({
+                        url:"http://localhost:8000/drugs/fahuo",
+                        data:{"list":list},
+                        dataType:"json",
+                        type:"post",
+                        success:function (data) {
+                            alert("成功发货"+data+"单");
+                            history.go(0)
+                        }
+                    })
+                }
+            }
         })
     </script>
     <style>
@@ -80,7 +117,6 @@
                 <td>药品类别:<select style="margin-left: 30px" id="type">
                     <option value="">请选择</option>
                     <option value="0-20">0~20%</option>
-
                     <option value="20-40">20%~40%</option>
                     <option value="40-60">40%~60%</option>
                     <option value="60-80">60%~80%</option>
@@ -106,7 +142,7 @@
             <table class="table table-bordered" style="font-size: 10px;width: 1349px">
                 <thead>
                 <tr>
-                    <th><button type="button" class="btn btn-primary">选择发货</button></th>
+                    <th><button ng-click="updateByList()" type="button" class="btn btn-primary">选择发货</button></th>
                 </tr>
                 <tr>
                     <th>序号</th>
@@ -134,11 +170,11 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="order in list">
-                    <td>{{order.orId}}</td>
-                    <td><input onclick="click()" value="${order.orCode}" type="checkbox"></td>
+                    <td>{{order.id}}</td>
+                    <td><input class="minch" ng-click="oneclick()" value="{{order.id}}" type="checkbox"></td>
                     <td>{{order.orCode}}</td>
                     <td>{{order.orBuynameId}}</td>
-                    <td>{{order.orHospId}}</td>
+                    <td>{{order.hospitalName}}</td>
                     <td>{{order.orCreatetime}}</td>
                     <td>{{order.orSubmittime}}</td>
                     <td>666</td>
@@ -153,7 +189,7 @@
                     <td>{{order.orderTradingprice}}</td>
                     <td>{{order.orderBuycount}}</td>
                     <td>{{order.orderBuyprice}}</td>
-                    <td>{{order.supplierId}}</td>
+                    <td>{{order.companyName}}</td>
                     <td>{{order.orderBuystate}}</td>
                 </tr>
                 </tbody>

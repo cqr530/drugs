@@ -124,6 +124,16 @@ public class DrugController {
     }
 
     /**
+     * 2021.1.13 陈泉润
+     * @param list
+     * @return 发货
+     */
+    @RequestMapping("/fahuo")
+    public Integer fahuo(@RequestParam("list[]") Integer[] list){
+        return supplierService.modifyOrder(list);
+    }
+
+    /**
      * 2021.1.5 陈泉润
      * @return 查询所有退货单
      */

@@ -5,4 +5,6 @@ public interface SupplierService {
     Integer saveDrugs(Integer[] list);
     //取消供货药品
     Integer cncelDrugs(Integer[] list);
+    //发货
+    Integer modifyOrder(Integer[] list);
 }

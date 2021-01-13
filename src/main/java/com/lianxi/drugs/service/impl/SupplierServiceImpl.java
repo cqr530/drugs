@@ -11,6 +11,8 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Autowired
     private com.lianxi.drugs.dao.supplierDrugMenuMapper supplierDrugMenuMapper;
+    @Autowired
+    private com.lianxi.drugs.dao.OrderFormMapper orderFormMapper;
 
     @Override
     public Integer saveDrugs(Integer[] list) {
@@ -20,5 +22,10 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public Integer cncelDrugs(Integer[] list) {
         return supplierDrugMenuMapper.deleteDrugs(list);
+    }
+
+    @Override
+    public Integer modifyOrder(Integer[] list) {
+        return orderFormMapper.updateOrder(list);
     }
 }
