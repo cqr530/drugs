@@ -7,4 +7,6 @@ public interface SupplierService {
     Integer cncelDrugs(Integer[] list);
     //发货
     Integer modifyOrder(Integer[] list);
+    //退货
+    Integer modifyCreditOrder(Integer[] list);
 }

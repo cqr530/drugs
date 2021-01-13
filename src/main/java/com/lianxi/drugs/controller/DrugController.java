@@ -143,6 +143,16 @@ public class DrugController {
     }
 
     /**
+     * 2021.1.13 陈泉润
+     * @param list
+     * @return 退货
+     */
+    @RequestMapping("/tuihuo")
+    public Integer tuihuo(@RequestParam("list[]") Integer[] list){
+        return supplierService.modifyCreditOrder(list);
+    }
+
+    /**
      * 2021.1.6     zmh
      * @return 将药品信息添加到医院的药品目录
      */

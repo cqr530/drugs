@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lianxi.drugs.dao.CreditOrderMapper">
   <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.CreditOrderVO">
-    <id column="co_id" jdbcType="INTEGER" property="coId" />
+    <id column="id" jdbcType="INTEGER" property="Id" />
+    <result column="co_id" jdbcType="INTEGER" property="coId" />
     <result column="co_number" jdbcType="VARCHAR" property="coNumber" />
     <result column="co_name" jdbcType="VARCHAR" property="coName" />
-    <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
+    <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
     <result column="co_createtime" jdbcType="TIMESTAMP" property="coCreatetime" />
     <result column="co_inputtime" jdbcType="TIMESTAMP" property="coInputtime" />
     <result column="or_code" jdbcType="VARCHAR" property="orCode" />
@@ -24,11 +25,22 @@
     co_inputtime, co_remark, co_state
   </sql>
   <select id="selectAllCreditOrder" resultMap="BaseResultMapOne">
-    select co.co_id,co_number,co_name,hospital_id,co_createtime,co_inputtime,or_code,or_buyname_id,generic_name,
+    select id,co_number,co_name,hospital_name,co_createtime,co_inputtime,or_code,or_buyname_id,generic_name,
     product_name,reagent_type,drug_size,company,transver_num,quality_level
     from credit_order co
     left join order_form of on of.or_id = co.co_id
     left join credit_order_info coi on coi.or_id = of.or_id
     left join drug_info di on di.drug_id = coi.drug_id
+    left join hospital hp on of.or_hosp_id= hp.hospital_id
+    where coi_state = 0
+    group by id
   </select>
+
+  <update id="updateCreditOrder" parameterType="java.util.List">
+    update credit_order_info set coi_state=1
+    where id in
+    <foreach collection="list" open="(" close=")" separator="," item="Id">
+      #{Id}
+    </foreach>
+  </update>
 </mapper>

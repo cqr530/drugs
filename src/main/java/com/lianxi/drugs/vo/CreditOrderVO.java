@@ -5,13 +5,15 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class CreditOrderVO {
+    private Integer Id;
+
     private Integer coId;
 
     private String coNumber;
 
     private String coName;
 
-    private Integer hospitalId;
+    private String hospitalName;
 
     private Date coCreatetime;
 

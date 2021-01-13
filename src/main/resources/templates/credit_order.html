@@ -21,6 +21,43 @@
                     console.log(response.data)
                 });
             }
+            $scope.allclick = function () {
+                var chked=$(".maxch").prop("checked");
+                $(".minch").prop("checked",chked);
+            }
+            $scope.oneclick = function () {
+                var chked=true;
+                $.each($(".minch"),function (index,item) {
+                    if ($(item).prop("checked")==false){
+                        chked=false;
+                    }
+                })
+                $(".maxch").prop("checked",chked);
+            }
+            $scope.updateByList = function (drugId) {
+                var list=new Array();
+                if(drugId!=null){
+                    list.push(drugId);
+                }else {
+                    $.each($(".minch:checked"),function (index,item) {
+                        list.push($(item).val());
+                    })
+                }
+                if(list.length<=0){
+                    alert("请勾选数据再点击批量退货")
+                }else {
+                    $.ajax({
+                        url:"http://localhost:8000/drugs/tuihuo",
+                        data:{"list":list},
+                        dataType:"json",
+                        type:"post",
+                        success:function (data) {
+                            alert("成功退货"+data+"单");
+                            history.go(0)
+                        }
+                    })
+                }
+            }
         })
     </script>
     <style>
@@ -111,11 +148,10 @@
 </div>
 <div class="container-fluid">
         <div class="container2">
+            <button ng-click="updateByList()" type="button" class="btn btn-primary">确认退货</button>
             <table class="table table-bordered" style="font-size: 10px;width: 1349px">
                 <thead>
-                <tr>
-                    <th><button type="button" class="btn btn-primary">确认退货</button></th>
-                </tr>
+
                 <tr>
                     <th>序号</th>
                     <th>选择</th>
@@ -138,11 +174,11 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="order in list">
-                    <td>{{order.coId}}</td>
-                    <td><input onclick="click()" value="${order.coId}" type="checkbox"></td>
+                    <td>{{order.id}}</td>
+                    <td><input class="minch" ng-click="oneclick()" value="{{order.id}}" type="checkbox"></td>
                     <td>{{order.coNumber}}</td>
                     <td>{{order.coName}}</td>
-                    <td>{{order.hospitalId}}</td>
+                    <td>{{order.hospitalName}}</td>
                     <td>{{order.coCreatetime}}</td>
                     <td>{{order.coInputtime}}</td>
                     <td>{{order.orCode}}</td>
