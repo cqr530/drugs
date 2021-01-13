@@ -13,6 +13,7 @@
   </resultMap>
 
   <resultMap id="BaseResultMapCaiGouDrugVo" type="com.lianxi.drugs.vo.CaiGouDrugVo">
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="drug_id" jdbcType="INTEGER" property="drugId" />
     <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
     <result column="generic_name" jdbcType="VARCHAR" property="genericName" />
@@ -21,6 +22,7 @@
     <result column="drug_size" jdbcType="VARCHAR" property="drugSize" />
     <result column="company" jdbcType="VARCHAR" property="company" />
     <result column="transver_num" jdbcType="INTEGER" property="transverNum" />
+    <result column="quality_level" jdbcType="VARCHAR" property="qualityLevel" />
     <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
     <result column="tender_price" jdbcType="DECIMAL" property="tenderPrice" />
     <result column="order_TradingPrice" jdbcType="DECIMAL" property="orderTradingPrice" />
@@ -28,18 +30,6 @@
     <result column="order_buyPrice" jdbcType="DECIMAL" property="orderBuyPrice" />
     <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
     <result column="payoff_tab_status" jdbcType="INTEGER" property="payoffTabStatus" />
-
-    <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
-    <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
-    <result column="payoff_tab_num" jdbcType="INTEGER" property="payofftabNum" />
-    <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
-    <result column="start_time" jdbcType="DATE" property="startTime" />
-    <result column="end_time" jdbcType="DATE" property="endTime" />
-    <result column="create_time" jdbcType="DATE" property="createTime" />
-    <result column="input_time" jdbcType="DATE" property="inputTime" />
-    <result column="examine_time" jdbcType="DATE" property="examineTime" />
-    <result column="examine" jdbcType="VARCHAR" property="examine" />
-
   </resultMap>
 
 
@@ -51,7 +41,7 @@
     </foreach>
   </insert>
 
-  <select id="queryPurchaseDrugById" parameterType="java.lang.Integer" resultMap="BaseResultMapCaiGouDrugVo">
+  <select id="queryPurchaseDrugById" parameterType="com.lianxi.drugs.dto.PurchaseDrugDto" resultMap="BaseResultMapCaiGouDrugVo">
     select di.drug_id,di.serial_num,di.generic_name,di.product_name,di.reagent_type,
     di.drug_size,di.company,di.transver_num,di.factory_name,di.tender_price,pd.order_TradingPrice,
     pd.order_buyCount,pd.order_buyPrice,pd.supplier_id,pur.payoff_tab_status,
@@ -62,10 +52,45 @@
       left join drug_info di on pd.drug_id = di.drug_id
       left join purchase pur on pd.order_num = pur.payoff_tab_id
      where pd.order_num = #{id}
+     order by di.drug_id asc
+     limit #{start},#{length}
   </select>
 
+  <select id="queryPurchaseDrugCount" parameterType="com.lianxi.drugs.dto.PurchaseDrugDto" resultType="java.lang.Long">
+    select count(*)
+      from purchase_drug pd
+      left join drug_info di on pd.drug_id = di.drug_id
+      left join purchase pur on pd.order_num = pur.payoff_tab_id
+     where pd.order_num = #{id}
+     limit #{start},#{length}
+  </select>
 
+  <select id="queryCaiGouDugById" parameterType="java.lang.Integer" resultType="com.lianxi.drugs.pojo.PurchaseDrug">
+      select id from purchase_drug pd
+        left join drug_info di on pd.drug_id = di.drug_id
+          where pd.drug_id = #{id}
+  </select>
 
+  <delete id="deleteCaiGouDrug" parameterType="java.lang.Integer">
+        delete from purchase_drug where id = #{id}
+  </delete>
+
+  <select id="queryPurchaseDrug" resultType="com.lianxi.drugs.pojo.PurchaseDrug">
+       select id from purchase_drug pd
+        left join drug_info di on pd.drug_id = di.drug_id
+          where pd.drug_id in
+          <foreach collection="idArr" open="(" separator="," close=")" item="item">
+            #{item}
+          </foreach>
+          and pd.order_num = #{caigoudanId}
+  </select>
+
+  <delete id="batchDeleteCaiGouDrug" parameterType="java.lang.Integer">
+      delete from purchase_drug WHERE id in
+      <foreach collection="list" open="(" separator="," close=")" item="item">
+        #{item}
+      </foreach>
+  </delete>
 
 
 

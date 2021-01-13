@@ -2,10 +2,7 @@ package com.lianxi.drugs.controller.zmh;
 
 import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.*;
-import com.lianxi.drugs.pojo.DataTableResult;
-import com.lianxi.drugs.pojo.DrugInfo;
-import com.lianxi.drugs.pojo.Hospital;
-import com.lianxi.drugs.pojo.User;
+import com.lianxi.drugs.pojo.*;
 import com.lianxi.drugs.service.zmh.ZmgItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -147,13 +144,54 @@ public class ZmhController {
      * @return  ServerResponse
      * 根据采购单id查询采购单信息
      */
+    @RequestMapping("queryCaiGouDanByIdEcho")
+    @ResponseBody
+    public ServerResponse findCaiGouDanByIdEcho(Integer id){
+        try {
+            //*通过采购单id回显采购单信息//
+            Purchase purchaseList = zmgItemService.findCaiGouDanByIdEcho(id);
+            return ServerResponse.success(purchaseList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     *
+     * @param   purchaseDrugDto
+     * @return  ServerResponse
+     * 根据采购单id查询采购单中的药品信息
+     */
     @RequestMapping("queryCaiGouDanById")
     @ResponseBody
-    public ServerResponse findCaiGouDanById(Integer id){
+    public ServerResponse findCaiGouDanById(PurchaseDrugDto purchaseDrugDto){
         try {
-            /*通过采购单id获取采购单中的商品集合*/
-            List<DrugInfo> drugInfoList = zmgItemService.findPurchaseDrugById(id);
-            return ServerResponse.success(drugInfoList);
+            DataTableResult dataTableResult = zmgItemService.findPurchaseDrugById(purchaseDrugDto);
+            return ServerResponse.success(dataTableResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+/**
+     *
+     * @param   id
+     * @return  ServerResponse
+     * 根据采购单id查询采购单中的药品信息
+     */
+    @RequestMapping("deleteCaiGouDrug")
+    @ResponseBody
+    public ServerResponse deleteCaiGouDrug(Integer id){
+        try {
+            PurchaseDrug purchaseDrug = zmgItemService.queryCaiGouDugById(id);
+            Integer id1 = purchaseDrug.getId();
+            Integer code = zmgItemService.deleteCaiGouDrug(id1);
+            if(code>0){
+                return ServerResponse.success();
+            }
+            return ServerResponse.error();
         } catch (Exception e) {
             e.printStackTrace();
             return ServerResponse.error();

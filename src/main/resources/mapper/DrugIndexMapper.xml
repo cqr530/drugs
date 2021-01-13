@@ -20,8 +20,8 @@
 
   <delete id="deleteDrugToHospital" parameterType="java.lang.Integer">
       delete from drug_directory WHERE drug_id in
-        <foreach collection="array" separator="," item="item">
-            (#{item})
+        <foreach collection="array" open="(" separator="," close=")" item="item">
+            #{item}
         </foreach>
   </delete>
 </mapper>

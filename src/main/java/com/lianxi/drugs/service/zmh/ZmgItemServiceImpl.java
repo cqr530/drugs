@@ -5,6 +5,7 @@ import com.lianxi.drugs.dao.PurchaseMapper;
 import com.lianxi.drugs.dao.ZmhItemMapper;
 import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.*;
+import com.lianxi.drugs.vo.CaiGouDrugVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class ZmgItemServiceImpl implements ZmgItemService{
 
     @Autowired
     private PurchaseDrugMapper purchaseDrugMapper;
+
+  @Autowired
+    private PurchaseMapper purchaseMapper;
 
     /*药品品目*/
     @Override
@@ -65,9 +69,25 @@ public class ZmgItemServiceImpl implements ZmgItemService{
     }
 
     @Override
-    public List<DrugInfo> findPurchaseDrugById(Integer id) {
-        return purchaseDrugMapper.queryPurchaseDrugById(id);
+    public DataTableResult findPurchaseDrugById(PurchaseDrugDto purchaseDrugDto) {
+        List<CaiGouDrugVo> caiGouDrugVoList = purchaseDrugMapper.queryPurchaseDrugById(purchaseDrugDto);
+        long count = purchaseDrugMapper.queryPurchaseDrugCount(purchaseDrugDto);
+        DataTableResult dataTableResult = new DataTableResult(purchaseDrugDto.getDraw(),count,count,caiGouDrugVoList);
+        return dataTableResult;
     }
 
+    @Override
+    public Purchase findCaiGouDanByIdEcho(Integer id) {
+        return purchaseMapper.findCaiGouDanByIdEcho(id);
+    }
 
+    @Override
+    public Integer deleteCaiGouDrug(Integer id) {
+        return purchaseDrugMapper.deleteCaiGouDrug(id);
+    }
+
+    @Override
+    public PurchaseDrug queryCaiGouDugById(Integer id) {
+        return purchaseDrugMapper.queryCaiGouDugById(id);
+    }
 }
