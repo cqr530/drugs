@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class PayoffTabVO {
-    private Integer Id;//序号
+    private Integer payoffTabId;//序号
 
     private String payoffTabNum;//结算单号
 
