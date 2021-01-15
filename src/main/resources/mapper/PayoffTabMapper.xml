@@ -43,16 +43,17 @@
   </resultMap>
 
   <select id="selectAllPayoffTab" resultMap="BaseResultMapOne">
-    select pt.payoff_tab_id,payoff_tab_num,payoff_tab_name,hospital_name,create_time,input_time,or_code,
-    or_buyname_id,generic_name,product_name,reagent_type,drug_size,company,transver_num,quality_level,
-    factory_name,order_biddingPrice,order_TradingPrice,order_buyCount,order_buyPrice
+    select distinct pt.payoff_tab_id,pt.payoff_tab_num,pt.payoff_tab_name,hp.hospital_name,pt.create_time,pt.input_time,of.or_code,
+    of.or_buyname_id,di.generic_name,di.product_name,di.reagent_type,di.drug_size,di.company,di.transver_num,di.quality_level,
+    di.factory_name,oli.order_biddingPrice,oli.order_TradingPrice,oli.order_buyCount,oli.order_buyPrice
     from payoff_tab pt
     left join order_form of on of.or_code = pt.payoff_tab_num
 	left join orderlist_info oli on of.or_id = oli.order_id
     left join payoff_tab_info pti on pti.payoff_tab_id = pt.payoff_tab_id
     left join drug_info di on di.drug_id = pti.drug_info_id
     left join hospital hp on of.or_hosp_id= hp.hospital_id
-    where payoff_tab_status = 1
+    left join credit_order_info coi on coi.or_id = of.or_id
+    where payoff_tab_status = 1 and coi_state = 0
     order by pt.payoff_tab_id
   </select>
 </mapper>
