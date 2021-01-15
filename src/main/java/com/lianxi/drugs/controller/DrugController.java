@@ -3,6 +3,7 @@ package com.lianxi.drugs.controller;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.CaiGouDanDto;
+import com.lianxi.drugs.dto.TuiHuoDanDto;
 import com.lianxi.drugs.pojo.*;
 import com.lianxi.drugs.service.*;
 import com.lianxi.drugs.vo.*;
@@ -37,6 +38,9 @@ public class DrugController {
 
     @Autowired
     private CaiGouDanService caiGouDanService;
+
+    @Autowired
+    private CreditOrderService creditOrderService;
 
     @Autowired
     private PurchaseDrugService purchaseDrugService;
@@ -319,6 +323,25 @@ public class DrugController {
             }
 
             Integer code = purchaseDrugService.batchDeleteCaiGouDrug(list);
+            if (code > 0) {
+                return ServerResponse.success(code);
+            }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     * 2021.1.15     zmh
+     * @return 创建退货单
+     */
+    @RequestMapping("/insertTuiHuoDanDto")
+    public ServerResponse insertTuiHuoDanDto(TuiHuoDanDto tuiHuoDanDto) {
+        try {
+
+            Integer code = creditOrderService.insertTuiHuoDanDto(tuiHuoDanDto);
             if (code > 0) {
                 return ServerResponse.success(code);
             }

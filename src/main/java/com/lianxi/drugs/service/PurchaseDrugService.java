@@ -10,4 +10,5 @@ public interface PurchaseDrugService {
     Integer batchDeleteCaiGouDrug(List list);
 
     List<PurchaseDrug> queryPurchaseDrug(int[] idArr,int caigoudanId);
+
 }

@@ -43,4 +43,12 @@
       #{Id}
     </foreach>
   </update>
+
+ <insert id="insertTuiHuoDanDto" parameterType="com.lianxi.drugs.dto.TuiHuoDanDto">
+      insert into credit_order (co_number,hospital_id,co_name,co_contacts,
+      co_state,co_phone,co_remark,co_inputtime,co_createtime)
+      values
+      (#{creditNum},#{hospitalNum},#{creditName},#{creditContacts},
+      #{creditState},#{phone},#{creditRemark},now(),now())
+  </insert>
 </mapper>

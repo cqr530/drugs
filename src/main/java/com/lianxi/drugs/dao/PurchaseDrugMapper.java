@@ -65,6 +65,4 @@ public interface PurchaseDrugMapper {
 
     int updateByPrimaryKey(PurchaseDrug record);
 
-
-
 }
