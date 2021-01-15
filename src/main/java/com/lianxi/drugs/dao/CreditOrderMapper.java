@@ -1,6 +1,7 @@
 package com.lianxi.drugs.dao;
 
 
+import com.lianxi.drugs.dto.TuiHuoDanDto;
 import com.lianxi.drugs.vo.CreditOrderVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,4 +12,6 @@ public interface CreditOrderMapper {
     List<CreditOrderVO> selectAllCreditOrder();
     //退货
     Integer updateCreditOrder(@Param("list") Integer[] list);
+    //创建退货单
+    Integer insertTuiHuoDanDto(TuiHuoDanDto tuiHuoDanDto);
 }

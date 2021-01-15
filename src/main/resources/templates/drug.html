@@ -63,7 +63,7 @@
                         <li><a href="#" onclick="selectCaiGouWarehouseIn()">采购入库</a></li>
                         <li class="divider"></li>
 
-                        <li><a href="#" onclick="createReturnGoodsManage()">退货单创建</a></li>
+                        <li><a href="#" onclick="createReturnGoodsManage()">退货单查询</a></li>
 
                         <li><a href="#" onclick="selectReturnGoodsManage()">退货管理</a></li>
 
@@ -1518,12 +1518,13 @@
     </div>
 </div>
 
-<!--采购管理-退货单创建-->
-<div style="display: none" id="createReturnGoodsManage">
-    <!--退货单创建-->
+<!--退货单查询界面-->
+<div id="selectReturnGoodsDanManage" style="display: none">
+
+    <!--条件查询-->
     <div class="panel panel-default">
         <div class="panel-heading">
-            退货单创建
+            退货单查询
         </div>
         <div class="panel-body">
             <form class="form-horizontal" method="post">
@@ -1532,115 +1533,85 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">医院编号:</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control" id="addHospitalNum">
-                                </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">退货单编号:</label>
-                                <div class="col-sm-5">
+                                <label class="col-sm-4 col-form-label">退货单编号:</label>
+                                <div class="col-sm-8">
                                     <input class="form-control">
                                 </div>
-                                <div class="col-sm-4" id="addCreditNum"></div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">退货时间:</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control" id="addCreditTime">
+                                <label class="col-sm-4 col-form-label">联系人:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control">
                                 </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">联系人:</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control" id="addCreditContacts">
-                                </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">退货单状态:</label>
-                                <div class="col-sm-5">
-                                    <select class="form-control" id="addCreditState">
-                                        <option value="">全部</option>
-                                        <option value="0">未提交</option>
-                                        <option value="1">已提交至供货商</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">备注:</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control" value="addCreditRemark">
-                                </div>
-                                <div class="col-sm-4"></div>
                             </div>
                         </div>
 
-                        <div class="col-sm-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">医院名称:</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control" id="add">
-                                </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">退货单名称:</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control">
-                                </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">建单时间:</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control">
-                                </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">联系电话:</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control">
-                                </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">提交时间:</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control">
-                                </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <form class="form-horizontal" method="post">
-                    <div class="col-sm-5"></div>
-                    <div class="col-sm-3">
-                        <div class="btn-group-lg">
-                            <button type="button" onclick="redirectionToReturnGoodsDan()" class="btn btn-default">保存退货单</button>
-                            <button type="reset" class="btn btn-default">提交退货单</button>
-                        </div>
+
+                <div class="col-sm-5"></div>
+                <div class="col-sm-4">
+                    <div class="btn-group-lg">
+                        <button type="button" class="btn btn-default">查询</button>
+                        <button type="reset" class="btn btn-default">导出</button>
                     </div>
-                    <div class="col-sm-4"></div>
-                </form>
+                </div>
+                <div class="col-sm-3"></div>
+
             </form>
         </div>
     </div>
+
+    <!--表格-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+
+            <div class="btn-group">
+                <button type="button" onclick="toAddTuiHuoDanPage()" class="btn btn-primary">添加 </button>
+            </div>
+
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">序号</th>
+                    <th scope="col">
+                        <input type="checkbox"> 选择
+                    </th>
+                    <th scope="col">采购单编号</th>
+                    <th scope="col">采购单名称</th>
+                    <th scope="col">采购医院</th>
+                    <th scope="col">流水号</th>
+                    <th scope="col">通用名</th>
+                    <th scope="col">商品名</th>
+                    <th scope="col">中标价</th>
+                    <th scope="col">交易价</th>
+                    <th scope="col">采购量</th>
+                    <th scope="col">采购金额</th>
+                    <th scope="col">入库量</th>
+                    <th scope="col">实际交易金额</th>
+                    <th scope="col">发票号或入库单号</th>
+                    <th scope="col">药品批号</th>
+                    <th scope="col">药品有效期（单位：年）</th>
+                    <th scope="col">剂型</th>
+                    <th scope="col">规格</th>
+                    <th scope="col">单位</th>
+                    <th scope="col">转换系数</th>
+                    <th scope="col">质量层次</th>
+                    <th scope="col">生产企业</th>
+                    <th scope="col">开始采购时间</th>
+                    <th scope="col">结束采购时间</th>
+                    <th scope="col">采购状态</th>
+                    <th scope="col">详细</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 </div>
+
 
 <!--采购管理-结算单创建-->
 <div style="display: none" id="createSettlementDan">
@@ -2758,25 +2729,9 @@
         location.href="/selectAndAddCaiGouDan"
     }
 
-    /*退货单跳转页面*/
-    function redirectionToReturnGoodsDan(){
-        $.ajax({
-            url:"drugs/insertDrugToHospital",
-            type:"get",
-            dataType:"json",
-            data:{
-
-            },
-            success:function (result) {
-                if(result.code==200){
-                    var data = result.data
-                    alert("添加成功")
-                    location.href="/redirectionToReturnGoodsDan"
-                }
-
-            }
-        })
-
+    /*跳转到退货单添加页面*/
+    function toAddTuiHuoDanPage(){
+        location.href="/toAddTuiHuoDanPage"
     }
 
     /*结算单跳转页面*/
@@ -3637,7 +3592,7 @@
                 {"data": "orderTradingPrice"},
                 {"data": "orderBuyCount",
                     render:function(data){
-                        return '<input name="orderBuyCount">'
+                            return '<input name="orderBuyCount">'
                     }
                 },
                 {"data": "orderBuyPrice"},
@@ -3763,6 +3718,17 @@
     }
     /*修改采购量*/
     function saveCaiGouCount(){
+        var orderBuyCount=[]
+        $("[name='orderBuyCount']").each(function () {
+            $("[name='checkbox']").each(function () {
+            })
+            orderBuyCount.push($(this).val())
+        })
+        alert(orderBuyCount)
+
+       var arr2 = $("[name='orderBuyCount']").val()
+        alert(arr2)
+
         var arr=[]
         $("input[name=checkbox]:checked").each(function () {
             arr.push($(this).val())
@@ -3770,15 +3736,6 @@
 
         alert(arr)
 
-        var orderBuyCount=[]
-        $("[name='orderBuyCount']").each(function () {
-            orderBuyCount.push($(this).val())
-        })
-
-        alert(orderBuyCount)
-
-        if(arr!=null && arr!=''){
-        }
     }
     /*修改供货商*/
     function updateSupplier(){
@@ -3798,8 +3755,9 @@
 
     /*采购管理-退货单创建*/
     function createReturnGoodsManage() {
-        var html1 = $("#createReturnGoodsManage").html()
+        var html1 = $("#selectReturnGoodsDanManage").html()
         $("#idDiv").html(html1)
+
     }
 
     <!--采购管理-结算单创建-->

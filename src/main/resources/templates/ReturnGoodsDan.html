@@ -8,12 +8,12 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<!--采购管理-退货单维护-->
-<div id="selectReturnGoodsDanManage">
-    <!--退货单-->
+<!--采购管理-退货单创建-->
+<div id="createReturnGoodsManage">
+    <!--退货单创建-->
     <div class="panel panel-default">
         <div class="panel-heading">
-            退货单
+            退货单创建
         </div>
         <div class="panel-body">
             <form class="form-horizontal" method="post">
@@ -21,390 +21,139 @@
 
                     <div class="row">
                         <div class="col-sm-6">
+
+
+
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">医院编号:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
+                                <label class="col-sm-3 col-form-label">退货单编号:</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" id="addCreditNum">
                                 </div>
+                                <div class="col-sm-4" ></div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">退货单编号:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
+                                <label class="col-sm-3 col-form-label">联系人:</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" id="addCreditContacts">
                                 </div>
+                                <div class="col-sm-4"></div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">退货时间:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
+                                <label class="col-sm-3 col-form-label">退货单状态:</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control" id="addCreditState">
+                                        <option value="">全部</option>
+                                        <option value="0">未提交</option>
+                                        <option value="1">已提交至供货商</option>
+                                    </select>
                                 </div>
+                                <div class="col-sm-4"></div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">联系人:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
+                                <label class="col-sm-3 col-form-label">备注:</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" id="addCreditRemark">
                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">退货单状态:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" value="未提交">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">备注:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
+                                <div class="col-sm-4"></div>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">医院名称:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
+                                <label class="col-sm-3 col-form-label">医院名称:</label>                                <div class="col-sm-5">
+                                <select class="form-control" id="addHospitalNum">
+
+                                </select>
+                            </div>
+                                <div class="col-sm-4"></div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">退货单名称:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
+                                <label class="col-sm-3 col-form-label">退货单名称:</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" id="addCreditName">
                                 </div>
+                                <div class="col-sm-4"></div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">建单时间:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
+                                <label class="col-sm-3 col-form-label">联系电话:</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" id="addPhone">
                                 </div>
+                                <div class="col-sm-4"></div>
                             </div>
 
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">联系电话:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">提交时间:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5"></div>
-                <div class="col-sm-4">
-                    <div class="btn-group-lg">
-                        <button type="button" class="btn btn-default">保存退货单</button>
-                        <button type="reset" class="btn btn-default">提交退货单</button>
+                <form class="form-horizontal" method="post">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-3">
+                        <div class="btn-group-lg">
+                            <button type="button" onclick="redirectionToReturnGoodsDan()" class="btn btn-default">保存退货单</button>
+                            <button type="reset" class="btn btn-default">提交退货单</button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6"></div>
+                    <div class="col-sm-4"></div>
+                </form>
             </form>
         </div>
-    </div>
-
-    <!--条件查询-->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            退货药品查询
-        </div>
-        <div class="panel-body">
-            <form class="form-horizontal" method="post">
-                <div class="container">
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">采购单编号:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">退货状态:</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control">
-                                        <option>全部</option>
-                                        <option>已退货</option>
-                                        <option>未退货</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">采购时间:</label>
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">开始采购时间</span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon">结束采购时间</span>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">药品流水号:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">剂型:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">单位:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">生产企业:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">质量层次:</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control">
-                                        <option>全部</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">入库时间:</label>
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon">—</span>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">发票号或入库单号:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">采购单名称:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">采购医院:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">通用名:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">规格:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">转换系数:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">商品名:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">药品类别:</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control">
-                                        <option>全部</option>
-                                        <option>正常</option>
-                                        <option>不正常</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">药品批号:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">供货商:</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control">
-                                        <option>全部</option>
-                                        <option>正常</option>
-                                        <option>不正常</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-5"></div>
-                <div class="col-sm-4">
-                    <div class="btn-group-lg">
-                        <button type="button" class="btn btn-default">查询</button>
-                        <button type="reset" class="btn btn-default">导出</button>
-                    </div>
-                </div>
-                <div class="col-sm-3"></div>
-
-            </form>
-        </div>
-    </div>
-
-    <!--表格-->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary">添加 </button>
-                <button type="button" class="btn btn-danger">删除</button>
-                <button type="button" class="btn btn-warning">保存退货量</button>
-            </div>
-
-        </div>
-        <div class="panel-body">
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">序号</th>
-                    <th scope="col">
-                        <input type="checkbox"> 选择
-                    </th>
-                    <th scope="col">采购单编号</th>
-                    <th scope="col">采购单名称</th>
-                    <th scope="col">采购医院</th>
-                    <th scope="col">流水号</th>
-                    <th scope="col">通用名</th>
-                    <th scope="col">商品名</th>
-                    <th scope="col">中标价</th>
-                    <th scope="col">交易价</th>
-                    <th scope="col">采购量</th>
-                    <th scope="col">采购金额</th>
-                    <th scope="col">入库量</th>
-                    <th scope="col">实际交易金额</th>
-                    <th scope="col">发票号或入库单号</th>
-                    <th scope="col">药品批号</th>
-                    <th scope="col">药品有效期（单位：年）</th>
-                    <th scope="col">剂型</th>
-                    <th scope="col">规格</th>
-                    <th scope="col">单位</th>
-                    <th scope="col">转换系数</th>
-                    <th scope="col">质量层次</th>
-                    <th scope="col">生产企业</th>
-                    <th scope="col">开始采购时间</th>
-                    <th scope="col">结束采购时间</th>
-                    <th scope="col">采购状态</th>
-                    <th scope="col">详细</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>Jacob</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <div class="btn-group btn-group-xs">
-                            <button type="button" class="btn btn-primary">查看</button>
-                            <button type="button" class="btn btn-warning">修改</button>
-                            <button type="button" class="btn btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <ul class="pagination">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li class="disabled"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
-        </div>
-
-        <ul class="pager">
-            <li><a href="#">Previous</a></li>
-            <li><a href="#">Next</a></li>
-        </ul>
     </div>
 </div>
+
 </body>
+<script>
+
+    $(function(){
+        /*查询医院*/
+        $.ajax({
+            url:"drug/queryHospital",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                if(data.code==200){
+                    var result = data.data
+                    var str = "<option value=''>全部</option>";
+                    for (var i = 0; i < result.length; i++) {
+                        str += "<option value=" + result[i].id + ">" + result[i].hospitalName + "</option>";
+                    }
+                    $("#addHospitalNum").html(str);
+                }
+            }
+        })
+    })
+
+    /*退货单跳转页面*/
+    function redirectionToReturnGoodsDan(){
+        var tuihuodan = {
+            hospitalNum : $("#addHospitalNum").val(),
+            creditNum : $("#addCreditNum").val(),
+            creditContacts : $("#addCreditContacts").val(),
+            creditState : $("#addCreditState").val(),
+            creditRemark : $("#addCreditRemark").val(),
+            creditName : $("#addCreditName").val(),
+            phone : $("#addPhone").val(),
+        }
+
+        $.ajax({
+            url:"drugs/insertTuiHuoDanDto",
+            type:"post",
+            dataType:"json",
+            data:tuihuodan,
+            success:function (result) {
+                if(result.code==200){
+                    var data = result.data
+                    alert("添加成功")
+                    location.href="/drug"
+                }
+
+            }
+        })
+
+    }
+</script>
 </html>
