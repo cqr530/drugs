@@ -120,4 +120,13 @@ public class ViewController {
     public String Payofftab(){
         return "/payoff_tab";
     }
+
+    /**
+     * 跳转到退货单添加页面
+     * @return
+     */
+    @RequestMapping("/toAddTuiHuoDanPage")
+    public String toAddTuiHuoDanPage(){
+        return "/ReturnGoodsDan";
+    }
 }
