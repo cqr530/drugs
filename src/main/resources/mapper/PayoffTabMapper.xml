@@ -59,4 +59,11 @@
     order by pti.id) as a,
 		(select @rank:=0) b
   </select>
+  <update id="updatePayoffTab" parameterType="java.util.List">
+    update payoff_tab set payoff_tab_status=2
+    where payoff_tab_num in
+    <foreach collection="list" open="(" close=")" separator="," item="payoffTabNum">
+      #{payoffTabNum}
+    </foreach>
+  </update>
 </mapper>

@@ -47,7 +47,7 @@
                     alert("请勾选数据再点击批量发货")
                 }else {
                     $.ajax({
-                        url:"http://localhost:8000/drugs/fahuo",
+                        url:"http://localhost:8000/drugs/jiesuan",
                         data:{"list":list},
                         dataType:"json",
                         type:"post",
@@ -179,7 +179,7 @@
                 <tbody>
                 <tr ng-repeat="order in list">
                     <td>{{order.rank}}</td>
-                    <td><input class="minch" ng-click="oneclick()" value="{{order.payoffTabId}}" type="checkbox"></td>
+                    <td><input class="minch" ng-click="oneclick()" value="{{order.payoffTabNum}}" type="checkbox"></td>
                     <td>{{order.payoffTabNum}}</td>
                     <td>{{order.payoffTabName}}</td>
                     <td>{{order.hospitalName}}</td>
