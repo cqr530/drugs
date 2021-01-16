@@ -25,7 +25,7 @@
     <result column="drug_report_id" jdbcType="INTEGER" property="drugReportId" />
     <result column="drug_report_id_date" jdbcType="TIMESTAMP" property="drugReportIdDate" />
     <result column="drug_specification" jdbcType="VARCHAR" property="drugSpecification" />
-    <result column="drug_tranl_status" jdbcType="INTEGER" property="drugTranlStatus" />
+    <result column="drug_tranl_status" jdbcType="VARCHAR" property="drugTranlStatus" />
     <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
     <result column="drug_examine_status" jdbcType="INTEGER" property="drugExamineStatus" />
   </resultMap>
@@ -40,10 +40,12 @@
   <select id="selectAllDrugInfo" resultMap="BaseResultMap">
     select drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num,
     factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status,
-    package_material, drug_pack_comp, lr_price, retail_price_from, quality_level, quality_level_spec,
-    test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status,
+    package_material, drug_pack_comp, lr_price, retail_price_from, ql.quality_level, quality_level_spec,
+    test_report_status, drug_report_id, drug_report_id_date, drug_specification, ds.drug_tranl_status,
     drug_type, drug_examine_status
-    from drug_info
+    from drug_info di
+    left join quality_level ql on ql.id = di.quality_level
+    left join drugtranl_status ds on ds.id = di.drug_tranl_status
 	group by drug_id
   </select>
   <select id="selectAllDrugInfoLike" resultMap="BaseResultMap">
