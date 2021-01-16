@@ -21,35 +21,35 @@ public class CaiGouDanDto extends DrugPageBean {
 
     /*采购时间*/
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date minStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date maxStartTime;
 
     /*开始时间*/
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date startTime;
 
     /*结束时间*/
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date endTime;
 
     /*建单时间*/
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
 
     /*提交时间*/
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date inputTime;
 
     /*审核时间*/
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date examineTime;
 
 

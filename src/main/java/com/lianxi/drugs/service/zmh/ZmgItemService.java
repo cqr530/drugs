@@ -5,6 +5,7 @@ import com.lianxi.drugs.pojo.DataTableResult;
 import com.lianxi.drugs.pojo.Hospital;
 import com.lianxi.drugs.pojo.Purchase;
 import com.lianxi.drugs.pojo.PurchaseDrug;
+import com.lianxi.drugs.vo.TuiHuoDanVo;
 
 import java.util.List;
 
@@ -28,4 +29,8 @@ public interface ZmgItemService {
     Integer deleteCaiGouDrug(Integer id);
 
     PurchaseDrug queryCaiGouDugById(Integer id);
+
+    DataTableResult queryAllTuiHuoDanPage(TuiHuoDanDto tuiHuoDanDto);
+
+    TuiHuoDanVo queryTuiHuoDanById(Integer id);
 }

@@ -321,7 +321,8 @@ public class DrugController {
     @RequestMapping("/insertTuiHuoDanDto")
     public ServerResponse insertTuiHuoDanDto(TuiHuoDanDto tuiHuoDanDto) {
         try {
-
+           User user = (User) request.getSession().getAttribute("user");
+            tuiHuoDanDto.setCreatePeople(user.getUserName());
             Integer code = creditOrderService.insertTuiHuoDanDto(tuiHuoDanDto);
             if (code > 0) {
                 return ServerResponse.success(code);
