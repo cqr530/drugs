@@ -1,7 +1,9 @@
 package com.lianxi.drugs.dao;
 
+import com.lianxi.drugs.dto.CaiGouDanAndDrugDto;
 import com.lianxi.drugs.dto.PurchaseDrugDto;
 import com.lianxi.drugs.pojo.PurchaseDrug;
+import com.lianxi.drugs.vo.CaiGouDanAndDrugVo;
 import com.lianxi.drugs.vo.CaiGouDrugVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,7 +28,9 @@ public interface PurchaseDrugMapper {
     Integer deleteCaiGouDrug(Integer id);
 
 
+    List<CaiGouDanAndDrugVo> queryAllCaiGouDanAndDrugPage(CaiGouDanAndDrugDto caiGouDanAndDrugDto);
 
+    long queryAllCaiGouDanAndDrugCount(CaiGouDanAndDrugDto caiGouDanAndDrugDto);
 
 
 

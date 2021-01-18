@@ -239,13 +239,17 @@ public class ZmhController {
      *
      * @param
      * @return  ServerResponse
-     * 查询所有商品信息
+     * 查询所有采购单和采购单中的商品
      */
-    @RequestMapping("queryAllyaopinInfoPage")
+    @RequestMapping("queryAllCaiGouDanAndDrugPage")
     @ResponseBody
-    public ServerResponse queryAllyaopinInfoPage(){
+    public ServerResponse queryAllCaiGouDanAndDrugPage(CaiGouDanAndDrugDto caiGouDanAndDrugDto){
         try {
-            return ServerResponse.success();
+            User user = (User) request.getSession().getAttribute("user");
+            /*登录用户*/
+            caiGouDanAndDrugDto.setUserCompany(user.getUserCompany());
+            DataTableResult dataTableResult = zmgItemService.queryAllCaiGouDanAndDrugPage(caiGouDanAndDrugDto);
+            return ServerResponse.success(dataTableResult);
         } catch (Exception e) {
             e.printStackTrace();
             return ServerResponse.error();

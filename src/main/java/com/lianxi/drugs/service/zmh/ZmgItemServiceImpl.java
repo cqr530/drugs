@@ -6,6 +6,7 @@ import com.lianxi.drugs.dao.PurchaseMapper;
 import com.lianxi.drugs.dao.ZmhItemMapper;
 import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.*;
+import com.lianxi.drugs.vo.CaiGouDanAndDrugVo;
 import com.lianxi.drugs.vo.CaiGouDrugVo;
 import com.lianxi.drugs.vo.TuiHuoDanVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,5 +108,13 @@ public class ZmgItemServiceImpl implements ZmgItemService{
     @Override
     public TuiHuoDanVo queryTuiHuoDanById(Integer id) {
         return creditOrderMapper.queryTuiHuoDanById(id);
+    }
+
+    @Override
+    public DataTableResult queryAllCaiGouDanAndDrugPage(CaiGouDanAndDrugDto caiGouDanAndDrugDto) {
+        List<CaiGouDanAndDrugVo> caiGouDanAndDrugVoList = purchaseDrugMapper.queryAllCaiGouDanAndDrugPage(caiGouDanAndDrugDto);
+        long count = purchaseDrugMapper.queryAllCaiGouDanAndDrugCount(caiGouDanAndDrugDto);
+        DataTableResult dataTableResult = new DataTableResult(caiGouDanAndDrugDto.getDraw(),count,count,caiGouDanAndDrugVoList);
+        return dataTableResult;
     }
 }

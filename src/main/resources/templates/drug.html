@@ -1766,6 +1766,7 @@
                         <input type="checkbox"> 选择
                     </th>
                     <th scope="col">采购单编号</th>
+                    <th scope="col">采购单名称</th>
                     <th scope="col">采购医院</th>
                     <th scope="col">流水号</th>
                     <th scope="col">通用名</th>
@@ -4043,7 +4044,12 @@
                     var result=data.data
                     $("#tuihuodanNum").val(result.creditNum)
                     $("#lianxiren").val(result.creditContacts)
-                    $("#tuihuoStatus").val(result.creditState)
+                    if(result.creditState==0){
+                        $("#tuihuoStatus").val("未提交")
+                    }else if(result.creditState==1){
+                        $("#tuihuoStatus").val("已提交至供货商")
+                    }
+
                     $("#beizhu").val(result.creditRemark)
                     $("#yiyuanName").val(result.hospitalName)
                     $("#tuihuodanName").val(result.creditName)
@@ -4057,6 +4063,7 @@
             }
         })
 
+        /*查询所有采购单和采购单中的商品*/
         table=$('#exampleNine').DataTable({
             "processing": true,
             "serverSide": true,//开启服务的模式
@@ -4069,10 +4076,9 @@
             ],
             "aLengthMenu": [5, 6, 7], //更改显示记录数选项
             ajax:{
-                url:"drug/queryAllyaopinInfoPage",
+                url:"drug/queryAllCaiGouDanAndDrugPage",
                 data: function (d) {
                     //添加额外的参数传给服务器
-                    d.id=id
                 },
                 type:"post",
                 dataSrc:function(f){
@@ -4093,32 +4099,63 @@
                         return "<input type='checkbox' name='"+data+"'/>"
                     }
                 },
-                {"data": "creditNum"},
-                {"data": "creditName"},
+                {"data": "payofftabNum"},
+                {"data": "payoffTabName"},
                 {"data": "hospitalName"},
-                {"data": "creditContacts"},
-                {"data": "phone"},
-                {"data": "createPeople"},
-                {"data": "creditCreateTime"},
-                {"data": "creditInputTime"},
-                {"data": "creditRemark"},
-                {"data": "creditState",
+                {"data": "serialNum"},
+                {"data": "genericName"},
+                {"data": "productName"},
+                {"data": "tenderPrice"},
+                {"data": "orderTradingPrice"},
+                {"data": "orderBuyCount"},
+                {"data": "orderBuyPrice"},
+                {"data": "company",
                     render:function(data){
-                        return data==0?"未提交":"已提交至供货商"
+                        return data="入库量"
+                    }
+                },
+                {"data": "company",
+                    render:function(data){
+                        return data="入库量"
+                    }
+                },
+                {"data": "company",
+                    render:function(data){
+                        return data="入库量"
+                    }
+                },
+                {"data": "approvalNum"},
+                {"data": "company",
+                    render:function(data){
+                        return data="入库量"
+                    }
+                },
+                {"data": "reagentType"},
+                {"data": "drugSize"},
+                {"data": "company"},
+                {"data": "transverNum"},
+                {"data": "qualityLevel"},
+                {"data": "factoryName"},
+                {"data": "supplierId"},
+                {"data": "startTime"},
+                {"data": "endTime"},
+                {"data": "drugTranlStatus",
+                    render:function(data){
+                        return data==0?"已采购":"未采购"
                     }
                 },
                 {"data": "id",render: function(data) {
                         return '<div class="btn-group btn-group-xs">'+
-                            '<button type="button" class="btn btn-primary">'+
-                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
-                            '</button>'+
-                            '<button type="button" onclick="toUpdateTuiHuoDan(' + data + ')" class="btn btn-primary">'+
-                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改'+
-                            '</button>'+
-                            '<button type="button" onclick="todeleteCaiGouDan(' + data + ')" class="btn btn-primary">'+
-                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;删除'+
-                            '</button>'+
-                            '</div>';
+                                    '<button type="button" class="btn btn-primary">'+
+                                    '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
+                                    '</button>'+
+                                    '<button type="button" onclick="toUpdateTuiHuoDan(' + data + ')" class="btn btn-primary">'+
+                                    '<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改'+
+                                    '</button>'+
+                                    '<button type="button" onclick="todeleteCaiGouDan(' + data + ')" class="btn btn-primary">'+
+                                    '<span class="glyphicon glyphicon-pencil"></span>&nbsp;删除'+
+                                    '</button>'+
+                                '</div>';
                     }
                 }
             ],

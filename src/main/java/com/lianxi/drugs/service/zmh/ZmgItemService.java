@@ -33,4 +33,6 @@ public interface ZmgItemService {
     DataTableResult queryAllTuiHuoDanPage(TuiHuoDanDto tuiHuoDanDto);
 
     TuiHuoDanVo queryTuiHuoDanById(Integer id);
+
+    DataTableResult queryAllCaiGouDanAndDrugPage(CaiGouDanAndDrugDto caiGouDanAndDrugDto);
 }
