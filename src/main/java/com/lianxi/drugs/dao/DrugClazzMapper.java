@@ -5,7 +5,7 @@ import com.lianxi.drugs.pojo.DrugClazz;
 import java.util.List;
 
 public interface DrugClazzMapper {
-    //查询所有质量层次
+    //查询所有药品类别
     List<DrugClazz> selectDrugClazz();
 
 

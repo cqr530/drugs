@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.drugs.dao.DrugtranlStatusMapper">
+  <resultMap id="BaseResultMap" type="com.lianxi.drugs.pojo.DrugtranlStatus">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="drug_tranl_status" jdbcType="VARCHAR" property="drugTranlStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, drug_tranl_status
+  </sql>
+  <select id="selectAllDrugtranlStatus" resultMap="BaseResultMap">
+    select id, drug_tranl_status
+    from drugtranl_status
+  </select>
+</mapper>

@@ -29,6 +29,35 @@
     <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
     <result column="drug_examine_status" jdbcType="INTEGER" property="drugExamineStatus" />
   </resultMap>
+  <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.DrugClassVO">
+    <id column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
+    <result column="generic_name" jdbcType="VARCHAR" property="genericName" />
+    <result column="reagent_type" jdbcType="VARCHAR" property="reagentType" />
+    <result column="drug_size" jdbcType="VARCHAR" property="drugSize" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="transver_num" jdbcType="INTEGER" property="transverNum" />
+    <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="tender_price" jdbcType="DECIMAL" property="tenderPrice" />
+    <result column="approval_num" jdbcType="VARCHAR" property="approvalNum" />
+    <result column="approval_num_date" jdbcType="TIMESTAMP" property="approvalNumDate" />
+    <result column="import_produc_status" jdbcType="INTEGER" property="importProducStatus" />
+    <result column="package_material" jdbcType="VARCHAR" property="packageMaterial" />
+    <result column="drug_pack_comp" jdbcType="VARCHAR" property="drugPackComp" />
+    <result column="lr_price" jdbcType="DECIMAL" property="lrPrice" />
+    <result column="retail_price_from" jdbcType="INTEGER" property="retailPriceFrom" />
+    <result column="quality_level" jdbcType="VARCHAR" property="qualityLevel" />
+    <result column="quality_level_spec" jdbcType="VARCHAR" property="qualityLevelSpec" />
+    <result column="test_report_status" jdbcType="INTEGER" property="testReportStatus" />
+    <result column="drug_report_id" jdbcType="INTEGER" property="drugReportId" />
+    <result column="drug_report_id_date" jdbcType="TIMESTAMP" property="drugReportIdDate" />
+    <result column="drug_specification" jdbcType="VARCHAR" property="drugSpecification" />
+    <result column="drug_tranl_status" jdbcType="VARCHAR" property="drugTranlStatus" />
+    <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
+    <result column="drug_examine_status" jdbcType="INTEGER" property="drugExamineStatus" />
+    <result column="drug_clazz_name" jdbcType="VARCHAR" property="drugClazzName" />
+  </resultMap>
   <sql id="Base_Column_List">
     drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num, 
     factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status, 
@@ -37,15 +66,16 @@
     drug_type, drug_examine_status
   </sql>
   
-  <select id="selectAllDrugInfo" resultMap="BaseResultMap">
+  <select id="selectAllDrugInfo" resultMap="BaseResultMapOne">
     select drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num,
     factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status,
     package_material, drug_pack_comp, lr_price, retail_price_from, ql.quality_level, quality_level_spec,
     test_report_status, drug_report_id, drug_report_id_date, drug_specification, ds.drug_tranl_status,
-    drug_type, drug_examine_status
+    drug_clazz_name, drug_examine_status
     from drug_info di
     left join quality_level ql on ql.id = di.quality_level
     left join drugtranl_status ds on ds.id = di.drug_tranl_status
+    left join drug_clazz dc on dc.drug_clazz_id = di.drug_type
 	group by drug_id
   </select>
   <select id="selectAllDrugInfoLike" resultMap="BaseResultMap">

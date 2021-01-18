@@ -1,9 +1,6 @@
 package com.lianxi.drugs.service.impl;
 
-import com.lianxi.drugs.pojo.DrugClazz;
-import com.lianxi.drugs.pojo.DrugInfo;
-import com.lianxi.drugs.pojo.Item;
-import com.lianxi.drugs.pojo.User;
+import com.lianxi.drugs.pojo.*;
 import com.lianxi.drugs.service.DrugSystemService;
 import com.lianxi.drugs.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +35,15 @@ public class DrugSystemServiceImpl implements DrugSystemService {
 
     @Autowired
     private com.lianxi.drugs.dao.OrderlistInfoMapper orderlistInfoMapper;
+
+    @Autowired
+    private com.lianxi.drugs.dao.DrugtranlStatusMapper drugtranlStatusMapper;
+
+    @Autowired
+    private com.lianxi.drugs.dao.QualityLevelMapper qualityLevelMapper;
+
+
+
 
     @Override
     public User queryUser(String name, String pwd) {
@@ -88,5 +94,15 @@ public class DrugSystemServiceImpl implements DrugSystemService {
     @Override
     public List<OrderlistVO> queryAllOrderlistInfo() {
         return orderlistInfoMapper.selectAllOrderInfo();
+    }
+
+    @Override
+    public List<DrugtranlStatus> queryAllDrugtranlStatus() {
+        return drugtranlStatusMapper.selectAllDrugtranlStatus();
+    }
+
+    @Override
+    public List<QualityLevel> queryAllQualityLevel() {
+        return qualityLevelMapper.selectAllQualityLevel();
     }
 }

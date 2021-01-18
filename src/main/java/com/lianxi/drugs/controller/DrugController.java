@@ -439,4 +439,24 @@ public class DrugController {
             return true;
         }
     }
+
+    /**
+     * 查询所有交易状态
+     * @return
+     */
+    @RequestMapping("/drugtranlstatus")
+    @ResponseBody
+    public List<DrugtranlStatus> findDrugtranlStatus(){
+        return drugSystemService.queryAllDrugtranlStatus();
+    }
+
+    /**
+     * 查询所有质量层次
+     * @return
+     */
+    @RequestMapping("/qualitylevel")
+    @ResponseBody
+    public List<QualityLevel> findQualityLevel(){
+        return drugSystemService.queryAllQualityLevel();
+    }
 }
