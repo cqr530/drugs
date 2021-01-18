@@ -9,4 +9,6 @@ public interface SupplierService {
     Integer modifyOrder(Integer[] list);
     //退货
     Integer modifyCreditOrder(Integer[] list);
+    //结算
+    Integer modifyPayoffTab(Integer[] list);
 }

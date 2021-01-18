@@ -1,11 +1,11 @@
-package com.lianxi.drugs.pojo;
+package com.lianxi.drugs.vo;
 
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
 @Data
-public class DrugInfo {
+public class DrugClassVO {
     private Integer drugId;
 
     private Integer serialNum;
@@ -58,5 +58,5 @@ public class DrugInfo {
 
     private Integer drugExamineStatus;
 
-
+    private String drugClazzName;
 }

@@ -9,24 +9,43 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+    <style>
+        body{
+            height: 412px;
+            width: 100%;
+            background-image:url("/static/image/beijing.jpg");
+            background-size: 100% 100%;
+        }
+        .container{
+            margin-top: 220px;
+            background-color: rgba(255,255,255,0.8);
+            width: 600px;
+            font-weight:800;
+            font-size: 20px;
+        }
+        .col-md-4{
+            width: 400px;
+            margin: 10px 80px;
+        }
+    </style>
 <body>
 
 
     <div class="container" >
-        <div class="row" >
+        <!--<div class="row" >
             <div class="col-md-4">
 
             </div>
 
             <div class="col-md-4">
                 <div id="myCarousel" class="carousel slide" style="width: 120%">
-                    <!-- 轮播（Carousel）指标 -->
+                    &lt;!&ndash; 轮播（Carousel）指标 &ndash;&gt;
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                         <li data-target="#myCarousel" data-slide-to="1"></li>
                         <li data-target="#myCarousel" data-slide-to="2"></li>
                     </ol>
-                    <!-- 轮播（Carousel）项目 -->
+                    &lt;!&ndash; 轮播（Carousel）项目 &ndash;&gt;
                     <div class="carousel-inner" >
                         <div class="item active">
                             <img th:src="@{/static/image/bg1.png}" class="img-responsive" alt="First slide">
@@ -38,7 +57,7 @@
                             <img th:src="@{/static/image/bg3.png}" class="img-responsive" alt="Third slide">
                         </div>
                     </div>
-                    <!-- 轮播（Carousel）导航 -->
+                    &lt;!&ndash; 轮播（Carousel）导航 &ndash;&gt;
                     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -53,7 +72,7 @@
             <div class="col-md-4">
 
             </div>
-        </div>
+        </div>-->
         <!--轮播-->
 
 

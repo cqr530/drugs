@@ -157,6 +157,25 @@ public class DrugController {
     }
 
     /**
+     * 2021.1.6 陈泉润
+     * @return 查询所有结算单
+     */
+    @RequestMapping("/payofftab")
+    public List<PayoffTabVO> findPayoffTab(){
+        return drugSystemService.queryAllPayoffTab();
+    }
+
+    /**
+     * 2021.1.15 陈泉润
+     * @param list
+     * @return 结算
+     */
+    @RequestMapping("/jiesuan")
+    public Integer jiesuan(@RequestParam("list[]") Integer[] list){
+        return supplierService.modifyPayoffTab(list);
+    }
+
+    /**
      * 2021.1.6     zmh
      * @return 将药品信息添加到医院的药品目录
      */
@@ -336,14 +355,7 @@ public class DrugController {
 
 
 
-    /**
-     * 2021.1.6 陈泉润
-     * @return 查询所有结算单
-     */
-    @RequestMapping("/payofftab")
-    public List<PayoffTabVO> findPayoffTab(){
-        return drugSystemService.queryAllPayoffTab();
-    }
+
     /**
      * 2021.1.6 陈泉润
      * @return 按采购单查询所有
@@ -427,5 +439,25 @@ public class DrugController {
         } else {
             return true;
         }
+    }
+
+    /**
+     * 查询所有交易状态
+     * @return
+     */
+    @RequestMapping("/drugtranlstatus")
+    @ResponseBody
+    public List<DrugtranlStatus> findDrugtranlStatus(){
+        return drugSystemService.queryAllDrugtranlStatus();
+    }
+
+    /**
+     * 查询所有质量层次
+     * @return
+     */
+    @RequestMapping("/qualitylevel")
+    @ResponseBody
+    public List<QualityLevel> findQualityLevel(){
+        return drugSystemService.queryAllQualityLevel();
     }
 }

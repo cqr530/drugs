@@ -47,7 +47,7 @@
     left join drug_info di on di.drug_id = coi.drug_id
     left join hospital hp on of.or_hosp_id= hp.hospital_id
     where coi_state = 0
-    group by id
+    order by id
   </select>
 
 

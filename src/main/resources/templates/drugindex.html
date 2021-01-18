@@ -15,11 +15,33 @@
     <script>
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope,$http){
+            $scope.entity={}
             $scope.load=function(){
                 $http.get("http://localhost:8000/drugs/alldrug").then(function (response){
                     $scope.list = response.data;
                     console.log(response.data)
                 });
+
+            }
+            $http.get("http://localhost:8000/drugs/drugtranlstatus").then(function (response){
+                $scope.drugtranlstatus = response.data;
+                console.log(response.data)
+            });
+            $http.get("http://localhost:8000/drugs/qualitylevel").then(function (response){
+                $scope.qualitylevel = response.data;
+                console.log(response.data)
+            });
+            $http.get("http://localhost:8000/drugs/drugclass").then(function (response){
+                $scope.clazz = response.data;
+                console.log(response.data)
+            });
+
+
+
+
+
+            $scope.clk=function () {
+
             }
         })
     </script>
@@ -69,30 +91,30 @@
             </tr>
             <tr style="background-color: #F3F3F3">
                 <td>价格范围:<input style="margin-left: 31px" type="text">至<input type="text"></td>
-                <td>质量层次:<select style="margin-left: 45px" id="wuranluv">
-                    <option value="">请选择</option>
-                    <option value="1">国家一类药物</option>
-                    <option value="2">国家二类药物</option>
-                    <option value="3">国家三类药物</option>
-                </select></td>
+                <td>
+                <lable>质量层次:	&nbsp;	&nbsp;	&nbsp; &nbsp;</lable>
+                    <input type="hidden" value="{{qualitylevel.qualityLevel}}" id="qualitylevel">
+                    <select ng-init="selectedName = qualitylevel[0]" ng-model="qualitylevel.id" ng-options="x.id as x.qualityLevel for x in qualitylevel">
+                    </select>
+                </td>
             </tr>
             <tr style="background-color: #F3F3F3">
-                <td>药品类别:<select style="margin-left: 30px" id="type">
-                    <option value="">请选择</option>
-                    <option value="0-20">0~20%</option>
-                    <option value="20-40">20%~40%</option>
-                    <option value="40-60">40%~60%</option>
-                    <option value="60-80">60%~80%</option>
-                    <option value="80-100">80%~100%</option>
-                </select></td>
-                <td>药品交易状态:<select style="margin-left: 13px" id="stuta">
+                <td>
+                    <lable>药品类别:	&nbsp;	&nbsp;	&nbsp;	</lable>
+                    <input type="hidden" value="{{clazz.drugClazzName}}" id="clazz">
+                    <select ng-init="selectedName = clazz[0]" ng-model="clazz.drugClazzId" ng-options="x.drugClazzId as x.drugClazzName for x in clazz">
+                    </select>
+                </td>
+                <td>
+                    <lable>药品交易状态:</lable>
+                    <select style="margin-left: 13px" id="stuta">
                     <option value="">请选择</option>
                     <option value="1">正常</option>
                     <option value="0">暂停交易</option>
                 </select></td>
             </tr>
             <tr>
-                <td><button style="margin-left: 350px" type="button" class="btn btn-primary">查询</button></td>
+                <td><button style="margin-left: 350px" type="button" class="btn btn-primary" ng-click="clk()">查询</button></td>
                 <td><button type="button" class="btn btn-primary">导出</button></td>
             </tr>
             </tbody>
@@ -134,7 +156,7 @@
                     <td>{{drug.productName}}</td>
                     <td>{{drug.tenderPrice}}</td>
                     <td>{{drug.qualityLevel}}</td>
-                    <td>{{drug.drugType}}</td>
+                    <td>{{drug.drugClazzName}}</td>
                     <td>{{drug.drugTranlStatus}}</td>
                     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">查看</button></td>
                 </tr>

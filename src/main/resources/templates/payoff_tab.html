@@ -21,9 +21,43 @@
                     console.log(response.data)
                 });
             }
-            $scope.clk=function () {
-                console.log(111)
+            $scope.allclick = function () {
+                var chked=$(".maxch").prop("checked");
+                $(".minch").prop("checked",chked);
             }
+            $scope.oneclick = function () {
+                var chked=true;
+                $.each($(".minch"),function (index,item) {
+                    if ($(item).prop("checked")==false){
+                        chked=false;
+                    }
+                })
+                $(".maxch").prop("checked",chked);
+            }
+            $scope.updateByList = function (drugId) {
+                var list=new Array();
+                if(drugId!=null){
+                    list.push(drugId);
+                }else {
+                    $.each($(".minch:checked"),function (index,item) {
+                        list.push($(item).val());
+                    })
+                }
+                if(list.length<=0){
+                    alert("请勾选数据再点击批量发货")
+                }else {
+                    $.ajax({
+                        url:"http://localhost:8000/drugs/jiesuan",
+                        data:{"list":list},
+                        dataType:"json",
+                        type:"post",
+                        success:function (data) {
+                            alert("成功结算"+data+"单");
+                            history.go(0)
+                        }
+                    })
+                }
+            } 
         })
     </script>
     <style>
@@ -65,11 +99,11 @@
                     <option value="2">已发货</option>
                     <option value="3">已入库</option>
                 </select></td>
-                <td>结算时间:<input style="margin-left: 70px" type="text">至<input type="text"></td>
+                <td>结算时间:<input style="margin-left: 70px" type="data">至<input type="data"></td>
             </tr>
             <tr style="background-color: #F3F3F3">
                 <td>下单医院:<input style="margin-left: 63px" type="text"></td>
-                <td>采购时间:<input style="margin-left: 70px" type="text">至<input type="text"></td>
+                <td>采购时间:<input style="margin-left: 70px" type="data">至<input type="data"></td>
             </tr>
             <tr style="background-color: #F3F3F3">
                 <td>采购单编号:<input style="margin-left: 48px" type="text"></td>
@@ -114,7 +148,7 @@
 </div>
 <div class="container-fluid">
         <div class="container2">
-            <button type="button" class="btn btn-primary">确认退货</button>
+            <button ng-click="updateByList()" type="button" class="btn btn-primary">确认结算</button>
             <table class="table table-bordered" style="font-size: 10px;width: 1349px">
                 <thead>
                 <tr>
@@ -144,8 +178,8 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="order in list">
-                    <td>{{order.id}}</td>
-                    <td><input onclick="click()" value="${order.id}" type="checkbox"></td>
+                    <td>{{order.rank}}</td>
+                    <td><input class="minch" ng-click="oneclick()" value="{{order.payoffTabNum}}" type="checkbox"></td>
                     <td>{{order.payoffTabNum}}</td>
                     <td>{{order.payoffTabName}}</td>
                     <td>{{order.hospitalName}}</td>

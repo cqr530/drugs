@@ -8,7 +8,8 @@ import com.lianxi.drugs.vo.OrderVO;
 import com.lianxi.drugs.pojo.DrugClazz;
 import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.pojo.Item;
-import com.lianxi.drugs.pojo.OrderForm;
+import com.lianxi.drugs.pojo.DrugtranlStatus;
+import com.lianxi.drugs.pojo.QualityLevel;
 import com.lianxi.drugs.vo.*;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public interface DrugSystemService {
     List<DrugInfo> queryDrug();
 
     /**
-     * 查找全部药品别信息
+     * 查找全部药类型信息
      * @return
      */
     List<DrugClazz> queryDrugClazz();
@@ -78,4 +79,16 @@ public interface DrugSystemService {
      * @return
      */
     List<OrderlistVO> queryAllOrderlistInfo();
+
+    /**
+     * 查询所有交易状态
+     * @return
+     */
+    List<DrugtranlStatus> queryAllDrugtranlStatus();
+
+    /**
+     * 查询所有质量层次
+     * @return
+     */
+    List<QualityLevel> queryAllQualityLevel();
 }
