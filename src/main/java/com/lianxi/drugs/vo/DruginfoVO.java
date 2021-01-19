@@ -40,12 +40,13 @@ public class DruginfoVO {
     private String qualityLevel;
 
     /*药品类别*/
-    private String drugClazzName;
+    private String drugClazzId;
 
     /*药品交易状态*/
     private Integer drugTranlStatus;
 
-    /*供货商*/
-
-    /*供货状态*/
+    /*最大中标价*/
+    private BigDecimal max;
+    /*最小中标价*/
+    private BigDecimal min;
 }

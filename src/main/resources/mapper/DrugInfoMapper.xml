@@ -78,13 +78,16 @@
     left join drug_clazz dc on dc.drug_clazz_id = di.drug_type
 	group by drug_id
   </select>
-  <select id="selectAllDrugInfoLike" resultMap="BaseResultMap">
+  <select id="selectAllDrugInfoLike" resultMap="BaseResultMapOne">
     select drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num,
     factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status,
-    package_material, drug_pack_comp, lr_price, retail_price_from, quality_level, quality_level_spec,
-    test_report_status, drug_report_id, drug_report_id_date, drug_specification, drug_tranl_status,
-    drug_type, drug_examine_status
-    from drug_info
+    package_material, drug_pack_comp, lr_price, retail_price_from, ql.quality_level, quality_level_spec,
+    test_report_status, drug_report_id, drug_report_id_date, drug_specification, ds.drug_tranl_status,
+    drug_clazz_name, drug_examine_status
+    from drug_info di
+    left join quality_level ql on ql.id = di.quality_level
+    left join drugtranl_status ds on ds.id = di.drug_tranl_status
+    left join drug_clazz dc on dc.drug_clazz_id = di.drug_type
     <where>
       <if test="druginfoVO.serialNum != null and druginfoVO.serialNum != ''">
         and serial_num = #{druginfoVO.serialNum}
@@ -116,14 +119,11 @@
       <if test="druginfoVO.qualityLevel != null and druginfoVO.qualityLevel != ''">
         and quality_level = #{druginfoVO.qualityLevel}
       </if>
-      <if test="druginfoVO.drugType != null and druginfoVO.drugType != ''">
-        and drug_type = #{druginfoVO.drugType}
+      <if test="druginfoVO.drugClazzId != null and druginfoVO.drugClazzId != ''">
+        and drug_clazz_id = #{druginfoVO.drugClazzId}
       </if>
       <if test="druginfoVO.drugTranlStatus != null and druginfoVO.drugTranlStatus != ''">
         and drug_tranl_status = #{druginfoVO.drugTranlStatus}
-      </if>
-	  <if test="druginfoVO.drugExamineStatus != null and druginfoVO.drugExamineStatus != ''">
-        and drug_examine_status = #{druginfoVO.drugExamineStatus}
       </if>
     </where>
 	group by drug_id
