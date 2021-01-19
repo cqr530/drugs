@@ -23,4 +23,6 @@ public interface CreditOrderMapper {
     Integer updateCreditOrder(@Param("list") Integer[] list);
 
     TuiHuoDanVo queryTuiHuoDanById(Integer id);
+
+    Integer todeleteTuiHuoDan(Integer id);
 }

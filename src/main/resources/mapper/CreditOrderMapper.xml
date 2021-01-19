@@ -82,6 +82,9 @@
         where co_id=#{id}
   </select>
 
+    <delete id="todeleteTuiHuoDan" parameterType="int">
+        delete from credit_order where co_id=#{id}
+    </delete>
 
 
 

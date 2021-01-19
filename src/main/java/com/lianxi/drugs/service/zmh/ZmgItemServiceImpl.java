@@ -8,6 +8,7 @@ import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.*;
 import com.lianxi.drugs.vo.CaiGouDanAndDrugVo;
 import com.lianxi.drugs.vo.CaiGouDrugVo;
+import com.lianxi.drugs.vo.DruginfoVO;
 import com.lianxi.drugs.vo.TuiHuoDanVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,7 @@ public class ZmgItemServiceImpl implements ZmgItemService{
 
     @Override
     public DataTableResult queryAllCaiGouIndexPage(QueryPurchaseIndexDto queryPurchaseIndexDto) {
-        List<DrugInfo> drugInfoList = zmhItemMapper.queryAllCaiGouIndexPage(queryPurchaseIndexDto);
+        List<DruginfoVO> drugInfoList = zmhItemMapper.queryAllCaiGouIndexPage(queryPurchaseIndexDto);
         long count = zmhItemMapper.queryAllCaiGouIndexCount(queryPurchaseIndexDto);
         DataTableResult dataTableResult = new DataTableResult(queryPurchaseIndexDto.getDraw(),count,count,drugInfoList);
         return dataTableResult;

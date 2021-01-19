@@ -359,7 +359,52 @@ public class DrugController {
         }
     }
 
+    /**
+     * 2021.1.19     zmh
+     * @return 创建退货单
+     */
+    @RequestMapping("/todeleteTuiHuoDan")
+    public ServerResponse todeleteTuiHuoDan(Integer id) {
+        try {
+           Integer code = creditOrderService.todeleteTuiHuoDan(id);
+           if(code>0){
+               return ServerResponse.success();
+           }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
 
+    /**
+     * 2021.1.19     zmh
+     * @return 添加药品到退货单
+     */
+    @RequestMapping("/addDrugToTuiHuoDan")
+    public ServerResponse addDrugToTuiHuoDan(@RequestParam(value = "arr[]")int[] arr,
+                                             @RequestParam(value = "tuihuodanId")int tuihuodanId
+                                             ) {
+        try {
+            List<CreditOrderInfo> list = new ArrayList<>();
+            for (int i : arr) {
+                CreditOrderInfo creditOrderInfo = new CreditOrderInfo();
+                creditOrderInfo.setDrugId(i);
+                creditOrderInfo.setCoId(tuihuodanId);
+                list.add(creditOrderInfo);
+            }
+
+
+            Integer count = creditOrderService.addDrugToTuiHuoDan(list);
+            if(count>0){
+                return ServerResponse.success(count);
+            }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
 
 
     /**
