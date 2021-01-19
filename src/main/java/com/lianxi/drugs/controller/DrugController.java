@@ -115,6 +115,12 @@ public class DrugController {
      */
     @RequestMapping("/likedrug")
     public List<DrugInfo> likeFindDrug(DruginfoVO druginfoVO){
+        //分割污染率范围
+        /*if (tenderPrice != null && !"".equals(tenderPrice)){
+            String[] wuran = tenderPrice.split("-");
+            druginfoVO.setMax(wuran[0]);
+            druginfoVO.setMin(wuran[1]);
+        }*/
         return drugSystemService.queryDrugLike(druginfoVO);
     }
 
