@@ -66,4 +66,12 @@
       #{payoffTabNum}
     </foreach>
   </update>
+
+  <insert id="createJieSuanDan" parameterType="com.lianxi.drugs.pojo.PayoffTab">
+        insert into payoff_tab  (payoff_tab_num,payoff_tab_name,contacts,contacts_phone,create_time,
+        input_time,payoff_tab_postil,payoff_tab_status)
+         values
+         (#{payoffTabNum},#{payoffTabName},#{contacts},#{contactsPhone},#{createTime},#{inputTime},
+         #{payoffTabPostil},#{payoffTabStatus})
+  </insert>
 </mapper>

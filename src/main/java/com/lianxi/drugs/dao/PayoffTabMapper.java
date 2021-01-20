@@ -11,4 +11,8 @@ public interface PayoffTabMapper {
     List<PayoffTabVO> selectAllPayoffTab();
     //结算
     Integer updatePayoffTab(@Param("list") Integer[] list);
+
+
+    /*创建结算单*/
+    Integer createJieSuanDan(PayoffTab payoffTab);
 }
