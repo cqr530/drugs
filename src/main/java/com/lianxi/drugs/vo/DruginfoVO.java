@@ -37,7 +37,7 @@ public class DruginfoVO {
     private BigDecimal tenderPrice;
 
     /*质量层次*/
-    private String qualityLevel;
+    private String qualitylevel;
 
     /*药品类别*/
     private String drugClazzName;

@@ -48,7 +48,7 @@
     <result column="drug_pack_comp" jdbcType="VARCHAR" property="drugPackComp" />
     <result column="lr_price" jdbcType="DECIMAL" property="lrPrice" />
     <result column="retail_price_from" jdbcType="INTEGER" property="retailPriceFrom" />
-    <result column="quality_level" jdbcType="VARCHAR" property="qualityLevel" />
+    <result column="quality_level" jdbcType="VARCHAR" property="qualitylevel" />
     <result column="quality_level_spec" jdbcType="VARCHAR" property="qualityLevelSpec" />
     <result column="test_report_status" jdbcType="INTEGER" property="testReportStatus" />
     <result column="drug_report_id" jdbcType="INTEGER" property="drugReportId" />
@@ -91,40 +91,40 @@
     left join drug_clazz dc on dc.drug_clazz_id = di.drug_type
     <where>
       <if test="druginfoVO.serialNum != null and druginfoVO.serialNum != ''">
-        and serial_num = #{druginfoVO.serialNum}
+        and serial_num like '%${druginfoVO.serialNum}%'
       </if>
       <if test="druginfoVO.genericName != null and druginfoVO.genericName != ''">
-        and generic_name = #{druginfoVO.genericName}
+        and generic_name like '%${druginfoVO.genericName}%'
       </if>
       <if test="druginfoVO.reagentType != null and druginfoVO.reagentType != ''">
-        and reagent_type = #{druginfoVO.reagentType}
+        and reagent_type like '%${druginfoVO.reagentType}%'
       </if>
       <if test="druginfoVO.drugSize != null and druginfoVO.drugSize != ''">
-        and drug_size = #{druginfoVO.drugSize}
+        and drug_size like '%${druginfoVO.drugSize}%'
       </if>
       <if test="druginfoVO.company != null and druginfoVO.company != ''">
         and company = #{druginfoVO.company}
       </if>
       <if test="druginfoVO.transverNum != null and druginfoVO.transverNum != ''">
-        and transver_num = #{druginfoVO.transverNum}
+        and transver_num like '%${druginfoVO.transverNum}%'
       </if>
       <if test="druginfoVO.factoryName != null and druginfoVO.factoryName != ''">
-        and factory_name = #{druginfoVO.factoryName}
+        and factory_name like '%${druginfoVO.factoryName}%'
       </if>
       <if test="druginfoVO.productName != null and druginfoVO.productName != ''">
-        and product_name = #{druginfoVO.productName}
+        and product_name like '%${druginfoVO.productName}%'
       </if>
       <if test="druginfoVO.max != null and druginfoVO.max != ''">
         and  lr_price BETWEEN #{druginfoVO.max} and #{druginfoVO.min}
       </if>
-      <if test="druginfoVO.qualityLevel != null and druginfoVO.qualityLevel != ''">
-        and quality_level = #{druginfoVO.qualityLevel}
+      <if test="druginfoVO.qualitylevel != null and druginfoVO.qualitylevel != ''">
+        and di.quality_level = #{druginfoVO.qualitylevel}
       </if>
       <if test="druginfoVO.drugClazzId != null and druginfoVO.drugClazzId != ''">
         and drug_clazz_id = #{druginfoVO.drugClazzId}
       </if>
       <if test="druginfoVO.drugTranlStatus != null and druginfoVO.drugTranlStatus != ''">
-        and drug_tranl_status = #{druginfoVO.drugTranlStatus}
+        and di.drug_tranl_status = #{druginfoVO.drugTranlStatus}
       </if>
     </where>
 	group by drug_id

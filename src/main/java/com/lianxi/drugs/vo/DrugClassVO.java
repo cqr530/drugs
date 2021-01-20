@@ -40,7 +40,7 @@ public class DrugClassVO {
 
     private Integer retailPriceFrom;
 
-    private String qualityLevel;
+    private String qualitylevel;
 
     private String qualityLevelSpec;
 
