@@ -40,7 +40,7 @@ public class DruginfoVO {
     private String qualitylevel;
 
     /*药品类别*/
-    private String drugClazzName;
+    private String drugClazzId;
 
     /*药品交易状态*/
     private Integer drugTranlStatus;
