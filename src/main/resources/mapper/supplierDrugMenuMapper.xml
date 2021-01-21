@@ -7,9 +7,96 @@
     <result column="drug_id" jdbcType="VARCHAR" property="drugId" />
     <result column="origanzition_control_status" jdbcType="VARCHAR" property="origanzitionControlStatus" />
   </resultMap>
+  <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.DrugClassVO">
+    <id column="drug_id" jdbcType="INTEGER" property="drugId" />
+    <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
+    <result column="generic_name" jdbcType="VARCHAR" property="genericName" />
+    <result column="reagent_type" jdbcType="VARCHAR" property="reagentType" />
+    <result column="drug_size" jdbcType="VARCHAR" property="drugSize" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="transver_num" jdbcType="INTEGER" property="transverNum" />
+    <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="tender_price" jdbcType="DECIMAL" property="tenderPrice" />
+    <result column="approval_num" jdbcType="VARCHAR" property="approvalNum" />
+    <result column="approval_num_date" jdbcType="TIMESTAMP" property="approvalNumDate" />
+    <result column="import_produc_status" jdbcType="INTEGER" property="importProducStatus" />
+    <result column="package_material" jdbcType="VARCHAR" property="packageMaterial" />
+    <result column="drug_pack_comp" jdbcType="VARCHAR" property="drugPackComp" />
+    <result column="lr_price" jdbcType="DECIMAL" property="lrPrice" />
+    <result column="retail_price_from" jdbcType="INTEGER" property="retailPriceFrom" />
+    <result column="quality_level" jdbcType="VARCHAR" property="qualitylevel" />
+    <result column="quality_level_spec" jdbcType="VARCHAR" property="qualityLevelSpec" />
+    <result column="test_report_status" jdbcType="INTEGER" property="testReportStatus" />
+    <result column="drug_report_id" jdbcType="INTEGER" property="drugReportId" />
+    <result column="drug_report_id_date" jdbcType="TIMESTAMP" property="drugReportIdDate" />
+    <result column="drug_specification" jdbcType="VARCHAR" property="drugSpecification" />
+    <result column="drug_tranl_status" jdbcType="VARCHAR" property="drugTranlStatus" />
+    <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
+    <result column="drug_examine_status" jdbcType="INTEGER" property="drugExamineStatus" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="drug_clazz_name" jdbcType="VARCHAR" property="drugClazzName" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, company_id, drug_id, origanzition_control_status
   </sql>
+  <select id="selectAllDrugsLike" resultMap="BaseResultMapOne">
+    select di.drug_id, serial_num, generic_name, reagent_type, drug_size, company, transver_num,
+    factory_name, product_name, tender_price, approval_num, approval_num_date, import_produc_status,
+    package_material, drug_pack_comp, lr_price, retail_price_from, ql.quality_level, quality_level_spec,
+    test_report_status, drug_report_id, drug_report_id_date, drug_specification, ds.drug_tranl_status,
+    drug_clazz_name, drug_examine_status
+    from drug_info di
+    left join quality_level ql on ql.id = di.quality_level
+    left join drugtranl_status ds on ds.id = di.drug_tranl_status
+    left join drug_clazz dc on dc.drug_clazz_id = di.drug_type
+    left join supplier_drug_menu sdm on sdm.drug_id = di.drug_id
+    <where>
+      <if test="druginfoVO.serialNum != null and druginfoVO.serialNum != ''">
+        and serial_num like '%${druginfoVO.serialNum}%'
+      </if>
+      <if test="druginfoVO.genericName != null and druginfoVO.genericName != ''">
+        and generic_name like '%${druginfoVO.genericName}%'
+      </if>
+      <if test="druginfoVO.reagentType != null and druginfoVO.reagentType != ''">
+        and reagent_type like '%${druginfoVO.reagentType}%'
+      </if>
+      <if test="druginfoVO.drugSize != null and druginfoVO.drugSize != ''">
+        and drug_size like '%${druginfoVO.drugSize}%'
+      </if>
+      <if test="druginfoVO.company != null and druginfoVO.company != ''">
+        and company = #{druginfoVO.company}
+      </if>
+      <if test="druginfoVO.transverNum != null and druginfoVO.transverNum != ''">
+        and transver_num like '%${druginfoVO.transverNum}%'
+      </if>
+      <if test="druginfoVO.factoryName != null and druginfoVO.factoryName != ''">
+        and factory_name like '%${druginfoVO.factoryName}%'
+      </if>
+      <if test="druginfoVO.productName != null and druginfoVO.productName != ''">
+        and product_name like '%${druginfoVO.productName}%'
+      </if>
+      <if test="druginfoVO.max != null and druginfoVO.max != ''">
+        and  lr_price BETWEEN #{druginfoVO.max} and #{druginfoVO.min}
+      </if>
+      <if test="druginfoVO.qualitylevel != null and druginfoVO.qualitylevel != ''">
+        and di.quality_level = #{druginfoVO.qualitylevel}
+      </if>
+      <if test="druginfoVO.drugClazzId != null and druginfoVO.drugClazzId != ''">
+        and drug_clazz_id = #{druginfoVO.drugClazzId}
+      </if>
+      <if test="druginfoVO.drugTranlStatus != null and druginfoVO.drugTranlStatus != ''">
+        and di.drug_tranl_status = #{druginfoVO.drugTranlStatus}
+      </if>
+      <if test="druginfoVO.companyId == null and druginfoVO.companyId == ''">
+        and company_id = 1
+      </if>
+    </where>
+    group by di.drug_id
+  </select>
+
+
+
   <insert id="insertDrugs" parameterType="java.util.List">
     insert into supplier_drug_menu(company_id,drug_id,origanzition_control_status)
     values

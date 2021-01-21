@@ -16,11 +16,31 @@
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope,$http){
             $scope.load=function(){
-                $http.get("http://localhost:8000/drugs/alldrug").then(function (response){
+                $http.get("http://localhost:8000/drugs/allsupplierdrug").then(function (response){
                     $scope.list = response.data;
                     console.log(response.data)
                 });
             }
+            $scope.entity={}
+            $scope.realList=function(){
+                var entity = $scope.entity;
+                console.log(entity)
+                $http.get("http://localhost:8000/drugs/allsupplierdrug",{
+                    params:entity
+                }).success(function (data) {
+                    $scope.list = data;
+                    console.log(data)
+                })
+            }
+            $http.get("http://localhost:8000/drugs/drugtranlstatus").then(function (response){
+                $scope.drugtranlstatus = response.data;
+            });
+            $http.get("http://localhost:8000/drugs/qualitylevel").then(function (response){
+                $scope.qualitylevel = response.data;
+            });
+            $http.get("http://localhost:8000/drugs/drugclass").then(function (response){
+                $scope.clazz = response.data;
+            });
         })
     </script>
     <style>
@@ -42,7 +62,7 @@
 <body ng-app="myApp" ng-controller="myCtrl" ng-init="load()">
 <div class="container-fluid">
     <div class="container1" style="background-color: #EEF7FC">
-    <form id="form1" action="/likeFindItem" method="get">
+    <form id="form1">
         <table class="table">
             <thead>
             <tr style="background-color: #eef7fc">
@@ -92,7 +112,8 @@
                 </select></td>
             </tr>
             <tr>
-                <td><button style="margin-left: 350px" type="button" class="btn btn-primary">查询</button></td>
+                <td><button ng-click="realList()" style="margin-left: 350px" type="button" class="btn btn-primary">查询</button></td>
+                <td><button type="button" class="btn btn-primary" ng-click="chongzhi()">重置</button></td>
             </tr>
             </tbody>
         </table>
@@ -133,13 +154,13 @@
                     <td>{{drug.factoryName}}</td>
                     <td>{{drug.productName}}</td>
                     <td>{{drug.tenderPrice}}</td>
-                    <td>{{drug.qualityLevel}}</td>
-                    <td>{{drug.drugType}}</td>
+                    <td>{{drug.qualitylevel}}</td>
+                    <td>{{drug.drugClazzName}}</td>
                     <td>{{drug.drugTranlStatus}}</td>
                     <td>供货商</td>
                     <td>{{drug.drugExamineStatus}}</td>
-                    <td><a>修改</a></td>
-                    <td><a>查看</a></td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">修改</button></td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">查看</button></td>
                 </tr>
                 </tbody>
             </table>

@@ -58,5 +58,5 @@ public class DrugInfo {
 
     private Integer drugExamineStatus;
 
-
+    private Integer companyId;
 }

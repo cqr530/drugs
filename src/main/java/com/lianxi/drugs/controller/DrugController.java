@@ -112,6 +112,14 @@ public class DrugController {
     }
 
     /**
+     * 2021.1.21 陈泉润
+     * @return 查询所有供货商药品
+     */
+    @RequestMapping("/allsupplierdrug")
+    public List<DrugInfo> findsupplierDrug(){
+        return drugSystemService.queryDrug();
+    }
+    /**
      * 2020.12.28 陈泉润
      * @param druginfoVO
      * @return 药品信息模糊查询

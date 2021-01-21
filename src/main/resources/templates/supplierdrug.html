@@ -16,11 +16,31 @@
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope,$http){
             $scope.load=function(){
-                $http.get("http://localhost:8000/drugs/alldrug").then(function (response){
+                $http.get("http://localhost:8000/drugs/likedrug").then(function (response){
                     $scope.list = response.data;
                     console.log(response.data)
                 });
             }
+            $scope.entity={}
+            $scope.realList=function(){
+                var entity = $scope.entity;
+                console.log(entity)
+                $http.get("http://localhost:8000/drugs/likedrug",{
+                    params:entity
+                }).success(function (data) {
+                    $scope.list = data;
+                    console.log(data)
+                })
+            }
+            $http.get("http://localhost:8000/drugs/drugtranlstatus").then(function (response){
+                $scope.drugtranlstatus = response.data;
+            });
+            $http.get("http://localhost:8000/drugs/qualitylevel").then(function (response){
+                $scope.qualitylevel = response.data;
+            });
+            $http.get("http://localhost:8000/drugs/drugclass").then(function (response){
+                $scope.clazz = response.data;
+            });
             $scope.allclick = function () {
                 var chked=$(".maxch").prop("checked");
                 $(".minch").prop("checked",chked);
@@ -58,6 +78,34 @@
                     })
                 }
             }
+            $scope.chongzhi=function () {
+                document.getElementById('serialNum').value = "";
+                $scope.entity.serialNum='';
+                document.getElementById('genericName').value = "";
+                $scope.entity.genericName='';
+                document.getElementById('reagentType').value = "";
+                $scope.entity.reagentType='';
+                document.getElementById('drugSize').value = "";
+                $scope.entity.drugSize='';
+                document.getElementById('company').value = "";
+                $scope.entity.company='';
+                document.getElementById('transverNum').value = "";
+                $scope.entity.transverNum='';
+                document.getElementById('max').value = "";
+                $scope.entity.max='';
+                document.getElementById('min').value = "";
+                $scope.entity.min='';
+                document.getElementById('factoryName').value = "";
+                $scope.entity.factoryName='';
+                document.getElementById('productName').value = "";
+                $scope.entity.productName='';
+                document.getElementById('qualitylevel').value = "";
+                $scope.entity.qualitylevel='';
+                document.getElementById('drugClazzName').value = "";
+                $scope.entity.drugClazzName='';
+                document.getElementById('drugTranlStatus').value = "";
+                $scope.entity.drugTranlStatus='';
+            }
         })
     </script>
     <style>
@@ -79,7 +127,7 @@
 <body ng-app="myApp" ng-controller="myCtrl" ng-init="load()">
 <div class="container-fluid">
     <div class="container1" style="background-color: #EEF7FC">
-    <form id="form1" action="/likeFindItem" method="get">
+    <form id="form1">
         <table class="table">
             <thead>
             <tr style="background-color: #eef7fc">
@@ -89,47 +137,52 @@
             </thead>
             <tbody>
             <tr style="background-color: #F3F3F3">
-                <td>药品流水号:<input style="margin-left: 15px;width: 130px" type="text"></td>
-                <td>通用名:<input style="margin-left: 62px;width: 130px" type="text"></td>
+                <td>药品流水号:<input id="serialNum" ng-model="entity.serialNum" style="margin-left: 15px;width: 130px" type="text"></td>
+                <td>通用名:<input id="genericName" ng-model="entity.genericName" style="margin-left: 62px;width: 130px" type="text"></td>
             </tr>
             <tr style="background-color: #F3F3F3">
-                <td>剂型:<input style="margin-left: 63px;width: 130px" type="text"></td>
-                <td>规格:<input style="margin-left: 78px;width: 130px" type="text"></td>
+                <td>剂型:<input id="reagentType" ng-model="entity.reagentType" style="margin-left: 63px;width: 130px" type="text"></td>
+                <td>规格:<input id="drugSize" ng-model="entity.drugSize" style="margin-left: 78px;width: 130px" type="text"></td>
             </tr>
             <tr style="background-color: #F3F3F3">
-                <td>单位:<input style="margin-left: 63px;width: 130px" type="text"></td>
-                <td>转换系数:<input style="margin-left: 45px;width: 130px" type="text"></td>
+                <td>单位:<input id="company" ng-model="entity.company" style="margin-left: 63px;width: 130px" type="text"></td>
+                <td>转换系数:<input id="transverNum" ng-model="entity.transverNum" style="margin-left: 45px;width: 130px" type="text"></td>
             </tr>
             <tr style="background-color: #F3F3F3">
-                <td>生产企业:<input style="margin-left: 31px;width: 130px" type="text"></td>
-                <td>商品名:<input style="margin-left: 62px;width: 130px" type="text"></td>
+                <td>生产企业:<input id="factoryName" ng-model="entity.factoryName" style="margin-left: 31px;width: 130px" type="text"></td>
+                <td>商品名:<input id="productName" ng-model="entity.productName" style="margin-left: 62px;width: 130px" type="text"></td>
             </tr>
             <tr style="background-color: #F3F3F3">
-                <td>价格范围:<input style="margin-left: 31px;width: 130px" type="text">至<input type="text"></td>
-                <td>质量层次:<select style="margin-left: 45px" id="wuranluv">
-                    <option value="">请选择</option>
-                    <option value="1">国家一类药物</option>
-                    <option value="2">国家二类药物</option>
-                    <option value="3">国家三类药物</option>
-                </select></td>
+                <td>价格范围:<input id="max" ng-model="entity.max" style="margin-left: 31px;width: 130px" type="text">至<input id="min" ng-model="entity.min" type="text"></td>
+                <td>
+                    <lable>质量层次:	&nbsp;	&nbsp;	&nbsp; &nbsp;</lable>
+                    <input type="hidden" value="{{entity.qualitylevel}}" id="qualitylevel">
+                    <select ng-init="selectedName = qualitylevel[0]" ng-model="entity.qualitylevel" ng-options="x.id as x.qualityLevel for x in qualitylevel">
+                        <option value="">请选择</option>
+                    </select>
+                </td>
             </tr>
             <tr style="background-color: #F3F3F3">
-                <td>药品类别:<select style="margin-left: 30px" id="type">
-                    <option value="">请选择</option>
-                    <option value="0-20">0~20%</option>
-                    <option value="20-40">20%~40%</option>
-                    <option value="40-60">40%~60%</option>
-                    <option value="60-80">60%~80%</option>
-                    <option value="80-100">80%~100%</option>
-                </select></td>
-                <td>药品交易状态:<select style="margin-left: 13px" id="stuta">
-                    <option value="">请选择</option>
-                    <option value="1">正常</option>
-                    <option value="0">暂停交易</option>
-                </select></td>
+                <td>
+                    <lable>药品类别:	&nbsp;	&nbsp;	&nbsp;	</lable>
+                    <input type="hidden" value="{{clazz.drugClazzName}}" id="drugClazzName">
+                    <select ng-init="selectedName = clazz[0]" ng-model="entity.drugClazzId" ng-options="x.drugClazzId as x.drugClazzName for x in clazz">
+                        <option value="">请选择</option>
+                    </select>
+                </td>
+                <td>
+                    <lable>药品交易状态:</lable>
+                    <input type="hidden" value="{{clazz.drugTranlStatus}}" id="drugTranlStatus">
+                    <select style="margin-left: 13px" ng-model="entity.drugTranlStatus">
+                        <option value="">请选择</option>
+                        <option value="1">正常</option>
+                        <option value="2">暂停交易</option>
+                    </select>
+                </td>
             </tr>
             <tr>
-                <td><button style="margin-left: 350px" type="button" class="btn btn-primary">查询</button></td>
+                <td><button style="margin-left: 350px" type="button" class="btn btn-primary" ng-click="realList()">查询</button></td>
+                <td><button type="button" class="btn btn-primary" ng-click="chongzhi()">重置</button></td>
             </tr>
             </tbody>
         </table>
@@ -172,10 +225,10 @@
                     <td>{{drug.factoryName}}</td>
                     <td>{{drug.productName}}</td>
                     <td>{{drug.tenderPrice}}</td>
-                    <td>{{drug.qualityLevel}}</td>
-                    <td>{{drug.drugType}}</td>
+                    <td>{{drug.qualitylevel}}</td>
+                    <td>{{drug.drugClazzName}}</td>
                     <td>{{drug.drugTranlStatus}}</td>
-                    <td><a>查看</a></td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">查看</button></td>
                 </tr>
                 </tbody>
             </table>

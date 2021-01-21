@@ -1,9 +1,13 @@
 package com.lianxi.drugs.service.impl;
 
+import com.lianxi.drugs.pojo.DrugInfo;
 import com.lianxi.drugs.service.SupplierService;
+import com.lianxi.drugs.vo.DruginfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -26,6 +30,11 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public Integer cncelDrugs(Integer[] list) {
         return supplierDrugMenuMapper.deleteDrugs(list);
+    }
+
+    @Override
+    public List<DrugInfo> queryAllDrugsLike(DruginfoVO druginfoVO) {
+        return supplierDrugMenuMapper.selectAllDrugsLike(druginfoVO);
     }
 
     @Override
