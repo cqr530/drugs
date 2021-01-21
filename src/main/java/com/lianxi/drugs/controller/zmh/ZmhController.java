@@ -4,6 +4,7 @@ import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.*;
 import com.lianxi.drugs.service.zmh.ZmgItemService;
+import com.lianxi.drugs.vo.TuiHuoDanVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -198,5 +199,60 @@ public class ZmhController {
         }
     }
 
+    /**
+     *
+     * @param   tuiHuoDanDto
+     * @return  ServerResponse
+     * 根据采购单id查询采购单中的药品信息
+     */
+    @RequestMapping("queryAllTuiHuoDanPage")
+    @ResponseBody
+    public ServerResponse queryAllTuiHuoDanPage(TuiHuoDanDto tuiHuoDanDto){
+        try {
+            DataTableResult dataTableResult = zmgItemService.queryAllTuiHuoDanPage(tuiHuoDanDto);
+                return ServerResponse.success(dataTableResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
 
+    /**
+     *
+     * @param   id
+     * @return  ServerResponse
+     * 根据退货单id查询退货单信息
+     */
+    @RequestMapping("queryTuiHuoDanById")
+    @ResponseBody
+    public ServerResponse queryTuiHuoDanById(Integer id){
+        try {
+           TuiHuoDanVo tuiHuoDanVo = zmgItemService.queryTuiHuoDanById(id);
+            return ServerResponse.success(tuiHuoDanVo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     *
+     * @param
+     * @return  ServerResponse
+     * 查询所有采购单和采购单中的商品
+     */
+    @RequestMapping("queryAllCaiGouDanAndDrugPage")
+    @ResponseBody
+    public ServerResponse queryAllCaiGouDanAndDrugPage(CaiGouDanAndDrugDto caiGouDanAndDrugDto){
+        try {
+            User user = (User) request.getSession().getAttribute("user");
+            /*登录用户*/
+            caiGouDanAndDrugDto.setUserCompany(user.getUserCompany());
+            DataTableResult dataTableResult = zmgItemService.queryAllCaiGouDanAndDrugPage(caiGouDanAndDrugDto);
+            return ServerResponse.success(dataTableResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
 }

@@ -1,11 +1,15 @@
 package com.lianxi.drugs.service.zmh;
 
+import com.lianxi.drugs.dao.CreditOrderMapper;
 import com.lianxi.drugs.dao.PurchaseDrugMapper;
 import com.lianxi.drugs.dao.PurchaseMapper;
 import com.lianxi.drugs.dao.ZmhItemMapper;
 import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.*;
+import com.lianxi.drugs.vo.CaiGouDanAndDrugVo;
 import com.lianxi.drugs.vo.CaiGouDrugVo;
+import com.lianxi.drugs.vo.DruginfoVO;
+import com.lianxi.drugs.vo.TuiHuoDanVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +23,11 @@ public class ZmgItemServiceImpl implements ZmgItemService{
     @Autowired
     private PurchaseDrugMapper purchaseDrugMapper;
 
-  @Autowired
+    @Autowired
     private PurchaseMapper purchaseMapper;
+
+    @Autowired
+    private CreditOrderMapper creditOrderMapper;
 
     /*药品品目*/
     @Override
@@ -41,7 +48,7 @@ public class ZmgItemServiceImpl implements ZmgItemService{
 
     @Override
     public DataTableResult queryAllCaiGouIndexPage(QueryPurchaseIndexDto queryPurchaseIndexDto) {
-        List<DrugInfo> drugInfoList = zmhItemMapper.queryAllCaiGouIndexPage(queryPurchaseIndexDto);
+        List<DruginfoVO> drugInfoList = zmhItemMapper.queryAllCaiGouIndexPage(queryPurchaseIndexDto);
         long count = zmhItemMapper.queryAllCaiGouIndexCount(queryPurchaseIndexDto);
         DataTableResult dataTableResult = new DataTableResult(queryPurchaseIndexDto.getDraw(),count,count,drugInfoList);
         return dataTableResult;
@@ -89,5 +96,26 @@ public class ZmgItemServiceImpl implements ZmgItemService{
     @Override
     public PurchaseDrug queryCaiGouDugById(Integer id) {
         return purchaseDrugMapper.queryCaiGouDugById(id);
+    }
+
+    @Override
+    public DataTableResult queryAllTuiHuoDanPage(TuiHuoDanDto tuiHuoDanDto) {
+        List<CreditOrder> creditOrderList = creditOrderMapper.queryAllTuiHuoDanPage(tuiHuoDanDto);
+        long count = creditOrderMapper.queryAllTuiHuoDanCount(tuiHuoDanDto);
+        DataTableResult dataTableResult = new DataTableResult(tuiHuoDanDto.getDraw(),count,count,creditOrderList);
+        return dataTableResult;
+    }
+
+    @Override
+    public TuiHuoDanVo queryTuiHuoDanById(Integer id) {
+        return creditOrderMapper.queryTuiHuoDanById(id);
+    }
+
+    @Override
+    public DataTableResult queryAllCaiGouDanAndDrugPage(CaiGouDanAndDrugDto caiGouDanAndDrugDto) {
+        List<CaiGouDanAndDrugVo> caiGouDanAndDrugVoList = purchaseDrugMapper.queryAllCaiGouDanAndDrugPage(caiGouDanAndDrugDto);
+        long count = purchaseDrugMapper.queryAllCaiGouDanAndDrugCount(caiGouDanAndDrugDto);
+        DataTableResult dataTableResult = new DataTableResult(caiGouDanAndDrugDto.getDraw(),count,count,caiGouDanAndDrugVoList);
+        return dataTableResult;
     }
 }

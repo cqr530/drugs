@@ -20,6 +20,20 @@
     <result column="quality_level" jdbcType="VARCHAR" property="qualityLevel" />
   </resultMap>
 
+  <resultMap id="BaseResultMapTwo" type="com.lianxi.drugs.vo.TuiHuoDanVo">
+    <id column="co_id" jdbcType="INTEGER" property="id" />
+    <result column="co_number" jdbcType="INTEGER" property="creditNum" />
+    <result column="co_name" jdbcType="VARCHAR" property="creditName" />
+    <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
+    <result column="co_contacts" jdbcType="VARCHAR" property="creditContacts" />
+    <result column="co_phone" jdbcType="VARCHAR" property="phone" />
+    <result column="co_createpeople" jdbcType="VARCHAR" property="createPeople" />
+    <result column="co_createtime" jdbcType="TIMESTAMP" property="creditCreateTime" />
+    <result column="co_inputtime" jdbcType="TIMESTAMP" property="creditInputTime" />
+    <result column="co_remark" jdbcType="VARCHAR" property="creditRemark" />
+    <result column="co_state" jdbcType="INTEGER" property="creditState" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     co_id, co_number, co_name, hospital_id, co_contacts, co_phone, co_createpeople, co_createtime, 
     co_inputtime, co_remark, co_state
@@ -36,6 +50,47 @@
     order by id
   </select>
 
+
+  <select id="queryAllTuiHuoDanPage" parameterType="com.lianxi.drugs.dto.TuiHuoDanDto" resultMap="BaseResultMapTwo">
+        select c.co_id, c.co_number, c.co_name, h.hospital_name, c.co_contacts,
+        c.co_phone, c.co_createpeople, c.co_createtime,
+        c.co_inputtime, c.co_remark, c.co_state from credit_order c
+        left join hospital h on
+        c.hospital_id = h.hospital_id
+        limit #{start},#{length}
+  </select>
+
+  <select id="queryAllTuiHuoDanCount" parameterType="com.lianxi.drugs.dto.TuiHuoDanDto" resultType="long">
+        select count(*) from credit_order
+        limit #{start},#{length}
+  </select>
+
+  <insert id="insertTuiHuoDanDto" parameterType="com.lianxi.drugs.dto.TuiHuoDanDto">
+      insert into credit_order (co_number,hospital_id,co_name,co_contacts,
+      co_state,co_phone,co_remark,co_inputtime,co_createtime,co_createpeople)
+      values
+      (#{creditNum},#{hospitalNum},#{creditName},#{creditContacts},
+      #{creditState},#{phone},#{creditRemark},now(),now(),#{createPeople})
+  </insert>
+
+  <select id="queryTuiHuoDanById" parameterType="java.lang.Integer" resultMap="BaseResultMapTwo">
+        select c.co_id, c.co_number, c.co_name, h.hospital_name, c.co_contacts,
+        c.co_phone, c.co_createpeople, c.co_createtime,
+        c.co_inputtime, c.co_remark, c.co_state from credit_order c
+        left join hospital h on
+        c.hospital_id = h.hospital_id
+        where co_id=#{id}
+  </select>
+
+    <delete id="todeleteTuiHuoDan" parameterType="int">
+        delete from credit_order where co_id=#{id}
+    </delete>
+
+
+
+
+
+
   <update id="updateCreditOrder" parameterType="java.util.List">
     update credit_order_info set coi_state=1
     where id in
@@ -44,11 +99,4 @@
     </foreach>
   </update>
 
- <insert id="insertTuiHuoDanDto" parameterType="com.lianxi.drugs.dto.TuiHuoDanDto">
-      insert into credit_order (co_number,hospital_id,co_name,co_contacts,
-      co_state,co_phone,co_remark,co_inputtime,co_createtime)
-      values
-      (#{creditNum},#{hospitalNum},#{creditName},#{creditContacts},
-      #{creditState},#{phone},#{creditRemark},now(),now())
-  </insert>
 </mapper>

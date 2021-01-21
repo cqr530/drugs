@@ -29,6 +29,7 @@
     <result column="drug_type" jdbcType="VARCHAR" property="drugType" />
     <result column="drug_examine_status" jdbcType="INTEGER" property="drugExamineStatus" />
   </resultMap>
+
   <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.DrugClassVO">
     <id column="drug_id" jdbcType="INTEGER" property="drugId" />
     <result column="serial_num" jdbcType="INTEGER" property="serialNum" />

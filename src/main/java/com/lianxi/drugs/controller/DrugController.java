@@ -46,6 +46,9 @@ public class DrugController {
     private PurchaseDrugService purchaseDrugService;
 
     @Autowired
+    private PayoffTabService payoffTabService;
+
+    @Autowired
     private SupplierService supplierService;
     @Autowired
     DefaultKaptcha defaultKaptcha;
@@ -340,7 +343,8 @@ public class DrugController {
     @RequestMapping("/insertTuiHuoDanDto")
     public ServerResponse insertTuiHuoDanDto(TuiHuoDanDto tuiHuoDanDto) {
         try {
-
+           User user = (User) request.getSession().getAttribute("user");
+            tuiHuoDanDto.setCreatePeople(user.getUserName());
             Integer code = creditOrderService.insertTuiHuoDanDto(tuiHuoDanDto);
             if (code > 0) {
                 return ServerResponse.success(code);
@@ -352,7 +356,74 @@ public class DrugController {
         }
     }
 
+    /**
+     * 2021.1.19     zmh
+     * @return 创建退货单
+     */
+    @RequestMapping("/todeleteTuiHuoDan")
+    public ServerResponse todeleteTuiHuoDan(Integer id) {
+        try {
+           Integer code = creditOrderService.todeleteTuiHuoDan(id);
+           if(code>0){
+               return ServerResponse.success();
+           }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
 
+    /**
+     * 2021.1.19     zmh
+     * @return 添加药品到退货单
+     */
+    @RequestMapping("/addDrugToTuiHuoDan")
+    public ServerResponse addDrugToTuiHuoDan(@RequestParam(value = "arr[]")int[] arr,
+                                             @RequestParam(value = "tuihuodanId")int tuihuodanId
+                                             ) {
+        try {
+            List<CreditOrderInfo> list = new ArrayList<>();
+            for (int i : arr) {
+                CreditOrderInfo creditOrderInfo = new CreditOrderInfo();
+                creditOrderInfo.setDrugId(i);
+                creditOrderInfo.setCoId(tuihuodanId);
+                list.add(creditOrderInfo);
+            }
+
+
+            Integer count = creditOrderService.addDrugToTuiHuoDan(list);
+            if(count>0){
+                return ServerResponse.success(count);
+            }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     * 2021.1.19     zmh
+     * @return 创建结算单
+     */
+    @RequestMapping("/createJieSuanDan")
+    public ServerResponse createJieSuanDan(@RequestBody PayoffTab payoffTab) {
+        try {
+
+            payoffTab.setCreateTime(new Date());
+            payoffTab.setInputTime(new Date());
+
+            Integer count = payoffTabService.createJieSuanDan(payoffTab);
+            if(count>0){
+                return ServerResponse.success();
+            }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
 
 
     /**

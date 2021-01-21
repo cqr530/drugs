@@ -1573,12 +1573,204 @@
 
         </div>
         <div class="panel-body">
-            <table class="table">
+            <table class="table" id="exampleEight">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">序号</th>
                     <th scope="col">
                         <input type="checkbox"> 选择
+                    </th>
+                    <th scope="col">退货单编号</th>
+                    <th scope="col">退货单名称</th>
+                    <th scope="col">医院名称</th>
+                    <th scope="col">联系人</th>
+                    <th scope="col">联系电话</th>
+                    <th scope="col">建单人</th>
+                    <th scope="col">建单时间</th>
+                    <th scope="col">提交时间</th>
+                    <th scope="col">备注</th>
+                    <th scope="col">退货单状态</th>
+                    <th scope="col">详细</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--退货单详细界面-->
+<div id="selectTuiHuoDanManage" style="display: none">
+
+    <!--退货单回显-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            退货单
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="post">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">退货单id:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="tuihuodanId">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">退货单编号:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="tuihuodanNum">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">联系人:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="lianxiren">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">退货单状态:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="tuihuoStatus">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">备注:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="beizhu">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">医院名称:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="yiyuanName">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">退货单名称:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="tuihuodanName">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">建单时间:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="jiandanTime">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">联系电话:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="lianxidianhua">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">提交时间:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" id="tijiaoTime">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-5"></div>
+                <div class="col-sm-4">
+                    <div class="btn-group-lg">
+                        <button type="button" class="btn btn-default">查询</button>
+                        <button type="reset" class="btn btn-default">导出</button>
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+
+            </form>
+        </div>
+    </div>
+
+    <!--条件查询-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            退货单查询
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="post">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">退货单编号:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">联系人:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">退货状态:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control">
+                                        <option value="">全部</option>
+                                        <option value="">已入库</option>
+                                        <option value="">未提交</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-5"></div>
+                <div class="col-sm-4">
+                    <div class="btn-group-lg">
+                        <button type="button" class="btn btn-default">查询</button>
+                        <button type="reset" class="btn btn-default">导出</button>
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+
+            </form>
+        </div>
+    </div>
+
+    <!--表格-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+
+            <div class="btn-group">
+                <button type="button" onclick="addTuiHuoDrug()" class="btn btn-primary">添加 </button>
+            </div>
+
+        </div>
+        <div class="panel-body">
+            <table class="table" id="exampleNine">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">序号</th>
+                    <th scope="col">
+                        <input type="checkbox" onclick="checkAllTwo()" name="checkAll"> 选择
                     </th>
                     <th scope="col">采购单编号</th>
                     <th scope="col">采购单名称</th>
@@ -1594,13 +1786,14 @@
                     <th scope="col">实际交易金额</th>
                     <th scope="col">发票号或入库单号</th>
                     <th scope="col">药品批号</th>
-                    <th scope="col">药品有效期（单位：年）</th>
+                    <th scope="col">药品有效期</th>
                     <th scope="col">剂型</th>
                     <th scope="col">规格</th>
                     <th scope="col">单位</th>
                     <th scope="col">转换系数</th>
                     <th scope="col">质量层次</th>
                     <th scope="col">生产企业</th>
+                    <th scope="col">供货企业</th>
                     <th scope="col">开始采购时间</th>
                     <th scope="col">结束采购时间</th>
                     <th scope="col">采购状态</th>
@@ -1611,7 +1804,6 @@
         </div>
     </div>
 </div>
-
 
 <!--采购管理-结算单创建-->
 <div style="display: none" id="createSettlementDan">
@@ -1635,7 +1827,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-5 col-form-label">医院编号:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control">
+                                                <input class="form-control" id="JieSuanyiyuanbianhao">
                                             </div>
                                             <div class="col-sm-1"></div>
                                         </div>
@@ -1643,15 +1835,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-5 col-form-label">结算单编号:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control">
-                                            </div>
-                                            <div class="col-sm-1"></div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-5 col-form-label">结算时间:</label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control">
+                                                <input class="form-control" id="JieSuanjiesuandanbianhao">
                                             </div>
                                             <div class="col-sm-1"></div>
                                         </div>
@@ -1659,7 +1843,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-5 col-form-label">联系人:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control">
+                                                <input class="form-control" id="JieSuanlianxiren">
                                             </div>
                                             <div class="col-sm-1"></div>
                                         </div>
@@ -1667,15 +1851,20 @@
                                         <div class="form-group row">
                                             <label class="col-sm-5 col-form-label">结算单状态:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control" value="未提交">
+                                                <select class="form-control" id="JieSuanjiesuanzhuangtai">
+                                                    <option value="">全部</option>
+                                                    <option value="1">未提交</option>
+                                                    <option value="2">已提交至供货商</option>
+                                                </select>
                                             </div>
+
                                             <div class="col-sm-1"></div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-5 col-form-label">备注:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control">
+                                                <input class="form-control" id="JieSuanbeizhu">
                                             </div>
                                             <div class="col-sm-1"></div>
                                         </div>
@@ -1685,7 +1874,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-5 col-form-label">医院名称:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control">
+                                                <input class="form-control" id="JieSuanyiyuanmingcheng">
                                             </div>
                                             <div class="col-sm-1"></div>
                                         </div>
@@ -1693,41 +1882,29 @@
                                         <div class="form-group row">
                                             <label class="col-sm-5 col-form-label">结算单名称:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control">
+                                                <input class="form-control" id="JieSuanjiesuandanmingcheng">
                                             </div>
                                             <div class="col-sm-1"></div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-sm-5 col-form-label">建单时间:</label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control">
-                                            </div>
-                                            <div class="col-sm-1"></div>
-                                        </div>
+
 
                                         <div class="form-group row">
                                             <label class="col-sm-5 col-form-label">联系电话:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control">
+                                                <input class="form-control" id="JieSuanphone">
                                             </div>
                                             <div class="col-sm-1"></div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-sm-5 col-form-label">提交时间:</label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control">
-                                            </div>
-                                            <div class="col-sm-1"></div>
-                                        </div>
+
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" onclick="redirectionToSettlementDan()" class="btn btn-primary">结算单购单</button>
+                            <button type="button" id="close2" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" onclick="baocunJieSuanDan()" class="btn btn-default">保存结算单</button>
                         </div>
                     </div>
                 </div>
@@ -1735,7 +1912,7 @@
 
         </div>
             <div class="panel-body">
-        <table class="table">
+        <table class="table" id="exampleTen">
             <thead class="thead-light">
             <tr>
                 <th scope="col">序号</th>
@@ -1758,6 +1935,7 @@
                 <th scope="col">药品有效期（单位：年）</th>
                 <th scope="col">退货量</th>
                 <th scope="col">退货金额</th>
+                <th scope="col">结算量</th>
                 <th scope="col">结算金额</th>
                 <th scope="col">剂型</th>
                 <th scope="col">规格</th>
@@ -1772,60 +1950,8 @@
                 <th scope="col">详细</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>
-                    <input type="checkbox">
-                </td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>Jacob</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>
-                    <div class="btn-group btn-group-xs">
-                        <button type="button" class="btn btn-primary">查看</button>
-                        <button type="button" class="btn btn-warning">修改</button>
-                        <button type="button" class="btn btn-danger">删除</button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
         </table>
-        <ul class="pagination">
-            <li><a href="#">&laquo;</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li class="disabled"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
     </div>
-
     </div>
 </div>
 
@@ -2693,6 +2819,22 @@
 
 <script>
 
+    /*全选全不选*/
+    function checkAllTwo(){
+        var checked = $("[name=checkAll]").prop("checked")
+        if(checked){
+            $(".check-box").prop("checked",checked)
+        }else{
+            $.each($(".check-box"),function (index,item) {
+                if($(item).prop("checked")==false){
+                    $(item).prop("checked",true)
+                }else{
+                    $(item).prop("checked",false)
+                }
+            })
+        }
+
+    }
 
     /*全选*/
     function checkAll(){
@@ -2748,6 +2890,9 @@
         $("#exampleFive").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
         $("#exampleSix").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
         $("#exampleSeven").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+        $("#exampleEight").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+        $("#exampleNine").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+        $("#exampleTen").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
     }
 
 
@@ -3753,18 +3898,433 @@
 
     }
 
-    /*采购管理-退货单创建*/
+
+
+    /*采购管理-退货单查询*/
     function createReturnGoodsManage() {
         var html1 = $("#selectReturnGoodsDanManage").html()
         $("#idDiv").html(html1)
+        table=$('#exampleEight').DataTable({
+            "processing": true,
+            "serverSide": true,//开启服务的模式
+            "searching":false,
+            "ordering":true,
+            "order":[
+                [0,'asc']
+                ,
+                [1,'desc']
+            ],
+            "aLengthMenu": [5, 6, 7], //更改显示记录数选项
+            ajax:{
+                url:"drug/queryAllTuiHuoDanPage",
+                data: function (d) {
+                    //添加额外的参数传给服务器
+                },
+                type:"post",
+                dataSrc:function(f){
+                    if(f.code == 200){
+                        f.draw = f.data.draw;
+                        f.recordsTotal = f.data.recordsTotal;
+                        f.recordsFiltered = f.data.recordsFiltered;
+                        return f.data.data;
+                    }else{
+                        return "";
+                    }
+                },
+            },
+            "columns": [
+                {"data": "id"},
+                {"data": "id",
+                    render:function(data){
+                        return "<input type='checkbox' name='"+data+"'/>"
+                    }
+                },
+                {"data": "creditNum"},
+                {"data": "creditName"},
+                {"data": "hospitalName"},
+                {"data": "creditContacts"},
+                {"data": "phone"},
+                {"data": "createPeople"},
+                {"data": "creditCreateTime"},
+                {"data": "creditInputTime"},
+                {"data": "creditRemark"},
+                {"data": "creditState",
+                    render:function(data){
+                        return data==0?"未提交":"已提交至供货商"
+                    }
+                },
+                {"data": "id",render: function(data) {
+                        return '<div class="btn-group btn-group-xs">'+
+                            '<button type="button" class="btn btn-primary">'+
+                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
+                            '</button>'+
+                            '<button type="button" onclick="toUpdateTuiHuoDan(' + data + ')" class="btn btn-primary">'+
+                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改'+
+                            '</button>'+
+                            '<button type="button" onclick="todeleteTuiHuoDan(' + data + ')" class="btn btn-primary">'+
+                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;删除'+
+                            '</button>'+
+                            '</div>';
+                    }
+                }
+            ],
+            "language": {                              // 这是修改语言的显示
+                buttons: {
+                    pageLength: {
+                        _: "显示%d条",
+                        '-1': "全部显示"
+                    }
+                },
+                paginate: {
+                    first: "首条",
+                    previous: "前一页",
+                    next: "下一页",
+                    last: "末页"
+                },
+                "info": "第_PAGE_页,共_PAGES_页",
+                "infoEmpty": "未找到相关数据",
+                "search": "关键字",
+                "zeroRecords": "未找到相关数据",
+                "decimal": ".",
+                "thousands": ","
+            }
+        })
+    }
+    /*删除退货单*/
+    function todeleteTuiHuoDan(id){
+        $.ajax({
+            url:"drugs/todeleteTuiHuoDan",
+            dataType:"json",
+            type:"post",
+            data:{"id":id},
+            success:function (result) {
+                if(result.code==200){
+                    alert("成功")
+                    queryList()
+                }
+            }
+        })
+    }
+    /*对退货单中的商品进行维护*/
+    function toUpdateTuiHuoDan(id){
+        var html1 = $("#selectTuiHuoDanManage").html()
+        $("#idDiv").html(html1)
+        /*回显退货单*/
+        $.ajax({
+            url:"drug/queryTuiHuoDanById",
+            dataType:"json",
+            type:"post",
+            data:{"id":id},
+            success:function (data) {
+                if(data.code==200){
+                    var result=data.data
+                    $("#tuihuodanId").val(result.id)
+                    $("#tuihuodanNum").val(result.creditNum)
+                    $("#lianxiren").val(result.creditContacts)
+                    if(result.creditState==0){
+                        $("#tuihuoStatus").val("未提交")
+                    }else if(result.creditState==1){
+                        $("#tuihuoStatus").val("已提交至供货商")
+                    }
 
+                    $("#beizhu").val(result.creditRemark)
+                    $("#yiyuanName").val(result.hospitalName)
+                    $("#tuihuodanName").val(result.creditName)
+                    $("#jiandanTime").val(result.creditCreateTime)
+                    $("#lianxidianhua").val(result.phone)
+                    $("#tijiaoTime").val(result.creditInputTime)
+
+                }
+
+
+            }
+        })
+
+        /*查询所有采购单和采购单中的商品*/
+        table=$('#exampleNine').DataTable({
+            "processing": true,
+            "serverSide": true,//开启服务的模式
+            "searching":false,
+            "ordering":true,
+            "order":[
+                [0,'asc']
+                ,
+                [1,'desc']
+            ],
+            "aLengthMenu": [5, 6, 7], //更改显示记录数选项
+            ajax:{
+                url:"drug/queryAllCaiGouDanAndDrugPage",
+                data: function (d) {
+                    //添加额外的参数传给服务器
+                },
+                type:"post",
+                dataSrc:function(f){
+                    if(f.code == 200){
+                        f.draw = f.data.draw;
+                        f.recordsTotal = f.data.recordsTotal;
+                        f.recordsFiltered = f.data.recordsFiltered;
+                        return f.data.data;
+                    }else{
+                        return "";
+                    }
+                },
+            },
+            "columns": [
+                {"data": "id"},
+
+                {"data": "id",
+                    render:function (data) {
+                        var html="<input type='checkbox' name='checkbox' onclick='checkboxs()' class='check-box' value="+data+">"
+                        return html
+                    }
+                },
+                {"data": "payofftabNum"},
+                {"data": "payoffTabName"},
+                {"data": "hospitalName"},
+                {"data": "serialNum"},
+                {"data": "genericName"},
+                {"data": "productName"},
+                {"data": "tenderPrice"},
+                {"data": "orderTradingPrice"},
+                {"data": "orderBuyCount"},
+                {"data": "orderBuyPrice"},
+                {"data": "company",
+                    render:function(data){
+                        return data="入库量"
+                    }
+                },
+                {"data": "company",
+                    render:function(data){
+                        return data="入库量"
+                    }
+                },
+                {"data": "company",
+                    render:function(data){
+                        return data="入库量"
+                    }
+                },
+                {"data": "approvalNum"},
+                {"data": "company",
+                    render:function(data){
+                        return data="入库量"
+                    }
+                },
+                {"data": "reagentType"},
+                {"data": "drugSize"},
+                {"data": "company"},
+                {"data": "transverNum"},
+                {"data": "qualityLevel"},
+                {"data": "factoryName"},
+                {"data": "supplierId"},
+                {"data": "startTime"},
+                {"data": "endTime"},
+                {"data": "drugTranlStatus",
+                    render:function(data){
+                        return data==0?"已采购":"未采购"
+                    }
+                },
+                {"data": "id",render: function(data) {
+                        return '<div class="btn-group btn-group-xs">'+
+                                    '<button type="button" class="btn btn-primary">'+
+                                    '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看'+
+                                    '</button>'+
+                                    '<button type="button" onclick="toUpdateTuiHuoDan(' + data + ')" class="btn btn-primary">'+
+                                    '<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改'+
+                                    '</button>'+
+                                    '<button type="button" onclick="todeleteCaiGouDan(' + data + ')" class="btn btn-primary">'+
+                                    '<span class="glyphicon glyphicon-pencil"></span>&nbsp;删除'+
+                                    '</button>'+
+                                '</div>';
+                    }
+                }
+            ],
+            "language": {                              // 这是修改语言的显示
+                buttons: {
+                    pageLength: {
+                        _: "显示%d条",
+                        '-1': "全部显示"
+                    }
+                },
+                paginate: {
+                    first: "首条",
+                    previous: "前一页",
+                    next: "下一页",
+                    last: "末页"
+                },
+                "info": "第_PAGE_页,共_PAGES_页",
+                "infoEmpty": "未找到相关数据",
+                "search": "关键字",
+                "zeroRecords": "未找到相关数据",
+                "decimal": ".",
+                "thousands": ","
+            }
+        })
+    }
+    /*添加药品到退货单*/
+    function addTuiHuoDrug(){
+        /*退货单id*/
+        var tuihuodanId = $("#tuihuodanId").val()
+        /*商品id*/
+        var arr=[]
+        $("input[name=checkbox]:checked").each(function () {
+            arr.push($(this).val())
+        })
+
+
+        $.ajax({
+            url:"drugs/addDrugToTuiHuoDan",
+            dataType:"json",
+            type:"post",
+            data:{"tuihuodanId":tuihuodanId,"arr[]":arr},
+            success:function(data){
+                if(data.code==200){
+
+                }
+            }
+
+        })
     }
 
-    <!--采购管理-结算单创建-->
+
+    <!--采购管理- 查询结算单-->
     function createSettlementDan(){
         var html1 = $("#createSettlementDan").html()
         $("#idDiv").html(html1)
+
+        table=$('#exampleSix').DataTable({
+            "processing": true,
+            "serverSide": true,//开启服务的模式
+            "searching":false,
+            "ordering":true,
+            "order":[
+                [0,'asc']
+                ,
+                [1,'desc']
+            ],
+            "aLengthMenu": [5, 6, 7], //更改显示记录数选项
+            ajax:{
+                url:"drug/",
+                dataType:"json",
+                type:"post",
+                async:false,
+                data: function (d) {
+                    //添加额外的参数传给服务器
+                    d.id = id
+                },
+                dataSrc:function(f){
+                    if(f.code == 200){
+                        f.draw = f.data.draw;
+                        f.recordsTotal = f.data.recordsTotal;
+                        f.recordsFiltered = f.data.recordsFiltered;
+                        return f.data.data;
+                    }else{
+                        return "";
+                    }
+                },
+            },
+            "columns": [
+                {"data": "drugId"},
+                {"data": "drugId",
+                    render:function (data) {
+                        var html="<input type='checkbox' name='checkbox' value="+data+">"
+                        return html
+                    }
+                },
+                {"data": "serialNum"},
+                {"data": "genericName"},
+                {"data": "productName"},
+                {"data": "reagentType"},
+                {"data": "drugSize"},
+                {"data": "company"},
+                {"data": "transverNum"},
+                {"data": "qualityLevel"},
+                {"data": "factoryName"},
+                {"data": "tenderPrice"},
+                {"data": "orderTradingPrice"},
+                {"data": "orderBuyCount",
+                    render:function(data){
+                        return '<input name="orderBuyCount">'
+                    }
+                },
+                {"data": "orderBuyPrice"},
+                {"data": "supplierId"},
+                {"data": "drugId",
+                    render:function(data){
+                        return '<a href="javascript:void(0)" onclick="updateSupplier()" name="supplier"  value="'+data+'">'+
+                            '修改供货企业'+
+                            '</a>'
+
+                    }
+                },
+                {"data": "payoffTabStatus"},
+                {"data": "drugId", render: function (data) {
+                        return '<div class="btn-group btn-group-xs">' +
+                            '<button type="button" onclick="look(' + data + ')" class="btn btn-primary">' +
+                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看' +
+                            '</button>' +
+                            '<button type="button" onclick="toUpdateCaiGouDan(' + data + ')" class="btn btn-primary">' +
+                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改' +
+                            '</button>' +
+                            '<button type="button" onclick="todeleteCaiGouDrug(' + data + ')" class="btn btn-primary">' +
+                            '<span class="glyphicon glyphicon-pencil"></span>&nbsp;删除' +
+                            '</button>' +
+                            '</div>';
+                    }
+                }
+            ],
+            "language": {                              // 这是修改语言的显示
+                buttons: {
+                    pageLength: {
+                        _: "显示%d条",
+                        '-1': "全部显示"
+                    }
+                },
+                paginate: {
+                    first: "首条",
+                    previous: "前一页",
+                    next: "下一页",
+                    last: "末页"
+                },
+                "info": "第_PAGE_页,共_PAGES_页",
+                "infoEmpty": "未找到相关数据",
+                "search": "关键字",
+                "zeroRecords": "未找到相关数据",
+                "decimal": ".",
+                "thousands": ","
+            }
+        })
+
     }
+    <!--采购管理- 添加结算单-->
+    function baocunJieSuanDan() {
+
+       var payoffTab = {
+           payoffTabNum : $("#JieSuanjiesuandanbianhao").val(),
+           payoffTabName : $("#JieSuanjiesuandanmingcheng").val(),
+           contacts : $("#JieSuanlianxiren").val(),
+           contactsPhone : $("#JieSuanphone").val(),
+           payoffTabStatus : $("#JieSuanjiesuanzhuangtai").val(),
+           payoffTabPostil : $("#JieSuanbeizhu").val()
+       }
+
+        $.ajax({
+            url:"drugs/createJieSuanDan",
+            dataType:"json",
+            type:"post",
+            contentType:"application/json;charset=utf-8",
+            data:JSON.stringify(payoffTab),
+            success:function(data){
+                if(data.code==200){
+                    alert("添加成功")
+                    $("#close2").trigger('click');
+                }
+            }
+
+        })
+    }
+
+
+
 
     <!--采购管理-交易查询统计-->
     function selectTransaction() {

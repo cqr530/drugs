@@ -14,11 +14,11 @@ public class TuiHuoDanDto extends DrugPageBean {
     private Integer creditNum;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date creditCreateTime;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date creditInputTime;
 
     private String creditContacts;
@@ -30,4 +30,6 @@ public class TuiHuoDanDto extends DrugPageBean {
     private String creditName;
 
     private String phone;
+
+    private String createPeople;
 }
