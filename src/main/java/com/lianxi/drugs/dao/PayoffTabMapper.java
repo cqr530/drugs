@@ -1,6 +1,8 @@
 package com.lianxi.drugs.dao;
 
+import com.lianxi.drugs.dto.JieSuanDanDto;
 import com.lianxi.drugs.pojo.PayoffTab;
+import com.lianxi.drugs.vo.JieSuanDanVo;
 import com.lianxi.drugs.vo.PayoffTabVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,4 +17,10 @@ public interface PayoffTabMapper {
 
     /*创建结算单*/
     Integer createJieSuanDan(PayoffTab payoffTab);
+
+    List<JieSuanDanVo> queryAllJieSuanDanPage(JieSuanDanDto jieSuanDanDto);
+
+    long queryAllJieSuanDanCount(JieSuanDanDto jieSuanDanDto);
+
+    JieSuanDanVo queryJieSuanDanById(Integer id);
 }

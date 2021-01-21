@@ -3,7 +3,10 @@ package com.lianxi.drugs.controller.zmh;
 import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.*;
 import com.lianxi.drugs.pojo.*;
+import com.lianxi.drugs.service.PayoffTabInfoService;
+import com.lianxi.drugs.service.PayoffTabService;
 import com.lianxi.drugs.service.zmh.ZmgItemService;
+import com.lianxi.drugs.vo.JieSuanDanVo;
 import com.lianxi.drugs.vo.TuiHuoDanVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,12 @@ public class ZmhController {
 
     @Autowired
     private HttpServletRequest request;
+
+    @Autowired
+    private PayoffTabService payoffTabService;
+
+    @Autowired
+    private PayoffTabInfoService payoffTabInfoService;
 
     /**
      *
@@ -249,6 +258,63 @@ public class ZmhController {
             /*登录用户*/
             caiGouDanAndDrugDto.setUserCompany(user.getUserCompany());
             DataTableResult dataTableResult = zmgItemService.queryAllCaiGouDanAndDrugPage(caiGouDanAndDrugDto);
+            return ServerResponse.success(dataTableResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     *
+     * @param
+     * @return  ServerResponse
+     * 查询所有采购单和采购单中的商品
+     */
+    @RequestMapping("queryAllJieSuanDanPage")
+    @ResponseBody
+    public ServerResponse queryAllJieSuanDanPage(JieSuanDanDto jieSuanDanDto){
+        try {
+            DataTableResult dataTableResult = payoffTabService.queryAllJieSuanDanPage(jieSuanDanDto);
+            return ServerResponse.success(dataTableResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     *
+     * @param
+     * @return  ServerResponse
+     * 查询所有采购单和采购单中的商品
+     */
+    @RequestMapping("queryJieSuanDanById")
+    @ResponseBody
+    public ServerResponse queryJieSuanDanById(Integer id){
+        try {
+            JieSuanDanVo jieSuanDanVo = payoffTabService.queryJieSuanDanById(id);
+            return ServerResponse.success(jieSuanDanVo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     *
+     * @param
+     * @return  ServerResponse
+     * 查询所有采购单和采购单中的商品
+     */
+    @RequestMapping("queryAllJieSuanDanAndDrugPage")
+    @ResponseBody
+    public ServerResponse queryAllJieSuanDanAndDrugPage(JieSuanDanInfoDto jieSuanDanInfoDto){
+        try {
+           User user = (User) request.getSession().getAttribute("user");
+           jieSuanDanInfoDto.setUserCompany(user.getUserCompany());
+
+            DataTableResult dataTableResult = payoffTabInfoService.queryAllJieSuanDanAndDrugPage(jieSuanDanInfoDto);
             return ServerResponse.success(dataTableResult);
         } catch (Exception e) {
             e.printStackTrace();
