@@ -74,4 +74,31 @@
          (#{payoffTabNum},#{payoffTabName},#{contacts},#{contactsPhone},#{createTime},#{inputTime},
          #{payoffTabPostil},#{payoffTabStatus})
   </insert>
+
+  <resultMap id="BaseResultMapTwo" type="com.lianxi.drugs.vo.JieSuanDanVo">
+    <id column="payoff_tab_id" jdbcType="INTEGER" property="id" />
+    <result column="payoff_tab_num" jdbcType="VARCHAR" property="payoffTabNum" />
+    <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
+    <result column="contacts" jdbcType="VARCHAR" property="contacts" />
+    <result column="contacts_phone" jdbcType="VARCHAR" property="contactsPhone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="payoff_tab_postil" jdbcType="VARCHAR" property="payoffTabPostil" />
+    <result column="payoff_tab_status" jdbcType="INTEGER" property="payoffTabStatus" />
+    <result column="payoff_price" jdbcType="FLOAT" property="payoffPrice" />
+  </resultMap>
+
+  <select id="queryAllJieSuanDanPage" parameterType="com.lianxi.drugs.dto.JieSuanDanDto" resultMap="BaseResultMapTwo">
+      select * from payoff_tab
+      limit #{start},#{length}
+  </select>
+
+  <select id="queryAllJieSuanDanCount" parameterType="com.lianxi.drugs.dto.JieSuanDanDto" resultType="long">
+      select count(*) from payoff_tab
+  </select>
+
+  <select id="queryJieSuanDanById" parameterType="int" resultMap="BaseResultMapTwo">
+      select * from payoff_tab where payoff_tab_id=#{id}
+  </select>
+
 </mapper>
