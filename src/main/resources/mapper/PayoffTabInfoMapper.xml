@@ -51,4 +51,50 @@
       </if>
     </trim>
   </insert>
+
+
+  <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.JieSuanDanInfoVo">
+    <id column="payoff_tab_id" jdbcType="INTEGER" property="id" />
+    <result column="payoff_tab_num" jdbcType="INTEGER" property="payoffTabNum" />
+    <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
+    <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
+    <result column="serial_num" jdbcType="INTEGER" property="serialNum" />
+    <result column="generic_name" jdbcType="VARCHAR" property="genericName" />
+    <result column="tender_price" jdbcType="DECIMAL" property="tenderPrice" />
+    <result column="order_TradingPrice" jdbcType="DECIMAL" property="orderTradingPrice" />
+    <result column="order_buyCount" jdbcType="INTEGER" property="orderBuyCount" />
+    <result column="order_buyPrice" jdbcType="DECIMAL" property="orderBuyPrice" />
+    <result column="approval_num" jdbcType="INTEGER" property="approvalNum" />
+    <result column="approval_num_date" jdbcType="TIMESTAMP" property="approvalNumDate" />
+    <result column="reagent_type" jdbcType="VARCHAR" property="reagentType" />
+    <result column="drug_size" jdbcType="VARCHAR" property="drugSize" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="transver_num" jdbcType="INTEGER" property="transverNum" />
+    <result column="quality_level" jdbcType="VARCHAR" property="qualityLevel" />
+    <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="drug_tranl_status" jdbcType="INTEGER" property="drugTranlStatus" />
+    <result column="user_company" jdbcType="INTEGER" property="userCompany" />
+  </resultMap>
+
+  <select id="queryAllJieSuanDanAndDrugPage" resultMap="BaseResultMapOne" parameterType="com.lianxi.drugs.dto.JieSuanDanInfoDto">
+      select * from purchase_drug pd
+        left join purchase p on pd.order_num = p.payoff_tab_num
+        left join supplier s on pd.supplier_id = s.company_name
+        left join drug_info di on pd.drug_id = di.drug_id
+        left join hospital h on p.hospital_id = h.hospital_id
+        where p.hospital_id = #{userCompany}
+        limit #{start},#{length}
+  </select>
+
+  <select id="queryAllJiceSuanDanAndDrugCount" resultType="long" parameterType="com.lianxi.drugs.dto.JieSuanDanInfoDto">
+         select count(*) from purchase_drug pd
+        left join purchase p on pd.order_num = p.payoff_tab_num
+        left join supplier s on pd.supplier_id = s.company_name
+        left join drug_info di on pd.drug_id = di.drug_id
+        left join hospital h on p.hospital_id = h.hospital_id
+        where p.hospital_id = #{userCompany}
+  </select>
 </mapper>
