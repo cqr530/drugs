@@ -116,8 +116,8 @@ public class DrugController {
      * @return 查询所有供货商药品
      */
     @RequestMapping("/allsupplierdrug")
-    public List<DrugInfo> findsupplierDrug(){
-        return drugSystemService.queryDrug();
+    public List<DrugInfo> findsupplierDrug(DruginfoVO druginfoVO){
+        return supplierService.queryAllDrugsLike(druginfoVO);
     }
     /**
      * 2020.12.28 陈泉润

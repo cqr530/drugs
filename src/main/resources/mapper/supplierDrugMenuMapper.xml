@@ -51,7 +51,7 @@
     left join drugtranl_status ds on ds.id = di.drug_tranl_status
     left join drug_clazz dc on dc.drug_clazz_id = di.drug_type
     left join supplier_drug_menu sdm on sdm.drug_id = di.drug_id
-    <where>
+    where company_id = 1
       <if test="druginfoVO.serialNum != null and druginfoVO.serialNum != ''">
         and serial_num like '%${druginfoVO.serialNum}%'
       </if>
@@ -88,10 +88,7 @@
       <if test="druginfoVO.drugTranlStatus != null and druginfoVO.drugTranlStatus != ''">
         and di.drug_tranl_status = #{druginfoVO.drugTranlStatus}
       </if>
-      <if test="druginfoVO.companyId == null and druginfoVO.companyId == ''">
-        and company_id = 1
-      </if>
-    </where>
+
     group by di.drug_id
   </select>
 
