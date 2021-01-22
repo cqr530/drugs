@@ -54,7 +54,7 @@
 
 
   <resultMap id="BaseResultMapOne" type="com.lianxi.drugs.vo.JieSuanDanInfoVo">
-    <id column="payoff_tab_id" jdbcType="INTEGER" property="id" />
+    <id column="drug_id" jdbcType="INTEGER" property="id" />
     <result column="payoff_tab_num" jdbcType="INTEGER" property="payoffTabNum" />
     <result column="payoff_tab_name" jdbcType="VARCHAR" property="payoffTabName" />
     <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
@@ -80,21 +80,28 @@
   </resultMap>
 
   <select id="queryAllJieSuanDanAndDrugPage" resultMap="BaseResultMapOne" parameterType="com.lianxi.drugs.dto.JieSuanDanInfoDto">
-      select * from purchase_drug pd
-        left join purchase p on pd.order_num = p.payoff_tab_num
-        left join supplier s on pd.supplier_id = s.company_name
-        left join drug_info di on pd.drug_id = di.drug_id
-        left join hospital h on p.hospital_id = h.hospital_id
-        where p.hospital_id = #{userCompany}
-        limit #{start},#{length}
+       SELECT
+          di.drug_id,	p.payoff_tab_num,p.payoff_tab_name,p.hospital_name,di.serial_num,di.generic_name,di.product_name,
+          di.tender_price,pd.order_TradingPrice,pd.order_buyCount,pd.order_buyPrice,di.approval_num,di.approval_num_date,
+          di.reagent_type,di.drug_size,di.company,di.transver_num,di.quality_level,di.factory_name,s.company_name,
+          p.start_time,p.end_time,p.payoff_tab_status FROM
+          purchase_drug pd
+          LEFT JOIN purchase p ON pd.order_num = p.payoff_tab_id
+          LEFT JOIN supplier s ON pd.supplier_id = s.company_id
+          LEFT JOIN drug_info di ON pd.drug_id = di.drug_id
+      WHERE
+          p.hospital_id =#{userCompany}
   </select>
 
   <select id="queryAllJiceSuanDanAndDrugCount" resultType="long" parameterType="com.lianxi.drugs.dto.JieSuanDanInfoDto">
-         select count(*) from purchase_drug pd
-        left join purchase p on pd.order_num = p.payoff_tab_num
-        left join supplier s on pd.supplier_id = s.company_name
-        left join drug_info di on pd.drug_id = di.drug_id
-        left join hospital h on p.hospital_id = h.hospital_id
-        where p.hospital_id = #{userCompany}
+      SELECT
+          count(*)
+      FROM
+          purchase_drug pd
+          LEFT JOIN purchase p ON pd.order_num = p.payoff_tab_id
+          LEFT JOIN supplier s ON pd.supplier_id = s.company_id
+          LEFT JOIN drug_info di ON pd.drug_id = di.drug_id
+      WHERE
+          p.hospital_id = #{userCompany}
   </select>
 </mapper>

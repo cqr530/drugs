@@ -1770,7 +1770,7 @@
                 <tr>
                     <th scope="col">序号</th>
                     <th scope="col">
-                        <input type="checkbox" onclick="checkAllTwo()" name="checkAll"> 选择
+                        <input type="checkbox" name="checkAll" onclick="checkAll()"> 选择
                     </th>
                     <th scope="col">采购单编号</th>
                     <th scope="col">采购单名称</th>
@@ -2039,7 +2039,7 @@
         <div class="panel-heading">
 
             <div class="btn-group">
-                <button type="button" onclick="addTuiHuoDrug()" class="btn btn-primary">添加 </button>
+                <button type="button" onclick="addJieSuanDrug()" class="btn btn-primary">添加 </button>
             </div>
 
         </div>
@@ -2049,7 +2049,7 @@
                 <tr>
                     <th scope="col">序号</th>
                     <th scope="col">
-                        <input type="checkbox" onclick="checkAllTwo()" name="checkAll"> 选择
+                        <input type="checkbox" name="checkAll" onclick="checkAll()"> 选择
                     </th>
                     <th scope="col">采购单编号</th>
                     <th scope="col">采购单名称</th>
@@ -2948,22 +2948,16 @@
 
 <script>
 
-    /*全选全不选*/
+   /* /!*全选全不选*!/
     function checkAllTwo(){
         var checked = $("[name=checkAll]").prop("checked")
         if(checked){
-            $(".check-box").prop("checked",checked)
+            $("[name=checkbox]").prop("checked",checked)
         }else{
-            $.each($(".check-box"),function (index,item) {
-                if($(item).prop("checked")==false){
-                    $(item).prop("checked",true)
-                }else{
-                    $(item).prop("checked",false)
-                }
-            })
+            $("[name=checkbox]").prop("checked",checked)
         }
 
-    }
+    }*/
 
     /*全选*/
     function checkAll(){
@@ -4200,7 +4194,6 @@
             },
             "columns": [
                 {"data": "id"},
-
                 {"data": "id",
                     render:function (data) {
                         var html="<input type='checkbox' name='checkbox' onclick='checkboxs()' class='check-box' value="+data+">"
@@ -4461,7 +4454,7 @@
         })
 
         /*查询所有结算单的商品中的采购单和商品*/
-        table=$('#exampleNine').DataTable({
+        table=$('#exampleElevn').DataTable({
             "processing": true,
             "serverSide": true,//开启服务的模式
             "searching":false,
@@ -4491,19 +4484,17 @@
             },
             "columns": [
                 {"data": "id"},
-
                 {"data": "id",
                     render:function (data) {
                         var html="<input type='checkbox' name='checkbox' onclick='checkboxs()' class='check-box' value="+data+">"
                         return html
                     }
                 },
-                {"data": "payofftabNum"},
+                {"data": "payoffTabNum"},
                 {"data": "payoffTabName"},
                 {"data": "hospitalName"},
                 {"data": "serialNum"},
                 {"data": "genericName"},
-                {"data": "productName"},
                 {"data": "tenderPrice"},
                 {"data": "orderTradingPrice"},
                 {"data": "orderBuyCount"},
@@ -4524,20 +4515,18 @@
                     }
                 },
                 {"data": "approvalNum"},
-                {"data": "company",
-                    render:function(data){
-                        return data="入库量"
-                    }
-                },
+                {"data": "approvalNumDate"},
                 {"data": "reagentType"},
                 {"data": "drugSize"},
                 {"data": "company"},
                 {"data": "transverNum"},
                 {"data": "qualityLevel"},
                 {"data": "factoryName"},
-                {"data": "supplierId"},
+                {"data": "companyName"},
                 {"data": "startTime"},
                 {"data": "endTime"},
+                {"data": "endTime"},
+
                 {"data": "drugTranlStatus",
                     render:function(data){
                         return data==0?"已采购":"未采购"
@@ -4580,7 +4569,15 @@
             }
         })
     }
-
+    /*添加药品到结算单*/
+    function addJieSuanDrug(){
+        /*商品id*/
+        var arr=[]
+        $("input[name=checkbox]:checked").each(function () {
+            arr.push($(this).val())
+        })
+        alert(arr)
+    }
 
     <!--采购管理-交易查询统计-->
     function selectTransaction() {
