@@ -3,6 +3,7 @@ package com.lianxi.drugs.controller;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.lianxi.drugs.common.ServerResponse;
 import com.lianxi.drugs.dto.CaiGouDanDto;
+import com.lianxi.drugs.dto.JieSuanDanDto;
 import com.lianxi.drugs.dto.TuiHuoDanDto;
 import com.lianxi.drugs.pojo.*;
 import com.lianxi.drugs.service.*;
@@ -50,6 +51,11 @@ public class DrugController {
 
     @Autowired
     private SupplierService supplierService;
+
+    @Autowired
+    private PayoffTabInfoService payoffTabInfoService;
+
+
     @Autowired
     DefaultKaptcha defaultKaptcha;
     /**
@@ -419,6 +425,55 @@ public class DrugController {
                 return ServerResponse.success();
             }
             return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+
+    /**
+     * 2021.2.18     zmh
+     * @return 添加药品到结算单info
+     */
+    @RequestMapping("/addDrugToJieSuanDanInfo")
+    public ServerResponse addDrugToJieSuanDanInfo(@RequestParam(value = "arr[]")int[] arr,
+                                                  @RequestParam(value = "jiesuandanId")int jiesuandanId
+                                                  ) {
+        try {
+
+            List<PayoffTabInfo> list = new ArrayList<>();
+            for (int i : arr) {
+                PayoffTabInfo payoffTabInfo = new PayoffTabInfo();
+                payoffTabInfo.setDrugInfoId(i);
+                payoffTabInfo.setPayoffTabId(jiesuandanId);
+                list.add(payoffTabInfo);
+            }
+
+            Integer count = payoffTabService.addDrugToJieSuanDanInfo(list);
+            if(count>0){
+                return ServerResponse.success();
+            }
+            return ServerResponse.error();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ServerResponse.error();
+        }
+    }
+
+    /**
+     * 2021.2.18     zmh
+     * @return 结算单维护界面查询结算单中的商品信息
+     */
+    @RequestMapping("/selectDrugInfoByJieSuanDanId")
+    public ServerResponse selectDrugInfoByJieSuanDanId(Integer id) {
+        try {
+
+            JieSuanDanDto jieSuanDanDto = new JieSuanDanDto();
+            jieSuanDanDto.setId(id);
+
+            DataTableResult dataTableResult = payoffTabInfoService.selectDrugInfoByJieSuanDanId(jieSuanDanDto);
+            return ServerResponse.success(dataTableResult);
         } catch (Exception e) {
             e.printStackTrace();
             return ServerResponse.error();

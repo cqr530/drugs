@@ -5,4 +5,8 @@ import lombok.Data;
 
 @Data
 public class JieSuanDanDto extends DrugPageBean {
+
+    /*结算单id*/
+    private Integer id;
+
 }

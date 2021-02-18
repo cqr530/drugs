@@ -4,6 +4,7 @@ import com.lianxi.drugs.dao.PayoffTabMapper;
 import com.lianxi.drugs.dto.JieSuanDanDto;
 import com.lianxi.drugs.pojo.DataTableResult;
 import com.lianxi.drugs.pojo.PayoffTab;
+import com.lianxi.drugs.pojo.PayoffTabInfo;
 import com.lianxi.drugs.service.PayoffTabService;
 import com.lianxi.drugs.vo.JieSuanDanVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class PayoffTabServiceImpl implements PayoffTabService {
     @Override
     public JieSuanDanVo queryJieSuanDanById(Integer id) {
         return payoffTabMapper.queryJieSuanDanById(id);
+    }
+
+    @Override
+    public Integer addDrugToJieSuanDanInfo(List<PayoffTabInfo> list) {
+        return payoffTabMapper.addDrugToJieSuanDanInfo(list);
     }
 }

@@ -1,6 +1,7 @@
 package com.lianxi.drugs.service.impl;
 
 import com.lianxi.drugs.dao.PayoffTabInfoMapper;
+import com.lianxi.drugs.dto.JieSuanDanDto;
 import com.lianxi.drugs.dto.JieSuanDanInfoDto;
 import com.lianxi.drugs.pojo.DataTableResult;
 import com.lianxi.drugs.service.PayoffTabInfoService;
@@ -23,4 +24,13 @@ public class PayoffTabInfoServiceImpl implements PayoffTabInfoService {
         DataTableResult dataTableResult = new DataTableResult(jieSuanDanInfoDto.getDraw(),count,count,jieSuanDanInfoVoList);
         return dataTableResult;
     }
+
+    @Override
+    public DataTableResult selectDrugInfoByJieSuanDanId(JieSuanDanDto jieSuanDanDto) {
+        List<JieSuanDanInfoVo> jieSuanDanInfoVoList = payoffTabInfoMapper.queryJieSuanDanAndDrugPageByJieSuanDanId(jieSuanDanDto);
+        long count = payoffTabInfoMapper.queryJiceSuanDanAndDrugCountByJieSuanDanId(jieSuanDanDto);
+        DataTableResult dataTableResult = new DataTableResult(jieSuanDanDto.getDraw(),count,count,jieSuanDanInfoVoList);
+        return dataTableResult;
+    }
+
 }

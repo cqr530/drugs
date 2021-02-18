@@ -2038,8 +2038,14 @@
     <div class="panel panel-default">
         <div class="panel-heading">
 
-            <div class="btn-group">
-                <button type="button" onclick="addJieSuanDrug()" class="btn btn-primary">添加 </button>
+            <div class="checkbox">
+                <label>
+                    <button type="button" onclick="addJieSuanDrug()" class="btn btn-default">添加 </button>
+                </label>
+                <label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="checkAll" onclick="checkAll()">全选
+                </label>
             </div>
 
         </div>
@@ -2049,7 +2055,7 @@
                 <tr>
                     <th scope="col">序号</th>
                     <th scope="col">
-                        <input type="checkbox" name="checkAll" onclick="checkAll()"> 选择
+                        选择
                     </th>
                     <th scope="col">采购单编号</th>
                     <th scope="col">采购单名称</th>
@@ -2948,16 +2954,6 @@
 
 <script>
 
-   /* /!*全选全不选*!/
-    function checkAllTwo(){
-        var checked = $("[name=checkAll]").prop("checked")
-        if(checked){
-            $("[name=checkbox]").prop("checked",checked)
-        }else{
-            $("[name=checkbox]").prop("checked",checked)
-        }
-
-    }*/
 
     /*全选*/
     function checkAll(){
@@ -4366,6 +4362,9 @@
                     render:function(data){
                         return '<a href="javascript:void(0)" onclick="toJieSuanDanInfoPage('+data+')">'+
                             '查看'+
+                            '</a>'+
+                            '<a href="javascript:void(0)" onclick="selectDrugInfo('+data+')">'+
+                            '查询'+
                             '</a>'
 
                     }
@@ -4577,7 +4576,36 @@
             arr.push($(this).val())
         })
         alert(arr)
+
+       var jiesuandanId = $("#jiesuandanId").val()
+
+        $.ajax({
+            url:"drugs/addDrugToJieSuanDanInfo",
+            dataType:"json",
+            type:"post",
+            data:{"arr[]":arr,jiesuandanId:jiesuandanId},
+            success:function(data){
+                if(data.code==200){
+                    alert("成功")
+                }
+            }
+        })
     }
+    /*结算单维护界面查询结算单中的商品信息*/
+    function selectDrugInfo(id){
+        $.ajax({
+            url:"drugs/selectDrugInfoByJieSuanDanId",
+            dataType:"json",
+            type:"post",
+            data:{"id":id},
+            success:function(data){
+                if(data.code==200){
+                    alert("成功")
+                }
+            }
+        })
+    }
+
 
     <!--采购管理-交易查询统计-->
     function selectTransaction() {

@@ -104,4 +104,33 @@
       WHERE
           p.hospital_id = #{userCompany}
   </select>
+
+
+
+  <select id="queryJieSuanDanAndDrugPageByJieSuanDanId" resultMap="BaseResultMapOne" parameterType="com.lianxi.drugs.dto.JieSuanDanDto">
+      SELECT
+            di.drug_id,di.serial_num,di.generic_name,di.product_name,di.tender_price,
+            di.reagent_type,di.drug_size,di.company,di.transver_num,di.quality_level,
+            di.factory_name,di.drug_tranl_status
+        FROM
+            payoff_tab_info pti
+            LEFT JOIN drug_info di ON pti.drug_info_id = di.drug_id
+        WHERE
+        pti.payoff_tab_id = #{id}
+        limit #{start},#{length}
+  </select>
+
+  <select id="queryJiceSuanDanAndDrugCountByJieSuanDanId" parameterType="com.lianxi.drugs.dto.JieSuanDanDto">
+      SELECT
+            count(*)
+        FROM
+            payoff_tab_info pti
+            LEFT JOIN drug_info di ON pti.drug_info_id = di.drug_id
+        WHERE
+        pti.payoff_tab_id = #{id}
+  </select>
+
+
+
+
 </mapper>

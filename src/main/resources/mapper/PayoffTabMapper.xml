@@ -101,4 +101,12 @@
       select * from payoff_tab where payoff_tab_id=#{id}
   </select>
 
+  <insert id="addDrugToJieSuanDanInfo" parameterType="com.lianxi.drugs.pojo.PayoffTabInfo">
+    insert into payoff_tab_info (drug_info_id,payoff_tab_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.drugInfoId},#{item.payoffTabId})
+    </foreach>
+  </insert>
+
 </mapper>
